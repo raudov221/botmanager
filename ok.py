@@ -3,8 +3,9 @@ from vkbottle.keyboard import Keyboard, Text
 import random
 import random as r
 import json
+import os
 
-token = "bfd9b4ba0ec9739a49f46081f98b59751ba31766914b3245d524d6be68d13ad575fdb9a9d778303dae035"
+token = os.environ.get("token")
 group_id = 201150448
 
 bot = Bot(token)
