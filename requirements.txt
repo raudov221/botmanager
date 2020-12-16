@@ -1,3 +1,0 @@
-vkbottle.py
-random
-json
