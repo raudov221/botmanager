@@ -93,4 +93,11 @@ async def wrapper(ans: Message, da):
         chat_id=ans.peer_id - 2000000000, member_id=user
     )
 
+@bot.on.chat_message(text=["!пред <da>"])
+async def wrapper(ans: Message, da):
+    reg( ans )
+    user = ans.reply_message.from_id
+    await ans(f"Тебе дали пред по причине: {da} \n\n Твои предупреждения: {data[ "pred" ][ str( ans.from_user ) ]}")
+    data[ "pred" ][ str( ans.from_user ) ] + "1"
+              
 bot.run_polling( skip_updates = False )
