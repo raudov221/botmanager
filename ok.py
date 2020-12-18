@@ -6,7 +6,7 @@ import json
 import os
 
 token = "af9e1047f1f4fb78795df127e9e4763349d89789462b9bffb54e0f1445e5376eb629e875733b23d49c58b"
-group_id = 201150448
+group_id = 200759417
 
 bot = Bot(token)
 
