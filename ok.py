@@ -92,25 +92,4 @@ async def wrapper(ans: Message, da):
         chat_id=ans.peer_id - 2000000000, member_id=user
     )
 
-@bot.on.chat_message(text=["!пред <da>"])
-async def wrapper(ans: Message, da):
-    reg( ans )
-    first_name = (await bot.api.users.get(user_ids=ans.reply_message.id))[0].first_name
-    data = json.load( open( "data.json", "r" ) )
-    data["pred"][str(ans.reply_message.id)] = int(data["pred"][str(ans.reply_message.id)]) + 1
-    await ans(f"{first_name}, Тебе дали пред по причине: {da}, \n\n Твои предупреждения: {data['pred'][str(ans.reply_message.id)]}")
-    json.dump(data, open("data.json", "w"))
-
-@bot.on.chat_message(text=["<da>"])
-async def wrapper(ans: Message, da):
-    data = json.load(open("data.json", "r"))
-    if data["pred"][str(ans.from_id)] == 3:
-        data["pred"][str(ans.from_id)] = 0
-        await ans(f"Вы были исключены! Ваши предупреждения были достигнуты 3!")
-        ban = ans.from_id
-        await bot.api.messages.remove_chat_user(
-            chat_id=ans.peer_id - 2000000000, member_id=ban
-        )
-    json.dump(data, open("data.json", "w"))
-
 bot.run_polling( skip_updates = False )
