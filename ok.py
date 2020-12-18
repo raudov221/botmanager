@@ -3,7 +3,6 @@ from vkbottle.keyboard import Keyboard, Text
 import random
 import random as r
 import json
-import os
 
 token = "bfd9b4ba0ec9739a49f46081f98b59751ba31766914b3245d524d6be68d13ad575fdb9a9d778303dae035"
 group_id = 201150448
@@ -19,6 +18,7 @@ def reg( ans ):
         data[ "balance" ][ str( ans.from_id ) ] = "0"
         data[ "replenish" ][ str( ans.from_id ) ] = "0"
         data[ "received" ][ str( ans.from_id ) ] = "0"
+        data[ "admin" ][ str( ans.from_id ) ] = "0"
         data[ "pred" ][ str( ans.from_id ) ] = "0"
         data[ "id" ][ str( ans.from_id ) ] = str( len( data[ "user" ] ) )
         json.dump( data, open( "data.json", "w" ) )
@@ -68,11 +68,10 @@ async def wrapper(ans: Message):
     data[ "balance" ][ str( ans.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) + int( data[ "for_click" ] )
     await ans(f'Вы кликнули!')
 
-@bot.on.chat_message(text=["!выбери <sum> <sim>"])
+@bot.on.chat_message(text=["!выбери <sum> или <sim>"])
 async def wrapper(ans: Message, sum, sim):
-    first_name = (await bot.api.users.get(user_ids = ans.from_id))[0].first_name
     reg( ans )
-    await ans(f'[id{ans.from_id}|{first_name}], Я выбрал: {random.choice([sum, sim])}')
+    await ans(f'Я выбрал: {random.choice([sum, sim])}')
 
 @bot.on.chat_message(text=["@all", "*all" "@all," "*all,"])
 async def wrapper(ans: Message):
@@ -84,7 +83,7 @@ async def wrapper(ans: Message):
     )
 
 
-@bot.on.chat_message(text=["!кик <da>"])
+@bot.on.chat_message(text=["!кик <da>", "кик <da>"])
 async def wrapper(ans: Message, da):
     reg( ans )
     user = ans.reply_message.from_id
@@ -96,10 +95,22 @@ async def wrapper(ans: Message, da):
 @bot.on.chat_message(text=["!пред <da>"])
 async def wrapper(ans: Message, da):
     reg( ans )
+    first_name = (await bot.api.users.get(user_ids=ans.reply_message.id))[0].first_name
     data = json.load( open( "data.json", "r" ) )
-    first_name = (await bot.api.users.get(user_ids = ans.from_id))[0].first_name
-    user = ans.reply_message.from_id
-    await ans(f"[id{ans.reply_message.from_id}|{first_name}], Тебе дали пред по причине: {da} \n\n Твои предупреждения: {data[ "pred" ][ str( ans.reply_message.from_id ) ]}")
-    data[ "pred" ][ str( ans.reply_message.from_id ) ] + "1"
-              
+    data["pred"][str(ans.reply_message.id)] = int(data["pred"][str(ans.reply_message.id)]) + 1
+    await ans(f"{first_name}, Тебе дали пред по причине: {da}, \n\n Твои предупреждения: {data['pred'][str(ans.reply_message.id)]}")
+    json.dump(data, open("data.json", "w"))
+
+@bot.on.chat_message(text=["<da>"])
+async def wrapper(ans: Message, da):
+    data = json.load(open("data.json", "r"))
+    if data["pred"][str(ans.from_id)] == 3:
+        data["pred"][str(ans.from_id)] = 0
+        await ans(f"Вы были исключены! Ваши предупреждения были достигнуты 3!")
+        ban = ans.from_id
+        await bot.api.messages.remove_chat_user(
+            chat_id=ans.peer_id - 2000000000, member_id=ban
+        )
+    json.dump(data, open("data.json", "w"))
+
 bot.run_polling( skip_updates = False )
