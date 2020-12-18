@@ -98,7 +98,7 @@ async def wrapper(ans: Message, da):
     reg( ans )
     first_name = (await bot.api.users.get(user_ids = ans.from_id))[0].first_name
     user = ans.reply_message.from_id
-    await ans(f"[id{ans.from_id}|{first_name}], Тебе дали пред по причине: {da} \n\n Твои предупреждения: {data[ "pred" ][ str( ans.reply_message.from_id ) ]}")
+    await ans(f"[id{ans.reply_message.from_id}|{first_name}], Тебе дали пред по причине: {da} \n\n Твои предупреждения: {data[ "pred" ][ str( ans.reply_message.from_id ) ]}")
     data[ "pred" ][ str( ans.reply_message.from_id ) ] + "1"
               
 bot.run_polling( skip_updates = False )
