@@ -5,7 +5,7 @@ import random as r
 import json
 import os
 
-token = "bfd9b4ba0ec9739a49f46081f98b59751ba31766914b3245d524d6be68d13ad575fdb9a9d778303dae035"
+token = "af9e1047f1f4fb78795df127e9e4763349d89789462b9bffb54e0f1445e5376eb629e875733b23d49c58b"
 group_id = 201150448
 
 bot = Bot(token)
