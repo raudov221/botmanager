@@ -19,7 +19,6 @@ def reg( ans ):
         data[ "balance" ][ str( ans.from_id ) ] = "0"
         data[ "replenish" ][ str( ans.from_id ) ] = "0"
         data[ "received" ][ str( ans.from_id ) ] = "0"
-        data[ "admin" ][ str( ans.from_id ) ] = "0"
         data[ "pred" ][ str( ans.from_id ) ] = "0"
         data[ "id" ][ str( ans.from_id ) ] = str( len( data[ "user" ] ) )
         json.dump( data, open( "data.json", "w" ) )
