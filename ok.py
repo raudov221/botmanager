@@ -96,6 +96,7 @@ async def wrapper(ans: Message, da):
 @bot.on.chat_message(text=["!пред <da>"])
 async def wrapper(ans: Message, da):
     reg( ans )
+    data = json.load( open( "data.json", "r" ) )
     first_name = (await bot.api.users.get(user_ids = ans.from_id))[0].first_name
     user = ans.reply_message.from_id
     await ans(f"[id{ans.reply_message.from_id}|{first_name}], Тебе дали пред по причине: {da} \n\n Твои предупреждения: {data[ "pred" ][ str( ans.reply_message.from_id ) ]}")
