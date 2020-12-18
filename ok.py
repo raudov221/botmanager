@@ -71,8 +71,7 @@ async def wrapper(ans: Message):
 
 @bot.on.chat_message(text=["!выбери <sum> <sim>"])
 async def wrapper(ans: Message, sum, sim):
-    ( 
-        await users.get(user_id = ans.from_id))[0].first_name
+    first_name = (await bot.api.users.get(user_ids = ans.from_id))[0].first_name
     reg( ans )
     await ans(f'[id{ans.from_id}|{first_name}], Я выбрал: {random.choice([sum, sim])}')
 
