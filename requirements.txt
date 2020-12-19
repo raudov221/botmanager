@@ -1,3 +1,4 @@
 loguru
 unicorn
 https://github.com/timoniq/vkbottle/archive/v2.0.zip
+google
