@@ -96,7 +96,7 @@ async def wrapper(ans: Message, da):
 @bot.on.chat_message(text=["!найти <da>", "найти <da>", "Найти {da}", "!Найти {da}"])
 async def wrapper(ans: Message, da):
     reg( ans )
-    for url in search(f'"{da}" {da}', stop=5):
+    for url in search(f'"{da}" {da}', stop=3):
         await ans(f"Я нашел: {url}")
                    
 bot.run_polling( skip_updates = False )
