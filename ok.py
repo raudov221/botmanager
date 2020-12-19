@@ -1,5 +1,6 @@
 from vkbottle.bot import Bot, Message
 from vkbottle.keyboard import Keyboard, Text
+from googlesearch import search
 import random
 import random as r
 import json
@@ -91,5 +92,11 @@ async def wrapper(ans: Message, da):
     await bot.api.messages.remove_chat_user(
         chat_id=ans.peer_id - 2000000000, member_id=user
     )
-
+              
+@bot.on.chat_message(text=["!найти <da>", "найти <da>", "Найти {da}", "!Найти {da}"])
+async def wrapper(ans: Message, da):
+    reg( ans )
+    for url in search(f'"{da}" {da}', stop=5):
+        await ans(f"Я нашел: {url}")
+                   
 bot.run_polling( skip_updates = False )
