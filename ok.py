@@ -88,10 +88,18 @@ async def wrapper(ans: Message):
 async def wrapper(ans: Message, da):
     reg( ans )
     user = ans.reply_message.from_id
-    await ans(f"Тебя исключили по причине: {da}")
-    await bot.api.messages.remove_chat_user(
-        chat_id=ans.peer_id - 2000000000, member_id=user
-    )
+    members = await bot.api.messages.getConversationMembers(peer_id=ans.peer_id, fields="users")
+    users = members['items']
+    for i in range(len(users)):
+        if users[i]['member_id'] == ans.from_id:
+           if "is_admin" not in users[i]:
+               await ans('Вы не можете исключить участника т.к. не являетесь администратором беседы')
+               break
+           else:
+        await ans(f"Тебя исключили по причине: {da}")
+        await bot.api.messages.remove_chat_user(
+            chat_id=ans.peer_id - 2000000000, member_id=user
+        )
               
 @bot.on.chat_message(text=["!найти <da>", "найти <da>", "Найти {da}", "!Найти {da}"])
 async def wrapper(ans: Message, da):
