@@ -110,17 +110,17 @@ data = json.load( open( "data.json", "r" ) )
 async def wrapper(ans: Message, sum, stak):
     reg( ans )
     if data["balance"][str(ans.from_id)] > int(sum):
-        await ans(f"бабла нет")
+        await ans(f'бабла нет')
     else:
         if stak > 5:
-        await ans("ты стаканчик больше 5 написал слепой")
+        await ans('ты стаканчик больше 5 написал слепой')
     else:
         random.choice(1,5) 
         if stak = random.choice:
-            await ans("ема ты молодец выйграл")
+            await ans('ема ты молодец выйграл')
             data["balance"][str(ans.from_id)] = int(data["balance"][str(ans.from_id] + int(sum)
         else:
-            await ans("ты проиграл удача не на твоей стороне.") 
+            await ans('ты проиграл удача не на твоей стороне.') 
             data["balance"][str(ans.from_id)] = int(data["balance"][str(ans.from_id] - int(sum)
 
 bot.run_polling( skip_updates = False )
