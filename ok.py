@@ -116,7 +116,7 @@ async def wrapper(ans: Message, sum, stak):
             await ans('ты стаканчик больше 5 написал слепой')
         else:
             random.choice(1,5) 
-            if (stak) = random.choice:
+            if int(stak) == random.choice:
                 await ans('ема ты молодец выйграл')
                 data["balance"][str(ans.from_id)] = int(data["balance"][str(ans.from_id] + int(sum)
             else:
