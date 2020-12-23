@@ -91,12 +91,9 @@ async def wrapper(ans: Message, da):
     user = ans.reply_message.from_id
     members = await bot.api.messages.getConversationMembers(peer_id=ans.peer_id, fields="users")
     users = members['items']
-    for i in range(len(users)):
-        if users[i]['member_id'] == ans.from_id:
-           if "is_admin" not in users[i]:
-               await ans('Вы не можете исключить участника т.к. не являетесь администратором беседы')
-               break
-           else:
+    if data[ "admin" ][ str( ans.from_id ) ] = "0":
+        await ans('Вы не можете исключить участника т.к. не являетесь администратором беседы')
+    else:
         await ans(f"Тебя исключили по причине: {da}")
         await bot.api.messages.remove_chat_user(
             chat_id=ans.peer_id - 2000000000, member_id=user
