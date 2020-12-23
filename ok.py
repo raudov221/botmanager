@@ -109,7 +109,7 @@ data = json.load( open( "data.json", "r" ) )
 @bot.on.chat_message(text=["казино <sum>"])
 async def wrapper(ans: Message, sum):
     reg( ans )
-    if int(data["balance"][str( ans.from_id )] < sum:
+    if int(data["balance"][str( ans.from_id )]) < sum:
         await ans(f"🚫 Недостаточно средств!")
                    
 bot.run_polling( skip_updates = False )
