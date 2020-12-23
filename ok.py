@@ -112,7 +112,7 @@ async def wrapper(ans: Message, sum, stak):
     if data["balance"][str(ans.from_id)] > int(sum):
         await ans(f"бабла нет")
     else:
-        if stak < 5:
+        if stak > 5:
         await ans("ты стаканчик больше 5 написал слепой")
     else:
         random.choice(1,5) 
