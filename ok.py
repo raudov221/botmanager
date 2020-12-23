@@ -111,12 +111,14 @@ async def wrapper(ans: Message, sum, stak):
     data = json.load( open( "data.json", "r" ) )
     if data["balance"][str(ans.from_id)] > int(sum):
         await ans(f'бабла нет')
+        break
     else:
-        if stak > 5:
+        if int(stak) > 5:
         await ans('ты стаканчик больше 5 написал слепой')
+        break
     else:
         random.choice(1,5) 
-        if stak = random.choice:
+        if (stak) = random.choice:
             await ans('ема ты молодец выйграл')
             data["balance"][str(ans.from_id)] = int(data["balance"][str(ans.from_id] + int(sum)
         else:
