@@ -104,5 +104,11 @@ async def wrapper(ans: Message, da):
     reg( ans )
     for url in search(f'"{da}" {da}', stop=3):
         await ans(f"Я нашел: {url}")
+
+@bot.on.chat_message(text=["казино <sum>"])
+async def wrapper(ans: Message, sum):
+    reg( ans )
+    if int(data["balance"][str( ans.from_id )] < sum:
+        await ans(f"🚫 Недостаточно средств!")
                    
 bot.run_polling( skip_updates = False )
