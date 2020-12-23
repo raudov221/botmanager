@@ -106,10 +106,14 @@ async def wrapper(ans: Message, da):
         await ans(f"Я нашел: {url}")
 
 data = json.load( open( "data.json", "r" ) )
-@bot.on.chat_message(text=["казино <sum>"])
-async def wrapper(ans: Message, sum):
+@bot.on.chat_message(text=["стаканчик <sum> <stak>"])
+async def wrapper(ans: Message, sum, stak):
     reg( ans )
-    if int(data["balance"][str( ans.from_id )]) < int(sum):
-        await ans(f"🚫 Недостаточно средств!")
+    if data["balance"][str(ans.from_id)] > int(sum):
+        await ans(f"бабла нет")
+    else:
+        if stak < 5:
+        await ans("ты стаканчик больше 5 написал слепой")
+        
                    
 bot.run_polling( skip_updates = False )
