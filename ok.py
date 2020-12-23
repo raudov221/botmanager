@@ -105,10 +105,10 @@ async def wrapper(ans: Message, da):
     for url in search(f'"{da}" {da}', stop=3):
         await ans(f"Я нашел: {url}")
 
-data = json.load( open( "data.json", "r" ) )
 @bot.on.chat_message(text=["стаканчик <sum> <stak>"])
 async def wrapper(ans: Message, sum, stak):
     reg( ans )
+    data = json.load( open( "data.json", "r" ) )
     if data["balance"][str(ans.from_id)] > int(sum):
         await ans(f'бабла нет')
     else:
