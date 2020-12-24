@@ -124,3 +124,4 @@ async def wrapper(ans: Message, sum, stak):
                 data["balance"][str(ans.from_id)] = int(data["balance"][str(ans.from_id) ]) - int(sum)
 
 bot.run_polling( skip_updates = False )
+
