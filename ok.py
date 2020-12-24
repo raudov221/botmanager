@@ -109,7 +109,7 @@ async def wrapper(ans: Message, da):
 async def wrapper(ans: Message, sum, stak):
     reg( ans )
     data = json.load( open( "data.json", "r" ) )
-    if data["balance"][str(ans.from_id)] > int(sum):
+    if data["balance"][str(ans.from_id)] > str(sum):
         await ans(f'бабла нет')
     else:
         if str(stak) > 5:
