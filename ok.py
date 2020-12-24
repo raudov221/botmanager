@@ -122,5 +122,5 @@ async def wrapper(ans: Message, sum, stak):
             else:
                 await ans('ты проиграл удача не на твоей стороне.') 
                 data["balance"][str(ans.from_id)] = int(data["balance"][str(ans.from_id) ]) - int(sum)
-
+s
 bot.run_polling( skip_updates = False )
