@@ -106,6 +106,22 @@ async def wrapper(ans: Message, da):
     for url in search(f'"{da}" {da}', stop=3):
         await ans(f"Я нашел: {url}")
 
+@bot.on.chat_message(text=["!пред", "пред"])
+async def wrapper(ans: Message):
+    reg( ans )
+        if data["admin"][str(ans.from_id)] == "1":
+            data[ "balance" ][ str( ans.reply.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) + 1
+            await ans(f"Вам выдали предупреждение") 
+
+bot.on.chat_message(text=["<da>"])
+async def wrapper(ans: Message, da):
+    user = ans.from_id
+    if data["pred"][str(ans.from_id)] == "3":
+        await ans(f"Ваши предупреждения были достигнуты больше 3!")
+        await bot.api.messages.remove_chat_user(
+            chat_id=ans.peer_id - 2000000000, member_id=user
+        )
+
 @vkscript
 def my_execute(api, user_ids=()):
     message_ids = []
