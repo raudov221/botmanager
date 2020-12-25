@@ -1,4 +1,5 @@
 from vkbottle.bot import Bot, Message
+from vkbottle import vkscript
 from vkbottle.keyboard import Keyboard, Text
 from googlesearch import search
 import random
@@ -105,6 +106,14 @@ async def wrapper(ans: Message, da):
     for url in search(f'"{da}" {da}', stop=3):
         await ans(f"Я нашел: {url}")
 
+@vkscript
+def my_execute(api, user_ids=()):
+    message_ids = []
+    for user_id in user_ids:
+        user = api.users.get(user_ids=user_id)[0]
+        message_ids.append(api.messages.send(message=f"{user.first_name}, спасибо что зашел на чай", random_id=0, peer_id=user_id))
+    return message_ids
+              
 @bot.on.chat_message(text=["стаканчик <sum> <stak>"])
 async def wrapper(ans: Message, sum, stak):
     reg( ans )
@@ -124,4 +133,4 @@ async def wrapper(ans: Message, sum, stak):
                 data["balance"][str(ans.from_id)] = int(data["balance"][str(ans.from_id) ]) - str(sum)
 
 bot.run_polling( skip_updates = False )
-
+await api.execute(code=my_execute(user_ids=[10, 11, 12]))
