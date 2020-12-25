@@ -110,7 +110,7 @@ async def wrapper(ans: Message, da):
 async def wrapper(ans: Message):
     reg( ans )
     data = json.load( open( "data.json", "r" ) )
-    if data["admin"][str( ans.from_id ) ] == 1:
+    if data["admin"][str( ans.from_id ) ] == "1":
         data[ "pred" ][ str( ans.reply.from_id ) ] = int( data[ "pred" ][ str( ans.reply.from_id ) ] ) + 1
         await ans(f"Вам выдали предупреждение")
         json.dump( data, open( "data.json", "w" ) )
