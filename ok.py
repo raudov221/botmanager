@@ -90,9 +90,8 @@ async def wrapper(ans: Message):
 async def wrapper(ans: Message, da):
     reg( ans )
     user = ans.reply_message.from_id
-    members = await bot.api.messages.getConversationMembers(peer_id=ans.peer_id, fields="users")
     users = members['items']
-    if data["admin"][str( ans.from_id ) ] == 0:
+    if data["admin"][str( ans.from_id ) ] == "0":
         await ans('Вы не можете исключить участника т.к. не являетесь администратором беседы')
     else:
         await ans(f"Тебя исключили по причине: {da}")
