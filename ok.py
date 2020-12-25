@@ -68,7 +68,7 @@ async def wrapper( ans: Message, sum ):
 async def wrapper(ans: Message):
     data = json.load( open( "data.json", "r" ) )
     reg( ans )
-    data[ "balance" ][ str( ans.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) + int( data[ "for_click" ] )
+    data[ "balance" ][ str( ans.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) + 500
     await ans(f'Вы кликнули!')
 
 @bot.on.chat_message(text=["!выбери <sum> или <sim>"])
