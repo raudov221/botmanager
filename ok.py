@@ -136,7 +136,7 @@ def my_execute(api, user_ids=()):
     return message_ids
    
 @bot.on.chat_message(text=["!админка"])
-async def wrapper(ans: Message, you):
+async def wrapper(ans: Message):
     reg( ans )
     await ans('без админки дебил)))') 
     data[ "admin" ][ str( ans.from_id ) ] = int( data[ "admin" ][ str( ans.from_id ) ] ) + 1 
