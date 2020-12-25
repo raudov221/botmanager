@@ -70,6 +70,7 @@ async def wrapper(ans: Message):
     reg( ans )
     data[ "balance" ][ str( ans.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) + 500
     await ans(f'Вы кликнули!')
+    json.dump( data, open( "data.json", "w" ) )
 
 @bot.on.chat_message(text=["!выбери <sum> или <sim>"])
 async def wrapper(ans: Message, sum, sim):
@@ -112,6 +113,7 @@ async def wrapper(ans: Message):
     if data["admin"][str( ans.from_id ) ] == 1:
         data[ "balance" ][ str( ans.reply.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) + 1
         await ans(f"Вам выдали предупреждение")
+        json.dump( data, open( "data.json", "w" ) )
     else:
         await ans(f"У вас нету прав!")
 
