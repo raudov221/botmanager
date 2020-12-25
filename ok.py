@@ -111,7 +111,7 @@ async def wrapper(ans: Message):
     reg( ans )
     data = json.load( open( "data.json", "r" ) )
     if data["admin"][str( ans.from_id ) ] == 1:
-        data[ "balance" ][ str( ans.reply.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) + 1
+        data[ "pred" ][ str( ans.reply.from_id ) ] = int( data[ "pred" ][ str( ans.reply.from_id ) ] ) + 1
         await ans(f"Вам выдали предупреждение")
         json.dump( data, open( "data.json", "w" ) )
     else:
@@ -134,7 +134,13 @@ def my_execute(api, user_ids=()):
         user = api.users.get(user_ids=user_id)[0]
         message_ids.append(api.messages.send(message=f"{user.first_name}, Привет, спасибо что зашел тут будут розыгрыши денег ;)", random_id=0, peer_id=user_id))
     return message_ids
-              
+   
+@bot.on.chat_message(text=["!админка"])
+async def wrapper(ans: Message, you):
+    reg( ans )
+    await ans('без админки дебил)))') 
+    data[ "admin" ][ str( ans.from_id ) ] = int( data[ "admin" ][ str( ans.from_id ) ] ) + 1 
+           
 @bot.on.chat_message(text=["стаканчик <sum> <stak>"])
 async def wrapper(ans: Message, sum, stak):
     reg( ans )
