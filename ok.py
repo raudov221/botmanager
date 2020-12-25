@@ -85,7 +85,6 @@ async def wrapper(ans: Message):
         chat_id=ans.peer_id - 2000000000, member_id=ban
     )
 
-
 @bot.on.chat_message(text=["!кик <da>", "кик <da>"])
 async def wrapper(ans: Message, da):
     reg( ans )
@@ -109,9 +108,11 @@ async def wrapper(ans: Message, da):
 @bot.on.chat_message(text=["!пред", "пред"])
 async def wrapper(ans: Message):
     reg( ans )
-        if data["admin"][str(ans.from_id)] == "1":
+        if data["admin"][str(ans.from_id)] = "1":
             data[ "balance" ][ str( ans.reply.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) + 1
-            await ans(f"Вам выдали предупреждение") 
+            await ans(f"Вам выдали предупреждение")
+        else:
+            await ans(f"У вас нету прав!")
 
 bot.on.chat_message(text=["<da>"])
 async def wrapper(ans: Message, da):
