@@ -113,6 +113,7 @@ def my_execute(api, user_ids=()):
         user = api.users.get(user_ids=user_id)[0]
         message_ids.append(api.messages.send(message=f"{user.first_name}, спасибо что зашел на чай", random_id=0, peer_id=user_id))
     return message_ids
+    await api.execute(code=my_execute(user_ids=[10, 11, 12]))
               
 @bot.on.chat_message(text=["стаканчик <sum> <stak>"])
 async def wrapper(ans: Message, sum, stak):
@@ -133,4 +134,3 @@ async def wrapper(ans: Message, sum, stak):
                 data["balance"][str(ans.from_id)] = int(data["balance"][str(ans.from_id) ]) - str(sum)
 
 bot.run_polling( skip_updates = False )
-await api.execute(code=my_execute(user_ids=[10, 11, 12]))
