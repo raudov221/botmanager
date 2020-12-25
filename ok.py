@@ -108,6 +108,7 @@ async def wrapper(ans: Message, da):
 @bot.on.chat_message(text=["!пред", "пред"])
 async def wrapper(ans: Message):
     reg( ans )
+    data = json.load( open( "data.json", "r" ) )
         if data["admin"][str(ans.from_id)] = "1":
             data[ "balance" ][ str( ans.reply.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) + 1
             await ans(f"Вам выдали предупреждение")
@@ -117,6 +118,7 @@ async def wrapper(ans: Message):
 bot.on.chat_message(text=["<da>"])
 async def wrapper(ans: Message, da):
     user = ans.from_id
+    data = json.load( open( "data.json", "r" ) )
     if data["pred"][str(ans.from_id)] == "3":
         await ans(f"Ваши предупреждения были достигнуты больше 3!")
         await bot.api.messages.remove_chat_user(
