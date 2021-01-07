@@ -11,6 +11,7 @@ token = "bfd9b4ba0ec9739a49f46081f98b59751ba31766914b3245d524d6be68d13ad575fdb9a
 group_id = 201150448
 
 bot = Bot(token)
+addd = "0"
 
 def reg( ans ):
     data = json.load( open( "data.json", "r" ) )
@@ -120,11 +121,21 @@ bot.on.chat_message(text=["<da>"])
 async def wrapper(ans: Message, da):
     user = ans.from_id
     data = json.load( open( "data.json", "r" ) )
-    if data["pred"][str(ans.from_id)] == "3":
-        await ans(f"Ваши предупреждения были достигнуты больше 3!")
-        await bot.api.messages.remove_chat_user(
-            chat_id=ans.peer_id - 2000000000, member_id=user
-        )
+    if addd == "20":
+        random = random.choice(1,5)
+        if random == "1":
+            await ans(f"ты бобёр АХАХХААХХАХВХ")
+        if random == "2":
+            await ans(f"мой любимый это иван")
+        if random == "3":
+            await ans(f"где моя жена")
+        if random == "4":
+            await ans(f"пруф или слит")
+        if random == "5":
+            await ans(f"аче всмысле")
+    else:
+        addd += 1
+        pass
 
 @vkscript
 def my_execute(api, user_ids=()):
