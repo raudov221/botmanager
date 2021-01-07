@@ -11,7 +11,7 @@ token = "bfd9b4ba0ec9739a49f46081f98b59751ba31766914b3245d524d6be68d13ad575fdb9a
 group_id = 201150448
 
 bot = Bot(token)
-addd = "0"
+addd = 0
 
 def reg( ans ):
     data = json.load( open( "data.json", "r" ) )
@@ -135,7 +135,6 @@ async def wrapper(ans: Message, da):
             await ans(f"аче всмысле")
     else:
         addd += 1
-        pass
 
 @vkscript
 def my_execute(api, user_ids=()):
