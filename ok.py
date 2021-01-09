@@ -122,6 +122,7 @@ async def wrapper(ans: Message, da):
     if data['reg'][str(ans.from_id)] == "0":
         await ans(f"[id{str(ans.from_id)}|Пользователь], вы успешно зарегистрировались!")
         reg( ans )
+        data['reg'][str(ans.from_id)] = "0"
     else:
         pass
         
