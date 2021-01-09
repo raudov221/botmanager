@@ -121,6 +121,7 @@ async def wrapper(ans: Message, da):
     data = json.load( open( "data.json", "r" ) )
     if data['reg'][str(ans.from_id)] == "0":
         await ans(f"[id{str(ans.from_id)}|Пользователь], вы успешно зарегистрировались!")
+        reg( ans )
     else:
         pass
         
