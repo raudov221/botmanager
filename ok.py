@@ -19,9 +19,7 @@ def reg( ans ):
         pass
     else:
         data[ "user" ][ str( ans.from_id ) ] = "reg"
-        data[ "balance" ][ str( ans.from_id ) ] = "0"
-        data[ "replenish" ][ str( ans.from_id ) ] = "0"
-        data[ "received" ][ str( ans.from_id ) ] = "0"
+        data[ "reg" ][ str( ans.from_id ) ] = "0"
         data[ "admin" ][ str( ans.from_id ) ] = "0"
         data[ "pred" ][ str( ans.from_id ) ] = "0"
         data[ "id" ][ str( ans.from_id ) ] = str( len( data[ "user" ] ) )
@@ -121,20 +119,11 @@ bot.on.chat_message(text=["<da>"])
 async def wrapper(ans: Message, da):
     user = ans.from_id
     data = json.load( open( "data.json", "r" ) )
-    if addd == "20":
-        random = random.choice(1,5)
-        if random == "1":
-            await ans(f"ты бобёр АХАХХААХХАХВХ")
-        if random == "2":
-            await ans(f"мой любимый это иван")
-        if random == "3":
-            await ans(f"где моя жена")
-        if random == "4":
-            await ans(f"пруф или слит")
-        if random == "5":
-            await ans(f"аче всмысле")
+    if data['reg'][str(ans.from_id)] == "0":
+        await ans(f"[id{str(ans.from_id)}|Пользователь], вы успешно зарегистрировались!")
     else:
-        addd += 1
+        pass
+        
 
 @vkscript
 def my_execute(api, user_ids=()):
