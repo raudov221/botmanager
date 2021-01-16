@@ -5,7 +5,7 @@ group_id = 200759417
 
 @bot.on.message('/mail <text>')
 async def mail(ans: Message, text):
-  m = mailing([id]) # ID бери из настроек приложения
+  m = mailing([1050338])
   m(text)
   await ans('Рассылка началась!')
   a = await m.run_now()
