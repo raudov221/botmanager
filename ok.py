@@ -192,8 +192,8 @@ async def wrapper(ans: Message, bd, b ):
 async def wrapper( ans: Message ):
     reg( ans )
     data = json.load( open( "data.json", "r" ) )
-    int(data["balance"][str(ans.from_id)]) + int(for_click)
-    await ans(f"✨ Вы кликнули и получили: {for_click}", keyboard = main)
+    int(data["balance"][str(ans.from_id)]) + 500
+    await ans(f"✨ Вы кликнули и получили: 500", keyboard = main)
     json.dump( data, open( "data.json", "w" ) )
 
 @bot.on.message( text = [ "/клик <click>" ], lower = True )
