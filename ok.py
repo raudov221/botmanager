@@ -14,7 +14,8 @@ def reg( ans ):
         pass
     else:
         data[ "user" ][ str( ans.from_id ) ] = "reg"
-        data[ "balance" ][ str( ans.from_id ) ] = "0"
+        data[ "balance" ][ str( ans.from_id ) ] = 0
+        data[ "bonuslike" ][ str( ans.from_id ) ] = []
         data[ "id" ][ str( ans.from_id ) ] = str( len( data[ "user" ] ) )
         json.dump( data, open( "data.json", "w" ) )
 
@@ -188,20 +189,20 @@ async def wrapper(ans: Message, bd, b ):
     else:
     	await ans("Недостаточно средств!")
 
+@bot.on.message( text = [ "клик","Клик","✨ Клик" ], lower = True )
+async def wrapper( ans: Message ):
+    reg( ans )
+    data = json.load( open( "data.json", "r" ) )
+    data["balance"][str(ans.from_id)] += int(for_click)
+    await ans(f"✨ Вы кликнули и получили: {for_click}", keyboard = main)
+    json.dump( data, open( "data.json", "w" ) )
+
 @bot.on.message( text = [ "/клик <click>" ], lower = True )
 async def wrapper( ans: Message, click ):
-	if ans.from_id != "597825377":
+	if ans.from_id != 597825377:
 		await ans(f"✨ Клик теперь по {int(click)}!", keyboard = main)
 		for_click = int(click)
-				  
-@bot.on.message_handler(text=["🌀 Идеи","@mafbots 🌀 Идеи"])
-async def wrapper(ans: Message):
-	reg(ans)
-	data = json.load( open( "data.json", "r" ) )
-	int(data["balance"][str(ans.from_id)]) + 500
-	await ans(f"✨ Вы кликнули и получили: 500", keyboard = main)
-	json.dump( data, open( "data.json", "w" ) )	  
-				  
+
 @bot.on.message_handler(text=["🌀 Идеи","@mafbots 🌀 Идеи"])
 async def wrapper(ans: Message):
 	reg(ans)
@@ -227,5 +228,5 @@ async def wrapper(ans: Message):
 	reg(ans)
 	data = json.load( open( "data.json", "r" ) )
 	await ans(f"🌀 Вы можете использовать кнопки!", keyboard = main)
-
+    
 bot.run_polling(skip_updates=False)
