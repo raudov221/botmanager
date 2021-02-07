@@ -1,232 +1,72 @@
-from vkbottle.bot import Bot, Message
-from vkbottle.keyboard import Keyboard, Text
-from vkbottle.ext import Middleware
+from vkbottle.user import User, Message
+from vkbottle.user import *
 import random
-import random as r
 import json
 
-token = "eef519400297c750b08ac304bc8bebd0bd9af767269aef45634659a59e4a374baaffe10ff61408c914388"
-group_id = 200759417
+user = User("7dbedbfcd99fa3d128bf19fc63b1c5b7b748559c080979cf5e2f5602b3490bfc301c013f4cc6afc068a65")
 
-def reg( ans ):
-    data = json.load( open( "data.json", "r" ) )
-    if str( ans.from_id ) in data[ "user" ]:
+def reg(ans):
+    data = json.load(open("data.json", "r"))
+    if str(ans.from_id) in data["user"]:
         pass
     else:
-        data[ "user" ][ str( ans.from_id ) ] = "reg"
-        data[ "balance" ][ str( ans.from_id ) ] = 0
-        data[ "bonuslike" ][ str( ans.from_id ) ] = []
-        data[ "id" ][ str( ans.from_id ) ] = str( len( data[ "user" ] ) )
-        json.dump( data, open( "data.json", "w" ) )
+        data["user"][str(ans.from_id)] = "reg"
+        data["status"][str(ans.from_id)] = "нету"
+        data["id"][str(ans.from_id)] = str(len(data["user"]))
+        json.dump(data, open("data.json", "w"))
 
-bot = Bot(token)
-
-main = Keyboard()
-main.add_row()
-main.add_button( Text( label = "✨ Клик" ), color = "primary" )
-main.add_row()
-main.add_button( Text( label = "🔥 Казино" ), color = "positive" )
-main.add_button( Text( label = "🌀 Идеи" ), color = "positive" )
-main.add_row()
-main.add_button( Text( label = "💴 Баланс" ), color = "positive" )
-
-for_click = 500
-
-@bot.on.message_handler(text="казино <bd>")
-async def wrapper(ans: Message, bd ):
-    reg( ans )
-    data = json.load( open( "data.json", "r" ) )
-    my = bd.replace('к', '000')
-    if int(data["balance"][str(ans.from_id)]) > int(my):
-    	r = random.randint(1, 5)
-    	if r == 1:
-    		data[ "balance" ][ str( ans.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) - int(my)
-    		await ans(f"😪Вы проиграли {my} (x0)!\n\n 💴 Ваш баланс: {data['balance'][ str( ans.from_id ) ]}")
-    		json.dump( data, open( "data.json", "w" ) )
-    	if r == 2:
-    		int(my) /2
-    		data[ "balance" ][ str( ans.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) + int(my)
-    		await ans(f"😐Вы частично выйграли {my} (x0.25)!\n\n 💴 Ваш баланс: {data['balance'][ str( ans.from_id ) ]}")
-    		json.dump( data, open( "data.json", "w" ) )
-    	if r == 3:
-    		int(my) *2
-    		data[ "balance" ][ str( ans.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) + int(my)
-    		await ans(f"🤑 Вы выйграли {my} (x2)!\n\n 💴 Ваш баланс: {data['balance'][ str( ans.from_id ) ]}")
-    		json.dump( data, open( "data.json", "w" ) )
-    	if r == 4:
-    		int(my) *3
-    		data[ "balance" ][ str( ans.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) + int(my)
-    		await ans(f"🤑 Вы выйграли {my} (x3)!\n\n 💴 Ваш баланс: {data['balance'][ str( ans.from_id ) ]}")
-    		json.dump( data, open( "data.json", "w" ) )
-    	if r == 5:
-    		int(my) *5
-    		data[ "balance" ][ str( ans.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) + int(my)
-    		await ans(f"🤑 Вы выйграли {my} (x5)!\n\n 💴 Ваш баланс: {data['balance'][ str( ans.from_id ) ]}")
-    		json.dump( data, open( "data.json", "w" ) )
+@user.on.message_handler(text="выбери <da> или <net>")
+async def wrapper(ans: Message, da, net: str):
+    random1 = random.randint(1, 2)
+    if random1 == 1:
+        return f"я выбрал {da}"
     else:
-    	await ans("Недостаточно средств!")
+        return f"я выбрал {net}"
 
-@bot.on.message_handler(text="казино")
-async def wrapper(ans: Message):
-	await ans("💴 Пример команды: Казино 'ставка'!")
-
-@bot.on.message_handler(text=["Дайс <bd> <b>","Dice <bd> <b>","дайс <bd> <b>","dice <bd> <b>"])
-async def wrapper(ans: Message, bd, b ):
-    reg( ans )
-    data = json.load( open( "data.json", "r" ) )
-    b = b.replace('к', '000')
-    if int(data["balance"][str(ans.from_id)]) > int(b):
-    	if bd == "чет":
-    		r = random.randint(1, 2)
-    		if r == 1:
-    			int(b) *2
-    			data[ "balance" ][ str( ans.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) + int(b)
-    			await ans(f"🔮 Выпало четное (x2)!\n\n 💴 Ваш баланс: {data['balance'][ str( ans.from_id ) ]}")
-    			json.dump( data, open( "data.json", "w" ) )
-    		else:
-    			data[ "balance" ][ str( ans.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) - int(b)
-    			await ans(f"🔮 Выпало нечетное (x0)!\n\n 💴 Ваш баланс: {data['balance'][ str( ans.from_id ) ]}")
-    			json.dump( data, open( "data.json", "w" ) )
-    	if bd == "нечет":
-    		r = random.randint(1, 2)
-    		if r == 2:
-    			int(b) *2
-    			data[ "balance" ][ str( ans.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) + int(b)
-    			await ans(f"🔮 Выпало нечетное (x2)!\n\n 💴 Ваш баланс: {data['balance'][ str( ans.from_id ) ]}")
-    			json.dump( data, open( "data.json", "w" ) )
-    		else:
-    			data[ "balance" ][ str( ans.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) - int(b)
-    			await ans(f"🔮 Выпало чётное (x0)!\n\n 💴 Ваш баланс: {data['balance'][ str( ans.from_id ) ]}")
-    			json.dump( data, open( "data.json", "w" ) )
-    	if bd == "четное":
-    		r = random.randint(1, 2)
-    		if r == 1:
-    			int(b) *2
-    			data[ "balance" ][ str( ans.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) + int(b)
-    			await ans(f"🔮 Выпало четное (x2)!\n\n 💴 Ваш баланс: {data['balance'][ str( ans.from_id ) ]}")
-    			json.dump( data, open( "data.json", "w" ) )
-    		else:
-    			data[ "balance" ][ str( ans.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) - int(b)
-    			await ans(f"🔮 Выпало нечетное (x0)!\n\n 💴 Ваш баланс: {data['balance'][ str( ans.from_id ) ]}")
-    			json.dump( data, open( "data.json", "w" ) )
-    	if bd == "нечетное":
-    		r = random.randint(1, 2)
-    		if r == 2:
-    			int(b) *2
-    			data[ "balance" ][ str( ans.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) + int(b)
-    			await ans(f"🔮 Выпало нечетное (x2)!\n\n 💴 Ваш баланс: {data['balance'][ str( ans.from_id ) ]}")
-    			json.dump( data, open( "data.json", "w" ) )
-    		else:
-    			data[ "balance" ][ str( ans.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) - int(b)
-    			await ans(f"🔮 Выпало чётное (x0)!\n\n 💴 Ваш баланс: {data['balance'][ str( ans.from_id ) ]}")
-    			json.dump( data, open( "data.json", "w" ) )
-    	if bd == "1":
-    		r = random.randint(1, 5)
-    		if r == 1:
-    			int(b) *3
-    			data[ "balance" ][ str( ans.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) + int(b)
-    			await ans(f"🔮 Выпала цифра {r} (x3)\n\n 💴 Ваш баланс: {data['balance'][ str( ans.from_id ) ]}")
-    			json.dump( data, open( "data.json", "w" ) )
-    		else:
-    			data[ "balance" ][ str( ans.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) - int(b)
-    			await ans(f"🔮 Выпала цифра {r} (x0)\n\n 💴 Ваш баланс: {data['balance'][ str( ans.from_id ) ]}")
-    			json.dump( data, open( "data.json", "w" ) )
-    	if bd == "2":
-    		r = random.randint(1, 5)
-    		if r == 2:
-    			int(b) *3
-    			data[ "balance" ][ str( ans.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) + int(b)
-    			await ans(f"🔮 Выпала цифра {r} (x3)\n\n 💴 Ваш баланс: {data['balance'][ str( ans.from_id ) ]}")
-    			json.dump( data, open( "data.json", "w" ) )
-    		else:
-    			data[ "balance" ][ str( ans.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) - int(b)
-    			await ans(f"🔮 Выпала цифра {r} (x0)\n\n 💴 Ваш баланс: {data['balance'][ str( ans.from_id ) ]}")
-    			json.dump( data, open( "data.json", "w" ) )
-    	if bd == "3":
-    		r = random.randint(1, 5)
-    		if r == 3:
-    			int(b) *3
-    			data[ "balance" ][ str( ans.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) + int(b)
-    			await ans(f"🔮 Выпала цифра {r} (x3)\n\n 💴 Ваш баланс: {data['balance'][ str( ans.from_id ) ]}")
-    			json.dump( data, open( "data.json", "w" ) )
-    		else:
-    			data[ "balance" ][ str( ans.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) - int(b)
-    			await ans(f"🔮 Выпала цифра {r} (x0)\n\n 💴 Ваш баланс: {data['balance'][ str( ans.from_id ) ]}")
-    			json.dump( data, open( "data.json", "w" ) )
-    	if bd == "4":
-    		r = random.randint(1, 5)
-    		if r == 4:
-    			int(b) *3
-    			data[ "balance" ][ str( ans.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) + int(b)
-    			await ans(f"🔮 Выпала цифра {r} (x3)\n\n 💴 Ваш баланс: {data['balance'][ str( ans.from_id ) ]}")
-    			json.dump( data, open( "data.json", "w" ) )
-    		else:
-    			data[ "balance" ][ str( ans.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) - int(b)
-    			await ans(f"🔮 Выпала цифра {r} (x0)\n\n 💴 Ваш баланс: {data['balance'][ str( ans.from_id ) ]}")
-    			json.dump( data, open( "data.json", "w" ) )
-    	if bd == "5":
-    		r = random.randint(1, 5)
-    		if r == 5:
-    			int(b) *3
-    			data[ "balance" ][ str( ans.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) + int(b)
-    			await ans(f"🔮 Выпала цифра {r} (x3)\n\n 💴 Ваш баланс: {data['balance'][ str( ans.from_id ) ]}")
-    			json.dump( data, open( "data.json", "w" ) )
-    		else:
-    			data[ "balance" ][ str( ans.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) - int(b)
-    			await ans(f"🔮 Выпала цифра {r} (x0)\n\n 💴 Ваш баланс: {data['balance'][ str( ans.from_id ) ]}")
-    			json.dump( data, open( "data.json", "w" ) )
-    	if bd == "6":
-    		r = random.randint(1, 5)
-    		if r == 6:
-    			int(b) *3
-    			data[ "balance" ][ str( ans.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) + int(b)
-    			await ans(f"🔮 Выпала цифра {r} (x3)\n\n 💴 Ваш баланс: {data['balance'][ str( ans.from_id ) ]}")
-    			json.dump( data, open( "data.json", "w" ) )
-    		else:
-    			data[ "balance" ][ str( ans.from_id ) ] = int( data[ "balance" ][ str( ans.from_id ) ] ) - int(b)
-    			await ans(f"🔮 Выпала цифра {r} (x0)\n\n 💴 Ваш баланс: {data['balance'][ str( ans.from_id ) ]}")
-    			json.dump( data, open( "data.json", "w" ) )
+@user.on.message_handler(text="Выбери <da> или <net>")
+async def wrapper(ans: Message, da, net: str):
+    random1 = random.randint(1, 2)
+    if random1 == 1:
+        return f"я выбрал {da}"
     else:
-    	await ans("Недостаточно средств!")
+        return f"я выбрал {net}"
 
-@bot.on.message( text = [ "клик","Клик","✨ Клик" ], lower = True )
-async def wrapper( ans: Message ):
-    reg( ans )
-    data = json.load( open( "data.json", "r" ) )
-    data["balance"][str(ans.from_id)] += int(for_click)
-    await ans(f"✨ Вы кликнули и получили: {for_click}", keyboard = main)
-    json.dump( data, open( "data.json", "w" ) )
+@user.on.message_handler(text="скажи <gay>")
+async def wrapper(ans: Message, gay: str):
+    if gay == "я гей":
+        return "сам гей"
+    else:
+        return f"{gay}"
 
-@bot.on.message( text = [ "/клик <click>" ], lower = True )
-async def wrapper( ans: Message, click ):
-	if ans.from_id != 597825377:
-		await ans(f"✨ Клик теперь по {int(click)}!", keyboard = main)
-		for_click = int(click)
+@user.on.message_handler(text="Скажи <gay>")
+async def wrapper(ans: Message, gay: str):
+    if item in ["гей", "ты гей", "батя твой гей"]:
+        return "сам гей"
+    else:
+        return f"{gay}"
 
-@bot.on.message_handler(text=["🌀 Идеи","@mafbots 🌀 Идеи"])
-async def wrapper(ans: Message):
-	reg(ans)
-	await ans(f"🌀 Вашу идею можете написать тут: https://vk.com/topic-200759417_46958933", keyboard = main)
+@user.on.message_handler(text="<gay>")
+async def wrapper(ans: Message, gay: str):
+    random1 = random.randint(1, 5)
+    random5 = random.randint(1, 100)
+    asa = 0
+    if random5 == 100:
+        asa = 100
+    if asa == 100:
+        if random1 == 1:
+            return "- Почему ваша кошка по субботам орет?\n- А мы ее моем.\n- Мы свою тоже моем по субботам...\n- А вы выжимать пробовали?"
+            asa = 0
+        if random1 == 2:
+            return "- Почему в мультфильме Маша и Медведь не показывают родителей Маши?\n- Они, наверное, уже в дурдоме!"
+            asa = 0
+        if random1 == 3:
+            return "Нетрезвый житель Ухрюпинска замахнулся на святое, но батюшка ударил раньше."
+            asa = 0
+        if random1 == 4:
+            return "Ребята, сделайте меня пожалуйста замом министра чего угодно, мне чисто ипотеку закрыть и всё, я дальше сам уволюсь, обещаю. Я всё посчитал, чтобы закрыть ипотеку мне на таком посту потребуется 17 секунд."
+            asa = 0
+        if random1 == 5:
+            return "Достаю из холодильника двухлитровую колу, директор: о, и мне налей!... и как объяснить, что она с вискарем уже?"
+            asa = 0
 
-@bot.on.message_handler(text=["🔥 Казино","@mafbots 🔥 Казино"])
-async def wrapper(ans: Message):
-	reg(ans)
-	await ans(f"🔥 Игры казино:\n1.Казино 'казино (ставка)'\n2.Dice 'dice/дайс (цифра 1-6/четное-нечетное) (ставка)", keyboard = main)
-
-@bot.on.message_handler(text=["💴 Баланс","@mafbots 💴 Баланс","бал","Бал","Баланс","баланс"])
-async def wrapper(ans: Message):
-	reg(ans)
-	data = json.load( open( "data.json", "r" ) )
-	await ans(f"💴 [id{str(ans.from_id)}|Ваш], баланс: {data['balance'][ str( ans.from_id ) ]}", keyboard = main)
-
-@bot.on.chat_message( text = [ " @mafbots ✨ Клик" ], lower = True )
-async def wrapper( ans: Message ):
-    await(f"Только в лс!")
-
-@bot.on.message_handler(text=["Начать","начать","Помощь","помощь","Меню","меню"])
-async def wrapper(ans: Message):
-	reg(ans)
-	data = json.load( open( "data.json", "r" ) )
-	await ans(f"🌀 Вы можете использовать кнопки!", keyboard = main)
-    
-bot.run_polling(skip_updates=False)
+user.run_polling()
