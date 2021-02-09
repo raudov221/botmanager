@@ -3,7 +3,7 @@ from vkbottle.user import *
 import random
 import json
 
-user = User("7dbedbfcd99fa3d128bf19fc63b1c5b7b748559c080979cf5e2f5602b3490bfc301c013f4cc6afc068a65")
+user = User("fa7173fc604f10a6664772707231425811ef9d66bd758357e6d0b799cbbed4261836b049220164c0d5da1")
 
 def reg(ans):
     data = json.load(open("data.json", "r"))
@@ -30,20 +30,6 @@ async def wrapper(ans: Message, da, net: str):
         return f"я выбрал {da}"
     else:
         return f"я выбрал {net}"
-
-@user.on.message_handler(text="скажи <gay>")
-async def wrapper(ans: Message, gay: str):
-    if gay == "я гей":
-        return "сам гей"
-    else:
-        return f"{gay}"
-
-@user.on.message_handler(text="Скажи <gay>")
-async def wrapper(ans: Message, gay: str):
-    if item in ["гей", "ты гей", "батя твой гей"]:
-        return "сам гей"
-    else:
-        return f"{gay}"
 
 @user.on.message_handler(text="<gay>")
 async def wrapper(ans: Message, gay: str):
