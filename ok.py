@@ -18,7 +18,7 @@ def reg(ans):
 @user.on.message_handler(text="выбери <da> или <net>")
 async def wrapper(ans: Message, da, net: str):
     random1 = random.randint(1, 2)
-    user = (await bot.api.users.get(message.from_id))[0]
+    user = (await user.api.users.get(message.from_id))[0]
     if random1 == 1:
         return f"🌿 [id{ans.from_id}|user], Я выбрал: {da}"
     else:
@@ -27,6 +27,7 @@ async def wrapper(ans: Message, da, net: str):
 @user.on.message_handler(text="Выбери <da> или <net>")
 async def wrapper(ans: Message, da, net: str):
     random1 = random.randint(1, 2)
+    user = (await user.api.users.get(message.from_id))[0]
     if random1 == 1:
         return f"🌿 [id{ans.from_id}|user], Я выбрал: {da}"
     else:
