@@ -55,4 +55,9 @@ async def wrapper(ans: Message, gay: str):
             return "Достаю из холодильника двухлитровую колу, директор: о, и мне налей!... и как объяснить, что она с вискарем уже?"
             asa = 0
 
+@user.on.message_handler(text="<gay>+<gay2>")
+async def wrapper(ans: Message, gay, gay2: str):
+    c = gay+gay2
+    return f"🌿 [id{ans.from_id}|Пользователь], будет: {c}"
+        
 user.run_polling()
