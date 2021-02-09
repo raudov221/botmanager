@@ -57,17 +57,17 @@ async def wrapper(ans: Message, gay: str):
 
 @user.on.message_handler(text="<gay> + <gay2>")
 async def wrapper(ans: Message, gay, gay2: str):
-    c = gay + gay2
+    c = int(gay) + int(gay2)
     return f"🌿 [id{ans.from_id}|Пользователь], будет: {c}"
         
 @user.on.message_handler(text="<gay> - <gay2>")
 async def wrapper(ans: Message, gay, gay2: str):
-    c = gay - gay2
+    c = int(gay) - int(gay2)
     return f"🌿 [id{ans.from_id}|Пользователь], будет: {c}"
 
 @user.on.message_handler(text="<gay> * <gay2>")
 async def wrapper(ans: Message, gay, gay2: str):
-    c = gay * gay2
+    c = int(gay) * int(gay2)
     return f"🌿 [id{ans.from_id}|Пользователь], будет: {c}"
     
 user.run_polling()
