@@ -21,31 +21,31 @@ async def wrapper(ans: Message, da, net: str):
     
 @user.on.message_handler(text="наградить медалью <da>")
 async def wrapper(ans: Message, da: str):
-    if int(da) == "vto.pe":
-        return "Такая магия на меня не действует!"
-    if int(da) == "https://vto.pe":
-        return "Такая магия на меня не действует!"
-    if int(da) == "http://vto.pe":
-        return "Такая магия на меня не действует!"
     return f"🌿 [id{ans.from_id}|Пользователь], наградил [id{ans.reply_message.from_id}|вас] медалью {da}"
 
 @user.on.message_handler(text="Наградить медалью <da>")
 async def wrapper(ans: Message, da: str):
-    if da == "vto.pe":
-        return "Такая магия на меня не действует!"
-    if da == "https://vto.pe":
-        return "Такая магия на меня не действует!"
-    if da == "http://vto.pe":
-        return "Такая магия на меня не действует!"
     return f"🌿 [id{ans.from_id}|Пользователь], наградил [id{ans.reply_message.from_id}|вас] медалью {da}"
 
-@user.on.message_handler(text="<da> Иван")
-async def wrapper(ans: Message, da: str):
-    return f"🌿 [id{ans.from_id}|Пользователь], привет"
+@user.on.message_handler(text="<da>+<net>")
+async def wrapper(ans: Message, da, net: str):
+    c = int(da)+int(net)
+    return f"🌿 [id{ans.from_id}|Пользователь], ответ: {c}"
 
-@user.on.message_handler(text="<da> иван")
-async def wrapper(ans: Message, da: str):
-    return f"🌿 [id{ans.from_id}|Пользователь], привет"
+@user.on.message_handler(text="<da>-<net>")
+async def wrapper(ans: Message, da, net: str):
+    c = int(da)-int(net)
+    return f"🌿 [id{ans.from_id}|Пользователь], ответ: {c}"
+
+@user.on.message_handler(text="<da>*<net>")
+async def wrapper(ans: Message, da, net: str):
+    c = int(da)*int(net)
+    return f"🌿 [id{ans.from_id}|Пользователь], ответ: {c}"
+
+@user.on.message_handler(text="<da>/<net>")
+async def wrapper(ans: Message, da, net: str):
+    c = int(da)/int(net)
+    return f"🌿 [id{ans.from_id}|Пользователь], ответ: {c}"
 
 @user.on.message_handler(text="<gay>")
 async def wrapper(ans: Message, gay: str):
