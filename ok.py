@@ -1,19 +1,7 @@
 from vkbottle.user import User, Message
-from vkbottle.user import *
 import random
-import json
 
 user = User("fa7173fc604f10a6664772707231425811ef9d66bd758357e6d0b799cbbed4261836b049220164c0d5da1")
-
-def reg(ans):
-    data = json.load(open("data.json", "r"))
-    if str(ans.from_id) in data["user"]:
-        pass
-    else:
-        data["user"][str(ans.from_id)] = "reg"
-        data["status"][str(ans.from_id)] = "нету"
-        data["id"][str(ans.from_id)] = str(len(data["user"]))
-        json.dump(data, open("data.json", "w"))
 
 @user.on.message_handler(text="выбери <da> или <net>")
 async def wrapper(ans: Message, da, net: str):
@@ -30,6 +18,14 @@ async def wrapper(ans: Message, da, net: str):
         return f"🌿 [id{ans.from_id}|Пользователь], Я выбрал: {da}"
     else:
         return f"🌿 [id{ans.from_id}|Пользователь], Я выбрал: {net}"
+    
+@user.on.message_handler(text="наградить медалью <da>")
+async def wrapper(ans: Message, da: str):
+    return f"🌿 [id{ans.from_id}|Пользователь], наградил [id{ans.reply_message.from_id}|вас] медалью {da}"
+
+@user.on.message_handler(text="Наградить медалью <da>")
+async def wrapper(ans: Message, da: str):
+    return f"🌿 [id{ans.from_id}|Пользователь], наградил [id{ans.reply_message.from_id}|вас] медалью {da}"
 
 @user.on.message_handler(text="<gay>")
 async def wrapper(ans: Message, gay: str):
@@ -54,24 +50,5 @@ async def wrapper(ans: Message, gay: str):
         if random1 == 5:
             return "Достаю из холодильника двухлитровую колу, директор: о, и мне налей!... и как объяснить, что она с вискарем уже?"
             asa = 0
-
-@user.on.message_handler(text="<gay> + <gay2>")
-async def wrapper(ans: Message, gay, gay2: str):
-    c = int(gay) + int(gay2)
-    return f"🌿 [id{ans.from_id}|Пользователь], будет: {c}"
-        
-@user.on.message_handler(text="<gay> - <gay2>")
-async def wrapper(ans: Message, gay, gay2: str):
-    c = int(gay) - int(gay2)
-    return f"🌿 [id{ans.from_id}|Пользователь], будет: {c}"
-
-@user.on.message_handler(text="<gay> * <gay2>")
-async def wrapper(ans: Message, gay, gay2: str):
-    c = int(gay) * int(gay2)
-    return f"🌿 [id{ans.from_id}|Пользователь], будет: {c}"
-    
-@user.on.message_handler(text="наградить медалью <da>")
-async def wrapper(ans: Message, da: str):
-    return f"🌿 [id{ans.from_id}|Пользователь], наградил [id{ans.reply_message.from_id}|вас] медалью {da}"
     
 user.run_polling()
