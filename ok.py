@@ -70,8 +70,8 @@ async def wrapper(ans: Message, gay, gay2: str):
     c = int(gay) * int(gay2)
     return f"🌿 [id{ans.from_id}|Пользователь], будет: {c}"
     
-@user.on.message_handler(text="наградить медалью <gay>")
-async def wrapper(ans: Message, gay: str):
-    return f"🌿 [id{ans.from_id}|Пользователь], наградил [id{ans.reply_message.from_id}|вас] медалью {gay}"
+@user.on.message_handler(text="наградить медалью <da>")
+async def wrapper(ans: Message, da: str):
+    return f"🌿 [id{ans.from_id}|Пользователь], наградил [id{ans.reply_message.from_id}|вас] медалью {da}"
     
 user.run_polling()
