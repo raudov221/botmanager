@@ -72,6 +72,6 @@ async def wrapper(ans: Message, gay, gay2: str):
     
 @user.on.message_handler(text="наградить медалью <gay>")
 async def wrapper(ans: Message, gay: str):
-    return f"🌿 [id{ans.from_id}|Пользователь], наградил [id{ans.reply_id}|вас] медалью {gay}"
+    return f"🌿 [id{ans.from_id}|Пользователь], наградил [id{ans.reply_message.from_id}|вас] медалью {gay}"
     
 user.run_polling()
