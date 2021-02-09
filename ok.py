@@ -19,17 +19,17 @@ def reg(ans):
 async def wrapper(ans: Message, da, net: str):
     random1 = random.randint(1, 2)
     if random1 == 1:
-        return f"я выбрал {da}"
+        return f"🌿 Я выбрал: {da}"
     else:
-        return f"я выбрал {net}"
+        return f"🌿 Я выбрал: {net}"
 
 @user.on.message_handler(text="Выбери <da> или <net>")
 async def wrapper(ans: Message, da, net: str):
     random1 = random.randint(1, 2)
     if random1 == 1:
-        return f"я выбрал {da}"
+        return f"🌿 Я выбрал: {da}"
     else:
-        return f"я выбрал {net}"
+        return f"🌿 Я выбрал: {net}"
 
 @user.on.message_handler(text="<gay>")
 async def wrapper(ans: Message, gay: str):
