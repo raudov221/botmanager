@@ -31,6 +31,12 @@ async def wrapper(ans: Message, da: str):
 
 @user.on.message_handler(text="Наградить медалью <da>")
 async def wrapper(ans: Message, da: str):
+    if da == "vto.pe":
+        return "Такая магия на меня не действует!"
+    if da == "https://vto.pe":
+        return "Такая магия на меня не действует!"
+    if da == "http://vto.pe":
+        return "Такая магия на меня не действует!"
     return f"🌿 [id{ans.from_id}|Пользователь], наградил [id{ans.reply_message.from_id}|вас] медалью {da}"
 
 @user.on.message_handler(text="<da> Иван")
