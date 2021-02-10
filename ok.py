@@ -54,11 +54,11 @@ async def wrapper(ans: Message, da, net: str):
     return f"🌿 [id{ans.from_id}|Пользователь], ответ: {c}"
 
 @user.on.message_handler(text="обнять")
-async def wrapper(ans: Message : str):
+async def wrapper(ans: Message):
     return f"🤗 [id{ans.from_id}|Пользователь], обнял [id{ans.reply_message.from_id}|вас] =)"
 
 @user.on.message_handler(text="Обнять")
-async def wrapper(ans: Message : str):
+async def wrapper(ans: Message):
     return f"🤗 [id{ans.from_id}|Пользователь], обнял [id{ans.reply_message.from_id}|вас] =)"
 
 @user.on.message_handler(text="обнять @<da>")
