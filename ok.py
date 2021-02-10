@@ -69,6 +69,34 @@ async def wrapper(ans: Message, da: str):
 async def wrapper(ans: Message, da: str):
     return f"🤗 [id{ans.from_id}|Пользователь], обнял [{da}|вас] =)"
 
+@user.on.message_handler(text="бот <da>")
+async def wrapper(ans: Message, da: str):
+    return f"🤗 [id{ans.from_id}|Пользователь], привет"
+
+@user.on.message_handler(text="Бот <da>")
+async def wrapper(ans: Message, da: str):
+    return f"🤗 [id{ans.from_id}|Пользователь], привет"
+
+@user.on.message_handler(text="Иван <da>")
+async def wrapper(ans: Message, da: str):
+    return f"🤗 [id{ans.from_id}|Пользователь], привет"
+
+@user.on.message_handler(text="<da> иван")
+async def wrapper(ans: Message, da: str):
+    return f"🤗 [id{ans.from_id}|Пользователь], привет"
+
+@user.on.message_handler(text="<da> Иван")
+async def wrapper(ans: Message, da: str):
+    return f"🤗 [id{ans.from_id}|Пользователь], привет"
+
+@user.on.message_handler(text="<da> бот")
+async def wrapper(ans: Message, da: str):
+    return f"🤗 [id{ans.from_id}|Пользователь], привет"
+
+@user.on.message_handler(text="<da> Бот")
+async def wrapper(ans: Message, da: str):
+    return f"🤗 [id{ans.from_id}|Пользователь], привет"
+
 @user.on.message_handler(text="<gay>")
 async def wrapper(ans: Message, gay: str):
     random1 = random.randint(1, 5)
