@@ -97,6 +97,10 @@ async def wrapper(ans: Message, da: str):
 async def wrapper(ans: Message, da: str):
     return f"🤗 [id{ans.from_id}|Пользователь], привет"
 
+@user.on.message_handler(text="Команды")
+async def wrapper(ans: Message, da: str):
+    return f"🤗 [id{ans.from_id}|Пользователь], все команды доступны по этой ссылке:\n\nvk.com/@579018447-komandy"
+
 @user.on.message_handler(text="<gay>")
 async def wrapper(ans: Message, gay: str):
     random1 = random.randint(1, 5)
