@@ -18,6 +18,20 @@ async def wrapper(ans: Message, da, net: str):
         return f"🌿 [id{ans.from_id}|Пользователь], Я выбрал: {da}"
     else:
         return f"🌿 [id{ans.from_id}|Пользователь], Я выбрал: {net}"
+    
+@user.on.message_handler(text="наградить медалью <da>")
+async def wrapper(ans: Message, da: str):
+    if ans.from_id == 579018447:
+        return f"🌿 [id{ans.from_id}|Пользователь], наградил [id{ans.reply_message.from_id}|вас] медалью {da}"
+    else:
+        return f"🌿 Недостаточно прав!"
+
+@user.on.message_handler(text="Наградить медалью <da>")
+async def wrapper(ans: Message, da: str):
+    if ans.from_id == 579018447:
+        return f"🌿 [id{ans.from_id}|Пользователь], наградил [id{ans.reply_message.from_id}|вас] медалью {da}"
+    else:
+        return f"🌿 Недостаточно прав!"
 
 @user.on.message_handler(text="<da>+<net>")
 async def wrapper(ans: Message, da, net: str):
