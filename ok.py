@@ -67,7 +67,7 @@ async def wrapper(ans: Message, da: str):
 
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
-    a = random.randint(1, 7)
+    a = random.randint(1, 9)
     b = random.randint(1, 10)
     if b == 10:
         if a == 1:
@@ -84,6 +84,10 @@ async def wrapper(ans: Message, da: str):
             return "помнишь я твоей матери дилдо подарил и она тебя им избила?"
         if a == 7:
             return "/me отпиздил твоего кота и убил твою мать"
+        if a == 8:
+            return "твой отец тебя обоссал, выебал и ушел из семьи, все это не снимая штанов" 
+        if a == 9:
+            return "у твоего отца пол сантимнтра по этому твоя мать лягушка, сука она кричала от боли моего пол метрового столба" 
  
 @user.on.message_handler(text="Обнять @<da>")
 async def wrapper(ans: Message, da: str):
