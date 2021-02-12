@@ -79,12 +79,12 @@ async def wrapper(ans: Message):
 async def wrapper(ans: Message):
     return f"🤗 [id{ans.from_id}|Пользователь], трахнул [id{ans.reply_message.from_id}|вас] =)"
 
-@user.on.message_handler(text="инфа @<da>")
+@user.on.message_handler(text="инфа <da>")
 async def wrapper(ans: Message, da: str):
     random1 = random.randint(1, 100)
     return f"🤗 [id{ans.from_id}|Пользователь], я думаю что {da} - {random1}%"
 
-@user.on.message_handler(text="Инфа @<da>")
+@user.on.message_handler(text="Инфа <da>")
 async def wrapper(ans: Message, da: str):
     random1 = random.randint(1, 100)
     return f"🤗 [id{ans.from_id}|Пользователь], я думаю что {da} - {random1}%"
