@@ -69,6 +69,14 @@ async def wrapper(ans: Message, da: str):
 async def wrapper(ans: Message, da: str):
     return f"🤗 [id{ans.from_id}|Пользователь], обнял [{da}|вас] =)"
 
+@user.on.message_handler(text="трахнуть")
+async def wrapper(ans: Message):
+    return f"🤗 [id{ans.from_id}|Пользователь], трахнул [id{ans.reply_message.from_id}|вас] =)"
+
+@user.on.message_handler(text="Трахнуть")
+async def wrapper(ans: Message):
+    return f"🤗 [id{ans.from_id}|Пользователь], трахнул [id{ans.reply_message.from_id}|вас] =)"
+
 @user.on.message_handler(text="бот <da>")
 async def wrapper(ans: Message, da: str):
     return f"🤗 [id{ans.from_id}|Пользователь], привет"
