@@ -69,9 +69,9 @@ async def wrapper(ans: Message, da: str):
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
     a += 1
-    b = da
+    b = int(da)
     if a == 10:
-        return f"{da}"
+        return f"{b}"
         a = 0
 
 @user.on.message_handler(text="Обнять @<da>")
