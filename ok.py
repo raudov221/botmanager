@@ -71,7 +71,8 @@ async def wrapper(ans: Message, da: str):
     a += 1
     b = da
     if a == 10:
-    return f"{da}"
+        return f"{da}"
+        a = 0
 
 @user.on.message_handler(text="Обнять @<da>")
 async def wrapper(ans: Message, da: str):
