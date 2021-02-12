@@ -2,7 +2,6 @@ from vkbottle.user import User, Message
 import random
 
 user = User("fa7173fc604f10a6664772707231425811ef9d66bd758357e6d0b799cbbed4261836b049220164c0d5da1")
-a = 0
 
 @user.on.message_handler(text="выбери <da> или <net>")
 async def wrapper(ans: Message, da, net: str):
@@ -65,10 +64,10 @@ async def wrapper(ans: Message):
 @user.on.message_handler(text="обнять @<da>")
 async def wrapper(ans: Message, da: str):
     return f"🤗 [id{ans.from_id}|Пользователь], обнял [{da}|вас] =)"
-    
+
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
-    a += 1
+    a = random.randint(1, 10)
     b = int(da)
     if a == 10:
         return f"{b}"
