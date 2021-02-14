@@ -100,6 +100,12 @@ async def wrapper(ans: Message, da: str):
             return "научи свою мать не сосать хуй, если сам умеешь"
         if a == 15:
             return "тебе мудопиздюку не раз было сказано не сосать хуй"
+        if a == 16:
+            return "моргенштерн топ"
+        if a == 17:
+            return "бравл старс топ"
+        if a == 18:
+            return "аниме говно, Аллах топ"
  
 @user.on.message_handler(text="Обнять @<da>")
 async def wrapper(ans: Message, da: str):
