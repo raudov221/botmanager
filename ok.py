@@ -65,11 +65,28 @@ async def wrapper(ans: Message):
 async def wrapper(ans: Message, da: str):
     return f"🤗 [id{ans.from_id}|Пользователь], обнял [{da}|вас] =)"
 
+@user.on.message_handler(text="b = 1")
+async def wrapper(ans: Message):
+    b = 0
+    if ans.from_id == 579018447:
+        b = 1
+        return "b = {b}!" 
+    else:
+        return "you id == {ans.from_id}"
+
+@user.on.message_handler(text="b = 0")
+async def wrapper(ans: Message):
+    b = 0
+    if ans.from_id == 579018447:
+        b = 0
+        return "b = {b}!" 
+    else:
+        return "you id == {ans.from_id}"
+
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
     a = random.randint(1, 15)
-    b = random.randint(1, 5)
-    if b == 5:
+    if b == 1:
         if a == 1:
             return "ты че ахуела чекни базар даун"
         if a == 2:
