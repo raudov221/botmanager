@@ -67,7 +67,7 @@ async def wrapper(ans: Message, da: str):
 
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
-    a = random.randint(1, 11)
+    a = random.randint(1, 12)
     b = random.randint(1, 5)
     if b == 5:
         if a == 1:
@@ -92,6 +92,8 @@ async def wrapper(ans: Message, da: str):
             return "что-что? что ты там пищиж мразь я блять таких как ты по 10 штук в день обоссываю а ты ещё возникаешь хуепутало, если тебе не нравится мой хуй не соси ето же ты кричала эй эй дядя дайте хуй пососать а я вам сотку дам блять токо прикол в том чо сотку я тебе не отдам такчто ты пойдешь просто нахуй поэтому соси пока есть возможность выбиться в люди"
         if a == 11:
             return f"- знаешь почему у твоей мамы всегда зубы свежие?\n- потому что мой хуй со вкусом тик така"
+        if a == 12:
+            return "угадай кто сегодня идет в кинотеатр с твоей матерью"
  
 @user.on.message_handler(text="Обнять @<da>")
 async def wrapper(ans: Message, da: str):
