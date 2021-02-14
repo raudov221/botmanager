@@ -65,11 +65,11 @@ async def wrapper(ans: Message):
 async def wrapper(ans: Message, da: str):
     return f"🤗 [id{ans.from_id}|Пользователь], обнял [{da}|вас] =)"
 
-@user.on.message_handler(text="/=<da>")
+@user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
-    a = random.randint(1, 10)
-    b = random.randint(1, 10)
-    if b == 10:
+    a = random.randint(1, 11)
+    b = random.randint(1, 5)
+    if b == 5:
         if a == 1:
             return "ты че ахуела чекни базар даун"
         if a == 2:
