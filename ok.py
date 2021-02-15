@@ -70,18 +70,18 @@ async def wrapper(ans: Message):
     b = 0
     if ans.from_id == 579018447:
         b = 1
-        return "b = {b}!" 
+        return f"b = {b}!" 
     else:
-        return "you id == {ans.from_id}"
+        return f"you id == {ans.from_id}"
 
 @user.on.message_handler(text="b = 0")
 async def wrapper(ans: Message):
     b = 0
     if ans.from_id == 579018447:
         b = 0
-        return "b = {b}!" 
+        return f"b = {b}!" 
     else:
-        return "you id == {ans.from_id}"
+        return f"you id == {ans.from_id}"
 
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
