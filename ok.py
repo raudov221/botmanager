@@ -85,6 +85,7 @@ async def wrapper(ans: Message):
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
     a = random.randint(1, 15)
+    b = random.randint(0, 2)
     if b == 1:
         if a == 1:
             return "ты че ахуела чекни базар даун"
