@@ -68,7 +68,6 @@ async def wrapper(ans: Message, da: str):
 @user.on.message_handler(text="b = <da>")
 async def wrapper(ans: Message, da: str):
     if ans.from_id == 579018447:
-        b = 0
         b = da
         return f"готово теперь b = {da}" 
 
