@@ -73,12 +73,10 @@ async def wrapper(ans: Message):
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
     a = random.randint(1, 15)
+    f = open('text.txt')
+    b = f.read(2)
     if b == 0:
-        @user.on.message_handler(text="b = <da>")
-        async def wrapper(ans: Message, da: str):
-            if ans.from_id == 579018447:
-                b = da
-                return f"готово теперь b = {da}" 
+        print("h") 
     else:
         if a == 1:
             return "ты че ахуела чекни базар даун"
