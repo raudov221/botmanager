@@ -75,7 +75,7 @@ async def wrapper(ans: Message, da: str):
     if ans.from_id == 579018447:
         f = open('text.txt')
         f.write(da)
-        return f"{f.read(2)}"
+        return f"b = da"
 
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
