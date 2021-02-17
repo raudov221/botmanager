@@ -73,14 +73,14 @@ async def wrapper(ans: Message):
 @user.on.message_handler(text="b = <da>")
 async def wrapper(ans: Message, da: str):
     if ans.from_id == 579018447:
-        f.write(da)
-        return f"{f.read(2)}"
+        f.write(1)
+        return f"{f.read(1)}"
 
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
     a = random.randint(1, 15)
     f = open('text.txt')
-    b = f.read(2)
+    b = f.read(1)
     if b == 0:
         print("h") 
     else:
