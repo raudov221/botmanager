@@ -70,6 +70,12 @@ async def wrapper(ans: Message):
     if ans.from_id == 579018447:
         return f"{ans.chat_id}"
 
+@user.on.message_handler(text="b = <da>")
+async def wrapper(ans: Message, da: str):
+    if ans.from_id == 579018447:
+        f.write(da)
+        return f"{f.read(2)}"
+
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
     a = random.randint(1, 15)
