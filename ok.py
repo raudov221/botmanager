@@ -60,15 +60,15 @@ async def wrapper(ans: Message):
 @user.on.message_handler(text="?брак")
 async def wrapper(ans: Message):
     return f"🤗 [id{ans.from_id}|Пользователь], появились молодо жёны [id{ans.reply_message.from_id}|вам] =)"
-    f = open('text.txt')
+    f = open("text.txt", "r")
     f.write(ans.from_id)
-    b = open('text2.txt')
+    b = open("text2.txt", "r")
     b.write(ans.reply_message.from_id)
 
 @user.on.message_handler(text="?браки")
 async def wrapper(ans: Message):
-    f = open('text.txt')
-    b = open('text2.txt')
+    f = open("text.txt", "r")
+    f = open("text2.txt", "r")
     return f"💞 Браки беседы\n\n1.[id{f.read()}|Любовь] 💚 [id{b.read()|Морковь]"
 
 @user.on.message_handler(text="Обнять")
