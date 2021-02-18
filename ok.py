@@ -65,6 +65,10 @@ async def wrapper(ans: Message):
 async def wrapper(ans: Message, da: str):
     return f"🤗 [id{ans.from_id}|Пользователь], обнял [{da}|вас] =)"
 
+@user.on.message_handler(text="/me <da>")
+async def wrapper(ans: Message, da: str):
+    return f"[id{ans.from_id}|Пользователь], {da}"
+
 @user.on.message_handler(text="чат айди")
 async def wrapper(ans: Message):
     if ans.from_id == 579018447:
