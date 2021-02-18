@@ -69,7 +69,7 @@ async def wrapper(ans: Message):
 async def wrapper(ans: Message):
     f = open("text.txt", "r")
     f = open("text2.txt", "r")
-    return f"💞 Браки беседы\n\n1.[id{f.read()}|Любовь] 💚 [id{b.read()|Морковь]"
+    return f"💞 Браки беседы\n\n1.[id{f.read()}|Любовь] 💚 [id{b.read()}|Морковь]"
 
 @user.on.message_handler(text="Обнять")
 async def wrapper(ans: Message):
