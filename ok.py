@@ -57,11 +57,19 @@ async def wrapper(ans: Message, da, net: str):
 async def wrapper(ans: Message):
     return f"🤗 [id{ans.from_id}|Пользователь], обнял [id{ans.reply_message.from_id}|вас] =)"
 
-@user.on.message_handler(text="брак")
+@user.on.message_handler(text="-брак")
 async def wrapper(ans: Message):
     return f"🤗 [id{ans.from_id}|Пользователь], появились молодо жёны [id{ans.reply_message.from_id}|вам] =)"
-    f = open ('text.txt')
-    f.write(f'{ans.from_id}')
+    f = open('text.txt')
+    f.write(ans.from_id)
+    b = open('text2.txt')
+    b.write(ans.reply_message.from_id)
+
+@user.on.message_handler(text="брак")
+async def wrapper(ans: Message):
+    f = open('text.txt')
+    b = open('text2.txt')
+    return "💞 Браки беседы\n\n1.[id{f.read()}|Любовь] 💚 [id{b.read()|Морковь]"
 
 @user.on.message_handler(text="Обнять")
 async def wrapper(ans: Message):
