@@ -81,7 +81,7 @@ async def wrapper(ans: Message, da: str):
 async def wrapper(ans: Message, da: str):
     a = random.randint(1, 15)
     f = open('text.txt')
-    b = f.read(2)
+    b = f.read()
     if b == 0:
         print("h") 
     else:
