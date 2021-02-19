@@ -8,18 +8,20 @@ api = API("c4d495bf98b70c7beac023a7c2ce16c6a2b71e33ac60b7ccfa7854b9ff8d8125e07af
 @user.on.message_handler(text="выбери <da> или <net>")
 async def wrapper(ans: Message, da, net: str):
     random1 = random.randint(1, 2)
+    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
     if random1 == 1:
-        return f"🌿 [id{ans.from_id}|Пользователь], Я выбрал: {da}"
+        return f"🌿 [id{ans.from_id}|{penis[0].first_name}], Я выбрал: {da}"
     else:
-        return f"🌿 [id{ans.from_id}|Пользователь], Я выбрал: {net}"
+        return f"🌿 [id{ans.from_id}|{penis[0].first_name}], Я выбрал: {net}"
 
 @user.on.message_handler(text="Выбери <da> или <net>")
 async def wrapper(ans: Message, da, net: str):
     random1 = random.randint(1, 2)
+    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
     if random1 == 1:
-        return f"🌿 [id{ans.from_id}|Пользователь], Я выбрал: {da}"
+        return f"🌿 [id{ans.from_id}|{penis[0].first_name}], Я выбрал: {da}"
     else:
-        return f"🌿 [id{ans.from_id}|Пользователь], Я выбрал: {net}"
+        return f"🌿 [id{ans.from_id}|{penis[0].first_name}], Я выбрал: {net}"
     
 @user.on.message_handler(text="наградить медалью <da>")
 async def wrapper(ans: Message, da: str):
@@ -38,26 +40,26 @@ async def wrapper(ans: Message, da: str):
 @user.on.message_handler(text="<da>+<net>")
 async def wrapper(ans: Message, da, net: str):
     c = int(da)+int(net)
-    return f"🌿 [id{ans.from_id}|Пользователь], ответ: {c}"
+    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
+    return f"🌿 [id{ans.from_id}|{penis[0].first_name], ответ: {c}"
 
 @user.on.message_handler(text="<da>-<net>")
 async def wrapper(ans: Message, da, net: str):
     c = int(da)-int(net)
-    return f"🌿 [id{ans.from_id}|Пользователь], ответ: {c}"
+    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
+    return f"🌿 [id{ans.from_id}|{penis[0].first_name], ответ: {c}"
 
 @user.on.message_handler(text="<da>*<net>")
 async def wrapper(ans: Message, da, net: str):
     c = int(da)*int(net)
-    return f"🌿 [id{ans.from_id}|Пользователь], ответ: {c}"
+    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
+    return f"🌿 [id{ans.from_id}|{penis[0].first_name], ответ: {c}"
 
 @user.on.message_handler(text="<da>/<net>")
 async def wrapper(ans: Message, da, net: str):
     c = int(da)/int(net)
-    return f"🌿 [id{ans.from_id}|Пользователь], ответ: {c}"
-
-@user.on.message_handler(text="обнять")
-async def wrapper(ans: Message):
-    return f"🤗 [id{ans.from_id}|Пользователь], обнял [id{ans.reply_message.from_id}|вас] =)"
+    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
+    return f"🌿 [id{ans.from_id}|{penis[0].first_name], ответ: {c}"
 
 @user.on.message_handler(text="?брак")
 async def wrapper(ans: Message):
@@ -75,11 +77,13 @@ async def wrapper(ans: Message):
 
 @user.on.message_handler(text="Обнять")
 async def wrapper(ans: Message):
-    return f"🤗 [id{ans.from_id}|Пользователь], обнял [id{ans.reply_message.from_id}|вас] =)"
+    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
+    return f"🤗 [id{ans.from_id}|{penis[0].first_name}] обнял [{da}|вас] =)"
 
-@user.on.message_handler(text="обнять @<da>")
-async def wrapper(ans: Message, da: str):
-    return f"🤗 [id{ans.from_id}|Пользователь], обнял [{da}|вас] =)"
+@user.on.message_handler(text="обнять")
+async def wrapper(ans: Message):
+    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
+    return f"🤗 [id{ans.from_id}|{penis[0].first_name}] обнял [{da}|вас] =)"
 
 @user.on.message_handler(text="/me <da>")
 async def wrapper(ans: Message, da: str):
@@ -105,11 +109,12 @@ async def wrapper(ans: Message):
 
 @user.on.message_handler(text="стикеры")
 async def wrapper(ans: Message):
-    all_stickers = await api.request('gifts.getCatalog', {'user_id': ans.reply_message.from_id})
+    penis = await user.api.users.get(user_ids=ans.reply_message.from_id, fields='is_closed')
+    all_stickers = await api.request('gifts.getCatalog', {'user_id': ans.from_id})
     stickers = [f"🌿 ID: {i['gift']['stickers_product_id']} - Название: {i['sticker_pack']['title']}"
     for i in all_stickers[1]['items'] if 'disabled' in i]
     stickers2 = '\n'.join(stickers)
-    return f"🤑 Пользователь его стикеры:\n\n{stickers2}"
+    return f"🤑 [id{ans.from_id}|{penis[0].first_name}], [id{ans.reply_message.from_id}|его] стикеры:\n\n{stickers2}"
 
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
