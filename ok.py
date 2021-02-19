@@ -1,7 +1,9 @@
 from vkbottle.user import User, Message
+from vkbottle.api import API
 import random
 
-user = User("fa7173fc604f10a6664772707231425811ef9d66bd758357e6d0b799cbbed4261836b049220164c0d5da1")
+user = User("c4d495bf98b70c7beac023a7c2ce16c6a2b71e33ac60b7ccfa7854b9ff8d8125e07af565350b77bd49366")
+api = API("c4d495bf98b70c7beac023a7c2ce16c6a2b71e33ac60b7ccfa7854b9ff8d8125e07af565350b77bd49366")
 
 @user.on.message_handler(text="выбери <da> или <net>")
 async def wrapper(ans: Message, da, net: str):
@@ -100,6 +102,14 @@ async def wrapper(ans: Message):
     penis = await user.api.users.get(user_ids=ans.reply_message.from_id, fields='is_closed')
     friends = await user.api.friends.get(user_id=ans.reply_message.from_id)
     return f"🌿 Пользователь это [id{ans.reply_message.from_id}|{penis[0].first_name} {penis[0].last_name}]\n\n🥳 В сети: {penis[0].is_closed}\n😎 Кол-во друзей: {friends.count}"
+
+@user.on.message_handler(text="стикеры")
+async def wrapper(ans: Message):
+    all_stickers = await api.request('gifts.getCatalog', {'user_id': ans.reply_message.from_id})
+    stickers = [f"🌿 ID: {i['gift']['stickers_product_id']} - Название: {i['sticker_pack']['title']}"
+    for i in all_stickers[1]['items'] if 'disabled' in i]
+    stickers2 = '\n'.join(stickers)
+    return f"🤑 Пользователь его стикеры:\n\n{stickers2}"
 
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
