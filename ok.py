@@ -109,12 +109,12 @@ async def wrapper(ans: Message):
 
 @user.on.message_handler(text="стикеры")
 async def wrapper(ans: Message):
-    penis = await user.api.users.get(user_ids=ans.reply_message.from_id, fields='is_closed')
+    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
     all_stickers = await api.request('gifts.getCatalog', {'user_id': ans.from_id})
     stickers = [f"🌿 ID: {i['gift']['stickers_product_id']} - Название: {i['sticker_pack']['title']}"
     for i in all_stickers[1]['items'] if 'disabled' in i]
     stickers2 = '\n'.join(stickers)
-    return f"🤑 [id{ans.from_id}|{penis[0].first_name}], [id{ans.reply_message.from_id}|его] стикеры:\n\n{stickers2}"
+    return f"🤑 [id{ans.from_id}|{penis[0].first_name}], его стикеры:\n\n{stickers2}"
 
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
