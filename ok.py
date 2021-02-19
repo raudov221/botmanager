@@ -41,25 +41,25 @@ async def wrapper(ans: Message, da: str):
 async def wrapper(ans: Message, da, net: str):
     c = int(da)+int(net)
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-    return f"🌿 [id{ans.from_id}|{penis[0].first_name], ответ: {c}"
+    return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {c}"
 
 @user.on.message_handler(text="<da>-<net>")
 async def wrapper(ans: Message, da, net: str):
     c = int(da)-int(net)
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-    return f"🌿 [id{ans.from_id}|{penis[0].first_name], ответ: {c}"
+    return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {c}"
 
 @user.on.message_handler(text="<da>*<net>")
 async def wrapper(ans: Message, da, net: str):
     c = int(da)*int(net)
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-    return f"🌿 [id{ans.from_id}|{penis[0].first_name], ответ: {c}"
+    return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {c}"
 
 @user.on.message_handler(text="<da>/<net>")
 async def wrapper(ans: Message, da, net: str):
     c = int(da)/int(net)
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-    return f"🌿 [id{ans.from_id}|{penis[0].first_name], ответ: {c}"
+    return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {c}"
 
 @user.on.message_handler(text="?брак")
 async def wrapper(ans: Message):
