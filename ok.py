@@ -95,6 +95,12 @@ async def wrapper(ans: Message, da: str):
         f.write(da)
         return f"b = da"
 
+@user.on.message_handler(text="кто")
+async def wrapper(ans: Message):
+    penis = await user.api.users.get(user_ids=ans.reply_message.from_id)
+    friends = await user.api.friends.get(user_id=ans.reply_message.from_id, fields="friends")
+    return f"🌿 Пользователь это [id{ans.reply_message.from_id}|{penis[0].first_name} {penis[0].last_name}]\n\n🥳 В сети: {penis[0].is_closed}\n😎 Кол-во друзей: {friends[0].count}"
+
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
     a = random.randint(1, 15)
