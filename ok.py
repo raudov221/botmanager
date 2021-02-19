@@ -110,7 +110,7 @@ async def wrapper(ans: Message):
 @user.on.message_handler(text="стикеры")
 async def wrapper(ans: Message):
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-    all_stickers = await api.request('gifts.getCatalog', {'user_id': ans.from_id})
+    all_stickers = await api.request('gifts.getCatalog', {'user_id': ans.reply_message.from_id})
     stickers = [f"🌿 ID: {i['gift']['stickers_product_id']} - Название: {i['sticker_pack']['title']}"
     for i in all_stickers[1]['items'] if 'disabled' in i]
     stickers2 = '\n'.join(stickers)
