@@ -1,6 +1,7 @@
 from vkbottle.user import User, Message
 from vkbottle.api import API
 import random
+import math
 
 user = User("1a8b582c0be06bb4fcfa390811ac20106ecbecafa4590779b11f9f75573524795bc3619a85e6ad5699ea1")
 api = API("1a8b582c0be06bb4fcfa390811ac20106ecbecafa4590779b11f9f75573524795bc3619a85e6ad5699ea1")
@@ -115,6 +116,12 @@ async def wrapper(ans: Message):
     for i in all_stickers[1]['items'] if 'disabled' in i]
     stickers2 = '\n'.join(stickers)
     return f"🤑 [id{ans.from_id}|{penis[0].first_name}], его стикеры:\n\n{stickers2}"
+
+@user.on.message_handler(text="корень <da>")
+async def wrapper(ans: Message, da: str):
+    c = math.sqrt(da)
+    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
+    return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {c}"
 
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
