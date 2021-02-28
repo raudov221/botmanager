@@ -2,8 +2,8 @@ from vkbottle.user import User, Message
 from vkbottle.api import API
 import random
 
-user = User("c4d495bf98b70c7beac023a7c2ce16c6a2b71e33ac60b7ccfa7854b9ff8d8125e07af565350b77bd49366")
-api = API("c4d495bf98b70c7beac023a7c2ce16c6a2b71e33ac60b7ccfa7854b9ff8d8125e07af565350b77bd49366")
+user = User("d560c04b6f2b4ed4c4a3840a1870b77af27d0c6f2f7a9b7e9e4a1fa4672f2eb3a4082cd983bec6873db8f")
+api = API("d560c04b6f2b4ed4c4a3840a1870b77af27d0c6f2f7a9b7e9e4a1fa4672f2eb3a4082cd983bec6873db8f")
 
 @user.on.message_handler(text="выбери <da> или <net>")
 async def wrapper(ans: Message, da, net: str):
