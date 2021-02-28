@@ -119,9 +119,8 @@ async def wrapper(ans: Message):
 
 @user.on.message_handler(text="корень <da>")
 async def wrapper(ans: Message, da: str):
-    c = math.sqrt(da)
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-    return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {c}"
+    return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {math.sqrt(int(da))}"
 
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
