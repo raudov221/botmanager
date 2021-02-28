@@ -122,6 +122,11 @@ async def wrapper(ans: Message, da: str):
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
     return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {math.sqrt(int(da))}"
 
+@user.on.message_handler(text="Корень <da>")
+async def wrapper(ans: Message, da: str):
+    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
+    return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {math.sqrt(int(da))}"
+
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
     a = random.randint(1, 15)
