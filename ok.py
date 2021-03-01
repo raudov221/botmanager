@@ -134,25 +134,25 @@ async def wrapper(ans: Message, da: str):
 
 @user.on.message_handler(text="выбери от <da> до <net>")
 async def wrapper(ans: Message, da, net: str):
-    ran = random.randint(da, net)
+    ran = random.randint(int(da), int(net))
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
     return f"🌿 [id{ans.from_id}|{penis[0].first_name}], я выбрал: {ran}"
 
 @user.on.message_handler(text="Выбери от <da> до <net>")
 async def wrapper(ans: Message, da, net: str):
-    ran = random.randint(da, net)
+    ran = random.randint(int(da), int(net))
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
     return f"🌿 [id{ans.from_id}|{penis[0].first_name}], я выбрал: {ran}"
 
 @user.on.message_handler(text="от <da> до <net>")
 async def wrapper(ans: Message, da, net: str):
-    ran = random.randint(da, net)
+ran = random.randint(int(da), int(net))
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
     return f"🌿 [id{ans.from_id}|{penis[0].first_name}], я выбрал: {ran}"
 
 @user.on.message_handler(text="От <da> до <net>")
 async def wrapper(ans: Message, da, net: str):
-    ran = random.randint(da, net)
+    ran = random.randint(int(da), int(net))
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
     return f"🌿 [id{ans.from_id}|{penis[0].first_name}], я выбрал: {ran}"
 
