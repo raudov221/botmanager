@@ -1,7 +1,8 @@
 from vkbottle.user import User, Message
 from vkbottle.api import API
-import random
+from rextester_py import rexec_aio
 import math
+import random
 
 user = User("1a8b582c0be06bb4fcfa390811ac20106ecbecafa4590779b11f9f75573524795bc3619a85e6ad5699ea1")
 api = API("1a8b582c0be06bb4fcfa390811ac20106ecbecafa4590779b11f9f75573524795bc3619a85e6ad5699ea1")
@@ -131,6 +132,12 @@ async def wrapper(ans: Message, da: str):
 async def wrapper(ans: Message, da: str):
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
     return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {math.sqrt(int(da))}"
+
+@user.on.message_handler(text="py <da>")
+async def wrapper(ans: Message, da: str):
+    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
+    rex = await rexec_aio("python 3", f"{da}", None)
+    🌿 [id{ans.from_id}|{penis[0].first_name}], вывод: {rex.results}"
 
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
