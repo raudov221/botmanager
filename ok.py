@@ -137,7 +137,7 @@ async def wrapper(ans: Message, da: str):
 async def wrapper(ans: Message, da: str):
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
     rex = await rexec_aio("python 3", f"{da}", None)
-    🌿 [id{ans.from_id}|{penis[0].first_name}], вывод: {rex.results}"
+    return f"🌿 [id{ans.from_id}|{penis[0].first_name}], вывод: {rex.results}"
 
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
