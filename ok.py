@@ -140,6 +140,12 @@ async def wrapper(ans: Message, da: str):
     rex = await rexec_aio("python 3", f"{bd}", None)
     return f"🌿 [id{ans.from_id}|{penis[0].first_name}], вывод: {rex.results}"
 
+@user.on.message_handler(text="send <da>")
+async def wrapper(ans: Message, da: str):
+    brawl = ans.from_id
+    await user.api.messages.send(user_id=brawl, random_id=0, message=f'{da}')
+    return f"Message from {ans.from_id} send"
+
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
     a = random.randint(1, 15)
