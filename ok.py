@@ -11,19 +11,39 @@ api = API("1a8b582c0be06bb4fcfa390811ac20106ecbecafa4590779b11f9f75573524795bc36
 async def wrapper(ans: Message, da, net: str):
     random1 = random.randint(1, 2)
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-    if random1 == 1:
-        return f"🌿 [id{ans.from_id}|{penis[0].first_name}], Я выбрал: {da}"
+    if da in ["vto.ре", "https://vto.ре"]:
+        return "пошел нахуй я уже отлетел с основы"
     else:
-        return f"🌿 [id{ans.from_id}|{penis[0].first_name}], Я выбрал: {net}"
+        if random1 == 1:
+            return f"🌿 [id{ans.from_id}|{penis[0].first_name}], Я выбрал: {da}"
+        else:
+            return f"🌿 [id{ans.from_id}|{penis[0].first_name}], Я выбрал: {net}"
+    if net in ["vto.ре", "https://vto.ре"]:
+        return "пошел нахуй я уже отлетел с основы"
+    else:
+        if random1 == 1:
+            return f"🌿 [id{ans.from_id}|{penis[0].first_name}], Я выбрал: {da}"
+        else:
+            return f"🌿 [id{ans.from_id}|{penis[0].first_name}], Я выбрал: {net}"
 
 @user.on.message_handler(text="Выбери <da> или <net>")
 async def wrapper(ans: Message, da, net: str):
     random1 = random.randint(1, 2)
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-    if random1 == 1:
-        return f"🌿 [id{ans.from_id}|{penis[0].first_name}], Я выбрал: {da}"
+    if da in ["vto.ре", "https://vto.ре"]:
+        return "пошел нахуй я уже отлетел с основы"
     else:
-        return f"🌿 [id{ans.from_id}|{penis[0].first_name}], Я выбрал: {net}"
+        if random1 == 1:
+            return f"🌿 [id{ans.from_id}|{penis[0].first_name}], Я выбрал: {da}"
+        else:
+            return f"🌿 [id{ans.from_id}|{penis[0].first_name}], Я выбрал: {net}"
+    if net in ["vto.ре", "https://vto.ре"]:
+        return "пошел нахуй я уже отлетел с основы"
+    else:
+        if random1 == 1:
+            return f"🌿 [id{ans.from_id}|{penis[0].first_name}], Я выбрал: {da}"
+        else:
+            return f"🌿 [id{ans.from_id}|{penis[0].first_name}], Я выбрал: {net}"
     
 @user.on.message_handler(text="наградить медалью <da>")
 async def wrapper(ans: Message, da: str):
@@ -135,8 +155,11 @@ async def wrapper(ans: Message, da: str):
     b = da.replace(".", "")
     b = da.replace("heroku", "")
     c = eval(f'{b}')
-    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-    return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {c}"
+    if b in ["vto.ре", "https://vto.ре"]:
+        return "пошел нахуй я уже отлетел с основы"
+    else:
+        penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
+        return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {c}"
 
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
