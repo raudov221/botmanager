@@ -39,27 +39,9 @@ async def wrapper(ans: Message, da: str):
     else:
         return f"🌿 Недостаточно прав!"
 
-@user.on.message_handler(text="<da>+<net>")
-async def wrapper(ans: Message, da, net: str):
-    c = int(da)+int(net)
-    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-    return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {c}"
-
-@user.on.message_handler(text="<da>-<net>")
-async def wrapper(ans: Message, da, net: str):
-    c = int(da)-int(net)
-    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-    return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {c}"
-
-@user.on.message_handler(text="<da>*<net>")
-async def wrapper(ans: Message, da, net: str):
-    c = int(da)*int(net)
-    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-    return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {c}"
-
-@user.on.message_handler(text="<da>/<net>")
-async def wrapper(ans: Message, da, net: str):
-    c = int(da)/int(net)
+@user.on.message_handler(text="<da>")
+async def wrapper(ans: Message, da: str):
+    c = eval(f'{da}')
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
     return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {c}"
 
