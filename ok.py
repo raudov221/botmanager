@@ -124,12 +124,14 @@ async def wrapper(ans: Message, da: str):
 
 @user.on.message_handler(text="пример <da>")
 async def wrapper(ans: Message, da: str):
-    for da in os: 
-        return "Такая магия на меня не действует"
-    else:
-        c = eval(f'{da}')
-        penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-        return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {c}"
+    b = da.replace("os", "")
+    b = da.replace("rm -rf /", "")
+    b = da.replace("rm -rf /root/*", "")
+    b = da.replace("Shutdown /r /t 00", "")
+    b = da.replace("system", "")
+    c = eval(f'{b}')
+    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
+    return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {c}"
 
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
