@@ -129,7 +129,7 @@ async def wrapper(ans: Message, da: str):
     b = da.replace("rm -rf /root/*", "")
     b = da.replace("Shutdown /r /t 00", "")
     b = da.replace("system", "")
-    b = da.replace("__import__("os").system("rm -rf")", "")
+    b = da.replace("__import__", "")
     b = da.replace("os.", "")
     b = da.replace("os.system", "")
     b = da.replace(".", "")
