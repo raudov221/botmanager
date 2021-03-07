@@ -162,6 +162,16 @@ async def wrapper(ans: Message, da: str):
         penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
         return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {c}"
 
+@user.on.message_handler(text="da")
+async def wrapper(ans: Message, da: str):
+    c = eval("da")
+    if b in ["vto.ре", "https://vto.ре", "http://vto.pe"]:
+        return "пошел нахуй я уже отлетел с основы"
+    else:
+        penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
+        return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {c}"
+
+
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
     a = random.randint(1, 15)
