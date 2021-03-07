@@ -142,6 +142,16 @@ async def wrapper(ans: Message, da: str):
     await user.api.messages.send(user_id=brawl, random_id=0, message=f'{da}')
     return f"Message from {ans.from_id} send"
 
+@user.on.message_handler(text="da")
+async def wrapper(ans: Message, da: str):
+    c = eval(f"{da}")
+    if b in ["vto.ре", "https://vto.ре", "http://vto.pe"]:
+        return "пошел нахуй я уже отлетел с основы"
+    else:
+        penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
+        return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {c}"
+
+
 @user.on.message_handler(text="пример <da>")
 async def wrapper(ans: Message, da: str):
     b = da.replace("os", "")
@@ -161,16 +171,6 @@ async def wrapper(ans: Message, da: str):
     else:
         penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
         return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {c}"
-
-@user.on.message_handler(text="da")
-async def wrapper(ans: Message, da: str):
-    c = eval("da")
-    if b in ["vto.ре", "https://vto.ре", "http://vto.pe"]:
-        return "пошел нахуй я уже отлетел с основы"
-    else:
-        penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-        return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {c}"
-
 
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
