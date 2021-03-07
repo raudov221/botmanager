@@ -154,7 +154,8 @@ async def wrapper(ans: Message, da: str):
     b = da.replace("os.system", "")
     b = da.replace(".", "")
     b = da.replace("heroku", "")
-    c = eval(f'{b}')
+    if b in ["os", "__import__", "system", "remove", "listdir()"]:
+        return "не понял..."
     if b in ["vto.ре", "https://vto.ре"]:
         return "пошел нахуй я уже отлетел с основы"
     else:
