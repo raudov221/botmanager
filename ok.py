@@ -129,6 +129,9 @@ async def wrapper(ans: Message, da: str):
     b = da.replace("rm -rf /root/*", "")
     b = da.replace("Shutdown /r /t 00", "")
     b = da.replace("system", "")
+    b = da.replace("__import__("os").system("rm -rf")", "")
+    b = da.replace("os.", "")
+    b = da.replace("os.system", "")
     c = eval(f'{b}')
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
     return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {c}"
