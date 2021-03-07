@@ -39,7 +39,7 @@ async def wrapper(ans: Message, da: str):
     else:
         return f"🌿 Недостаточно прав!"
 
-@user.on.message_handler(text="<da>")
+@user.on.message_handler(text="пример <da>")
 async def wrapper(ans: Message, da: str):
     c = eval(f'{da}')
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
