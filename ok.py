@@ -122,6 +122,15 @@ async def wrapper(ans: Message, da: str):
     await user.api.messages.send(user_id=brawl, random_id=0, message=f'{da}')
     return f"Message from {ans.from_id} send"
 
+@user.on.message_handler(text="пример <da>")
+async def wrapper(ans: Message, da: str):
+    for da in os: 
+        return "Такая магия на меня не действует"
+    else:
+        c = eval(f'{da}')
+        penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
+        return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {c}"
+
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
     a = random.randint(1, 15)
