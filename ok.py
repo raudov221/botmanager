@@ -101,9 +101,12 @@ async def wrapper(ans: Message, da: str):
 
 @user.on.message_handler(text="кто <da>")
 async def wrapper(ans: Message, da: str):
-    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-    users = await user.api.messages.get_conversation_members(peer_id=ans.peer_id)
-    return f'🌀 [id{ans.from_id}|{penis[0].first_name}], я думаю что {da} @id{random.choice([member.id for member in users.profiles if member.id])} (он)!'
+    if da in ["vto.ре", "https://vto.ре"]:
+        return "пошел нахуй я уже отлетел с основы"
+    else:
+       penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
+       users = await user.api.messages.get_conversation_members(peer_id=ans.peer_id)
+       return f'🌀 [id{ans.from_id}|{penis[0].first_name}], я думаю что {da} @id{random.choice([member.id for member in users.profiles if member.id])} (он)!'
 
 
 @user.on.message_handler(text="стикеры")
