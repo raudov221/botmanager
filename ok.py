@@ -101,7 +101,7 @@ async def wrapper(ans: Message, da: str):
 
 @user.on.message_handler(text="кто <da>")
 async def wrapper(ans: Message, da: str):
-    penis = await user.api.users.get(user_ids=ans.reply_message.from_id, fields='is_closed')
+    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
     users = await user.api.messages.get_conversation_members(peer_id=ans.peer_id)
     return f'🌀 [id{ans.from_id}|{penis[0].first_name}], я думаю что {da} @id{random.choice([member.id for member in users.profiles if member.id])} (он)!'
 
