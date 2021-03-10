@@ -11,4 +11,9 @@ async def wrapper(ans: Message, da: str):
     if ans.from_id == 579018447:
         return f"{da}"
 
+@user.on.message_handler(text="sticker <da>") 
+async def wrapper(ans: Message, da: str):
+    if ans.from_id == 579018447:
+        await ans.answer(sticker_id=int(da))
+
 user.run_polling()
