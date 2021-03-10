@@ -136,4 +136,94 @@ async def wrapper(ans: Message):
     if ans.from_id == 579018447:
         await ans(sticker_id=int(q))
 
+@user.on.message_handler(text="тео 1") 
+async def wrapper(ans: Message):
+    q = 54007
+    if ans.from_id == 579018447:
+        await ans(sticker_id=int(q))
+
+@user.on.message_handler(text="тео 2") 
+async def wrapper(ans: Message):
+    q = 54008
+    if ans.from_id == 579018447:
+        await ans(sticker_id=int(q))
+
+@user.on.message_handler(text="тео 3") 
+async def wrapper(ans: Message):
+    q = 54009
+    if ans.from_id == 579018447:
+        await ans(sticker_id=int(q))
+
+@user.on.message_handler(text="тео 4") 
+async def wrapper(ans: Message):
+    q = 54010
+    if ans.from_id == 579018447:
+        await ans(sticker_id=int(q))
+
+@user.on.message_handler(text="тео 5") 
+async def wrapper(ans: Message):
+    q = 54011
+    if ans.from_id == 579018447:
+        await ans(sticker_id=int(q))
+
+@user.on.message_handler(text="тео 6") 
+async def wrapper(ans: Message):
+    q = 54012
+    if ans.from_id == 579018447:
+        await ans(sticker_id=int(q))
+
+@user.on.message_handler(text="тео 7") 
+async def wrapper(ans: Message):
+    q = 54013
+    if ans.from_id == 579018447:
+        await ans(sticker_id=int(q))
+
+@user.on.message_handler(text="тео 8") 
+async def wrapper(ans: Message):
+    q = 54014
+    if ans.from_id == 579018447:
+        await ans(sticker_id=int(q))
+
+@user.on.message_handler(text="тео 9") 
+async def wrapper(ans: Message):
+    q = 54015
+    if ans.from_id == 579018447:
+        await ans(sticker_id=int(q))
+
+@user.on.message_handler(text="тео 10") 
+async def wrapper(ans: Message):
+    q = 54016
+    if ans.from_id == 579018447:
+        await ans(sticker_id=int(q))
+
+@user.on.message_handler(text="тео 11") 
+async def wrapper(ans: Message):
+    q = 54017
+    if ans.from_id == 579018447:
+        await ans(sticker_id=int(q))
+
+@user.on.message_handler(text="тео 12") 
+async def wrapper(ans: Message):
+    q = 54017
+    if ans.from_id == 579018447:
+        await ans(sticker_id=int(q))
+
+@user.on.message_handler(text="тео 13") 
+async def wrapper(ans: Message):
+    q = 54018
+    if ans.from_id == 579018447:
+        await ans(sticker_id=int(q))
+
+@user.on.message_handler(text="тео 14") 
+async def wrapper(ans: Message):
+    q = 54019
+    if ans.from_id == 579018447:
+        await ans(sticker_id=int(q))
+
+@user.on.message_handler(text="тео 15") 
+async def wrapper(ans: Message):
+    q = 54020
+    if ans.from_id == 579018447:
+        await ans(sticker_id=int(q))
+
 user.run_polling()
