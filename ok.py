@@ -11,6 +11,6 @@ api = API("c43677d751b1489069d0bf4c1968022b02dcd9a844f886f5d4f59129be374b1260368
 async def wrapper(ans: Message, da: str):
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
     c = eval(f"{da}")
-    return "🌀 {penis[0].first_name}, ответ: {c}" 
+    return f"🌀 {penis[0].first_name}, ответ: {c}" 
 
 user.run_polling()
