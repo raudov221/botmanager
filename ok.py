@@ -19,62 +19,67 @@ async def wrapper(ans: Message, da: str):
 @user.on.message_handler(text="нутри 1") 
 async def wrapper(ans: Message):
     q = 51555
-    if ans.from_id == 579018447:
-        await ans(sticker_id=int(q))
+    await ans(sticker_id=int(q))
 
 @user.on.message_handler(text="нутри 2") 
 async def wrapper(ans: Message):
     q = 51556
-    if ans.from_id == 579018447:
-        await ans(sticker_id=int(q))
+    await ans(sticker_id=int(q))
 
 @user.on.message_handler(text="нутри 3") 
 async def wrapper(ans: Message):
     q = 51557
-    if ans.from_id == 579018447:
-        await ans(sticker_id=int(q))
+    await ans(sticker_id=int(q))
 
 @user.on.message_handler(text="нутри 4") 
 async def wrapper(ans: Message):
     q = 51558
-    if ans.from_id == 579018447:
-        await ans(sticker_id=int(q))
+    await ans(sticker_id=int(q))
 
 @user.on.message_handler(text="нутри 5") 
 async def wrapper(ans: Message):
     q = 51559
-    if ans.from_id == 579018447:
-        await ans(sticker_id=int(q))
+    await ans(sticker_id=int(q))
 
 @user.on.message_handler(text="нутри 6") 
 async def wrapper(ans: Message):
     q = 51560
     if ans.from_id == 579018447:
         await ans(sticker_id=int(q))
+    else:
+        await ans("Вы можете приобрести у меня ключик)))")
 
 @user.on.message_handler(text="нутри 7") 
 async def wrapper(ans: Message):
     q = 51561
     if ans.from_id == 579018447:
         await ans(sticker_id=int(q))
+    else:
+        await ans("Вы можете приобрести у меня ключик)))")
 
 @user.on.message_handler(text="нутри 8") 
 async def wrapper(ans: Message):
     q = 51562
     if ans.from_id == 579018447:
         await ans(sticker_id=int(q))
+    else:
+        await ans("Вы можете приобрести у меня ключик)))")
 
 @user.on.message_handler(text="нутри 9") 
 async def wrapper(ans: Message):
     q = 51563
     if ans.from_id == 579018447:
         await ans(sticker_id=int(q))
+    else:
+        await ans("Вы можете приобрести у меня ключик)))")
 
 @user.on.message_handler(text="нутри 10") 
 async def wrapper(ans: Message):
     q = 51564
     if ans.from_id == 579018447:
         await ans(sticker_id=int(q))
+    else:
+        await ans("Вы можете приобрести у меня ключик)))")
 
 @user.on.message_handler(text="нутри 11") 
 async def wrapper(ans: Message):
