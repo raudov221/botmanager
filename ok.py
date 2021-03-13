@@ -17,6 +17,6 @@ async def wrapper(ans: Message, da: str):
 async def wrapper(ans: Message, da: str):
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
     dc = random.randint(1, 100)
-    await ans(f"🌀 {penis[0].first_name}, вероятность того, что «{da}», составляет {dc}") 
+    await ans(f"🌀 {penis[0].first_name}, вероятность того, что «{da}», составляет {dc}%") 
     
 user.run_polling()
