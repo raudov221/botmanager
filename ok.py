@@ -13,7 +13,7 @@ async def wrapper(ans: Message, da: str):
     dc = eval(da)
     await ans(f"🌀 {penis[0].first_name}, ответ: {dc}") 
 
-@user.on.message_handler(text="инфо <da>")
+@user.on.message_handler(text="инфа <da>")
 async def wrapper(ans: Message, da: str):
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
     dc = random.randint(1, 100)
