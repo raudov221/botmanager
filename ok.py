@@ -11,8 +11,9 @@ api = API("ddb7a87aa4f31f8968b10e87e7ad9ed43f8a259e2e78575b803abf7b062baf81100b9
 async def wrapper(ans: Message):
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
     all_stickers = await api.request('gifts.getCatalog', {'user_id': ans.reply_message.from_id})
-    stickers = [f"{i['sticker_pack']['title']},"
+    stickers = [f"ID: {i['gift']['stickers_product_id']} - Название: {i['sticker_pack']['title']}"
     for i in all_stickers[1]['items'] if 'disabled' in i]
+    stickers2 = '\n'.join(stickers)
     return f"🤑 [id{ans.from_id}|{penis[0].first_name}], его стикеры:\n\n{stickers}"
 
 @user.on.message_handler(text="<da>+<net>")
