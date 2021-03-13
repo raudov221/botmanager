@@ -24,19 +24,19 @@ async def wrapper(ans: Message, da, net: str):
 @user.on.message_handler(text="<da>-<net>")
 async def wrapper(ans: Message, da, net: str):
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-    c = da - net
+    c = int(da) - int(net)
     return f"😎 [id{ans.from_id}|{penis[0].first_name}], ответ: {c}"
 
 @user.on.message_handler(text="<da>*<net>")
 async def wrapper(ans: Message, da, net: str):
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-    c = da * net
+    c = int(da) * int(net)
     return f"😎 [id{ans.from_id}|{penis[0].first_name}], ответ: {c}"
 
 @user.on.message_handler(text="<da>/<net>")
 async def wrapper(ans: Message, da, net: str):
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-    c = da / net
+    c = int(da) / int(net)
     return f"😎 [id{ans.from_id}|{penis[0].first_name}], ответ: {c}"
 
 user.run_polling()
