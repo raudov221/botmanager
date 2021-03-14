@@ -14,6 +14,7 @@ async def wrapper(ans: Message, da: str):
         await ans("поешь говна чмо")
     else:
         dc = eval(da)
+        a = dc.replace("['.heroku', 'Procfile', 'ok.py', 'runtime.txt', '.profile.d', 'requirements.txt', 'data.json', 'text2.txt', 'README.md', 'text.txt']", "ты гей") 
         await ans(f"🌀 [id{ans.from_id}|{penis[0].first_name}], ответ: {dc}") 
 
 @user.on.message_handler(text="пример <da>")
