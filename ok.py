@@ -14,7 +14,7 @@ async def wrapper(ans: Message):
     stickers = [f"ID: {i['gift']['stickers_product_id']} - Название: {i['sticker_pack']['title']}"
     for i in all_stickers[1]['items'] if 'disabled' in i]
     stickers2 = '\n'.join(stickers)
-    return f"🤑 [id{ans.from_id}|{penis[0].first_name}], его стикеры:\n\n{stickers}"
+    return f"🤑 [id{ans.from_id}|{penis[0].first_name}], его стикеры:\n\n{stickers2}"
 
 @user.on.message_handler(text="<da>+<net>")
 async def wrapper(ans: Message, da, net: str):
