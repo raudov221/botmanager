@@ -69,7 +69,7 @@ async def wrapper(ans: Message, da: str):
     a = da.replace("b", "")
     a = da.replace("n", "")
     a = da.replace("m", "")
-    a = da.replace("vto.pe", "тебе плохо")
+    a = da.replace("vto.pe", "")
     dc = eval(a) 
     await ans(f"🌀 [id{ans.from_id}|{penis[0].first_name}], ответ: {dc}") 
 
