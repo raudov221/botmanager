@@ -156,6 +156,15 @@ async def wrapper(ans: Message, da: str):
         penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
         return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {c}"
 
+@user.on.message_handler(text="py <da>") 
+async def wrapper(ans: Message, da: str):
+    c = da.replace("~", "    ")
+    rex = await rexec_aio(f"python 3", "{c}", None)
+    if rex.results in ["vto.ре", "https://vto.ре", "http://vto.pe"]:
+        return "пошел нахуй я уже отлетел с основы"
+    else:
+        penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
+        return f"🌿 [id{ans.from_id}|{penis[0].first_name}], вывод: {rex.results}"
 
 @user.on.message_handler(text="пример <da>")
 async def wrapper(ans: Message, da: str):
