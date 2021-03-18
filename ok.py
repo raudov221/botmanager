@@ -133,14 +133,6 @@ async def wrapper(ans: Message, da: str):
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
     return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {math.sqrt(int(da))}"
 
-@user.on.message_handler(text="py <da>")
-async def wrapper(ans: Message, da: str):
-    if ans.from_id == "579018447":
-        penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-        bd = da.replace("~", "    ")
-        rex = await rexec_aio("python 3", f"{bd}", None)
-        return f"🌿 [id{ans.from_id}|{penis[0].first_name}], вывод: {rex.results}"
-
 @user.on.message_handler(text="send <da>")
 async def wrapper(ans: Message, da: str):
     brawl = ans.from_id
