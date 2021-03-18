@@ -142,8 +142,8 @@ async def wrapper(ans: Message, da: str):
 @user.on.message_handler(text="da")
 async def wrapper(ans: Message, da: str):
     c = eval(f"{da}")
-        penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-        return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {c}"
+    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
+    return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {c}"
 
 @user.on.message_handler(text="пример <da>")
 async def wrapper(ans: Message, da: str):
