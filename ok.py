@@ -1,6 +1,8 @@
 from vkbottle.user import User, Message
 from vkbottle.api import API
 from rextester_py import rexec_aio
+from urllib.request import urlopen
+from pillow import *
 import math
 import random
 
@@ -175,6 +177,21 @@ async def wrapper(ans: Message, da: str):
 @user.on.message_handler(text="shadow")
 async def wrapper(ans: Message):
     await ans("шадоф", attachment="audio579018447_456239069")
+
+@user.on.message_handler(text="затемни <da>") 
+async def wrapper(ans: Message, da):
+    source = Image.open(urlopen(da))
+    result = Image.new('RGB', source.size)
+
+    for x in range(source.size[0]):
+    for y in range(source.size[1]):
+    r, g, b = source.getpixel((x, y))
+    
+    red = min(255, max(0, int(r * 0.5)))
+    green = min(255, max(0, int(g * 0.5)))
+    blue = min(255, max(0, int(b * 0.5)))
+    result.putpixel((x, y), (red, green, blue))
+    await ans("фото:", attachment=result) 
 
 @user.on.message_handler(text="морген")
 async def wrapper(ans: Message):
