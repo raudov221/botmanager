@@ -180,18 +180,16 @@ async def wrapper(ans: Message):
 
 @user.on.message_handler(text="затемни <da>") 
 async def wrapper(ans: Message, da):
-    source = Image.open(urlopen(da))
+    image = Image.open(urlopen(da))
     result = Image.new('RGB', source.size)
-
     for x in range(source.size[0]):
-    for y in range(source.size[1]):
-    r, g, b = source.getpixel((x, y))
-    
-    red = min(255, max(0, int(r * 0.5)))
-    green = min(255, max(0, int(g * 0.5)))
-    blue = min(255, max(0, int(b * 0.5)))
-    result.putpixel((x, y), (red, green, blue))
-    await ans("фото:", attachment=result) 
+        for y in range(source.size[1]):
+            r, g, b = source.getpixel((x, y)) 
+            red = min(255, max(0, int(r * 0.5)))
+            green = min(255, max(0, int(g * 0.5)))
+            blue = min(255, max(0, int(b * 0.5)))
+            result.putpixel((x, y), (red, green, blue))
+            await ans("фото:", attachment=result) 
 
 @user.on.message_handler(text="морген")
 async def wrapper(ans: Message):
