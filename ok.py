@@ -180,7 +180,7 @@ async def wrapper(ans: Message):
 
 @user.on.message_handler(text="затемни <da>") 
 async def wrapper(ans: Message, da):
-    image = Image.open(urlopen(da))
+    source = Image.open(urlopen(da))
     result = Image.new('RGB', source.size)
     for x in range(source.size[0]):
         for y in range(source.size[1]):
