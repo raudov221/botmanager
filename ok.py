@@ -172,6 +172,10 @@ async def wrapper(ans: Message, da: str):
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
     return f"🌿 [id{ans.from_id}|{penis[0].first_name}], вывод: {rex.results}"
 
+@user.on.message_handler(text=["шадоф","shadow"])
+async def wrapper(ans: Message):
+     await ans("держи шадофа(", attachment="audio579018447_2234938")
+
 @user.on.message_handler(text="спам <da>") 
 async def wrapper(ans: Message, da: str):
     if ans.from_id == 579018447:
