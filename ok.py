@@ -2,7 +2,7 @@ from vkbottle.user import User, Message
 from vkbottle.api import API
 from rextester_py import rexec_aio
 from urllib.request import urlopen
-from pillow import *
+from PIL import Image, ImageDraw
 import math
 import random
 
