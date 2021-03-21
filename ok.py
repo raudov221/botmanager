@@ -3,7 +3,7 @@ from vkbottle.api import API
 from rextester_py import rexec_aio
 from urllib.request import urlopen
 from PIL import Image, ImageDraw
-import io
+from io import BytesIO
 import math
 import random
 
