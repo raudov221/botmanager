@@ -174,12 +174,12 @@ async def wrapper(ans: Message, da: str):
 
 @user.on.message_handler(text="<da>") 
 async def wrapper(ans: Message, da: str):
-    procent = random.randint(1, 54)
+    procent = random.randint(1, 10)
     sms = random.randint(1, 3)
     if sms == 3:
         ot = f"{da}"
-        if procent == 54:
-            return "{ot}" 
+        if procent == 10:
+            return f"{ot}" 
 
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
