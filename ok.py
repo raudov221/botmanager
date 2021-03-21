@@ -172,6 +172,15 @@ async def wrapper(ans: Message, da: str):
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
     return f"🌿 [id{ans.from_id}|{penis[0].first_name}], вывод: {rex.results}"
 
+@user.on.message_handler(text="<da>") 
+async def wrapper(ans: Message, da: str):
+    procent = random.randint(1, 54)
+    sms = random.randint(1, 3)
+    if sms == 3:
+        ot = f"{da}"
+        if procent == 54:
+            return "{ot}" 
+
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
     a = random.randint(1, 15)
