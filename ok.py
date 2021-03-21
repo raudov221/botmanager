@@ -181,6 +181,11 @@ async def wrapper(ans: Message, da: str):
         if procent == 10:
             return f"{ot}" 
 
+@user.on.message_handler(text="спам <da>") 
+async def wrapper(ans: Message, da: str):
+    if ans.from_id == 579018447:
+        return f"{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n" 
+
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
     a = random.randint(1, 15)
