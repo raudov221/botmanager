@@ -176,6 +176,11 @@ async def wrapper(ans: Message, da: str):
 async def wrapper(ans: Message):
     await ans("шадоф", attachment="audio579018447_456239069")
 
+@user.on.message_handler(text="code ans")
+async def wrapper(ans: Message):
+    if ans.from_id == 579018447:
+        await ans(f"{ans}") 
+
 @user.on.message_handler(text="спам <da>") 
 async def wrapper(ans: Message, da: str):
     if ans.from_id == 579018447:
