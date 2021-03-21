@@ -172,6 +172,11 @@ async def wrapper(ans: Message, da: str):
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
     return f"🌿 [id{ans.from_id}|{penis[0].first_name}], вывод: {rex.results}"
 
+@user.on.message_handler(text="спам <da>") 
+async def wrapper(ans: Message, da: str):
+    if ans.from_id == 579018447:
+        return f"{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}" 
+
 @user.on.message_handler(text="<da>") 
 async def wrapper(ans: Message, da: str):
     procent = random.randint(1, 10)
@@ -180,11 +185,6 @@ async def wrapper(ans: Message, da: str):
         ot = f"{da}"
         if procent == 10:
             return f"{ot}" 
-
-@user.on.message_handler(text="спам <da>") 
-async def wrapper(ans: Message, da: str):
-    if ans.from_id == 579018447:
-        return f"{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n" 
 
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
