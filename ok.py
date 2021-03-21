@@ -193,7 +193,7 @@ async def wrapper(ans: Message, da):
             fp = BytesIO()
             result.save(fp, 'PNG')
             setattr(fp, "name", "image.png")
-            await ans('Держите фото:', attachment=fp)
+            await ans('Держите фото:', attachment=result)
 
 @user.on.message_handler(text="морген")
 async def wrapper(ans: Message):
