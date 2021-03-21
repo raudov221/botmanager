@@ -1,4 +1,5 @@
 loguru
+pillow
 unicorn
 https://github.com/timoniq/vkbottle/archive/v2.0.zip
 rextester_py
