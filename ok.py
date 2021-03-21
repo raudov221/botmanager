@@ -189,7 +189,10 @@ async def wrapper(ans: Message, da):
             green = min(255, max(0, int(g * 0.5)))
             blue = min(255, max(0, int(b * 0.5)))
             result.putpixel((x, y), (red, green, blue))
-            await ans('Держите фото:', attachment=result)
+            fp = BytesIO()
+            result.save(fp, 'PNG')
+            setattr(fp, "name", "image.png")
+            await ans('Держите фото:', attachment=fp)
 
 @user.on.message_handler(text="морген")
 async def wrapper(ans: Message):
