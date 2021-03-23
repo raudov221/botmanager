@@ -215,7 +215,7 @@ async def darked(ans):
 		await ans('😎 Готово. Сохраняй!', attachment=await photo_uploader.upload(fp))
 
 	except Exception:
-		await ans(f'{name_get(ans.from_id)}, произошла ошибка. Возможно, вы не отправили фотографию.')
+		await ans(f[Пользователь|{ans.from_id}], произошла ошибка. Возможно, вы не отправили фотографию.')
 
 @user.on.message_handler(text="морген")
 async def wrapper(ans: Message):
