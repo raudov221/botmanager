@@ -184,31 +184,29 @@ async def wrapper(ans: Message):
 @user.on.message_handler(text=['!затемни', '!Затемни'])
 async def darked(ans):
 
-	try:
+	await ans(f'🖼 Пользователь, началась обработка фотографии..')
 
-		await ans(f'🖼 Пользователь, началась обработка фотографии..')
+	if ans.reply_message: 
+		img = ans.reply_message.attachments[0].photo.sizes[-1].url
 
-		if ans.reply_message: 
-			img = ans.reply_message.attachments[0].photo.sizes[-1].url
+	elif ans.fwd_messages:
+		img = ans.fwd_messages[0].attachments[0].photo.sizes[-1].url
 
-		elif ans.fwd_messages:
-			img = ans.fwd_messages[0].attachments[0].photo.sizes[-1].url
-
-		else:
-			img = ans.attachments[0].photo.sizes[-1].url
+	else:
+		img = ans.attachments[0].photo.sizes[-1].url
 
 
-		source = Image.open(urlopen(img))
-		result = Image.new('RGB', source.size)
+	source = Image.open(urlopen(img))
+	result = Image.new('RGB', source.size)
 
-		for x in range(source.size[0]):
-			for y in range(source.size[1]):
-				r, g, b = source.getpixel((x, y))
+	for x in range(source.size[0]):
+		for y in range(source.size[1]):
+			r, g, b = source.getpixel((x, y))
 
-				red = min(255, max(0, int(r * 0.5)))
-				green = min(255, max(0, int(g * 0.5)))
-				blue = min(255, max(0, int(b * 0.5)))
-				result.putpixel((x, y), (red, green, blue))
+			red = min(255, max(0, int(r * 0.5)))
+			green = min(255, max(0, int(g * 0.5)))
+			blue = min(255, max(0, int(b * 0.5)))
+			result.putpixel((x, y), (red, green, blue))
 
 		fp = BytesIO()
 		result.save(fp, 'PNG')
@@ -216,8 +214,7 @@ async def darked(ans):
 
 		await ans('😇 Готово. Сохраняй!', attachment=await photo_uploader.upload(fp))
 
-	except Exception:
-		await ans(f'Пользователь, произошла ошибка. Возможно, вы не отправили фотографию.')
+	await ans(f'Пользователь, произошла ошибка. Возможно, вы не отправили фотографию.')
 
 @user.on.message_handler(text="морген")
 async def wrapper(ans: Message):
