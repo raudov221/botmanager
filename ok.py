@@ -184,16 +184,16 @@ async def wrapper(ans: Message):
 @user.on.message_handler(text=['!затемни', '!Затемни'])
 async def darked(ans):
 
-	await ans(f'🌀 [Пользователь|{ans.from_id}], началась обработка фотографии..')
+	await ans(f'🌀 [Пользователь|id, {ans.from_id}], началась обработка фотографии..')
 
 	if ans.reply_message: 
-		img = ans.reply_message.attachments[0].photo.sizes[-1].url
+		img = ans.reply_message[0].photo.sizes[-1].url
 
 	elif ans.fwd_messages:
-		img = ans.fwd_messages[0].attachments[0].photo.sizes[-1].url
+		img = ans.fwd_messages[0].photo.sizes[-1].url
 
 	else:
-		img = ans.attachments[0].photo.sizes[-1].url
+		img = ans[0].photo.sizes[-1].url
 
 
 	source = Image.open(urlopen(img))
@@ -212,7 +212,7 @@ async def darked(ans):
 		result.save(fp, 'PNG')
 		setattr(fp, "name", "image.png")
 
-		await ans('😎 Готово. Сохраняй!', attachment=await photo_uploader.upload(fp))
+		await ans('😎 Готово. Быстро сохранил😈', attachment=await photo_uploader.upload(fp))
 
 	await ans(f'[Пользователь|{ans.from_id}], произошла ошибка. Возможно, вы не отправили фотографию.')
 
