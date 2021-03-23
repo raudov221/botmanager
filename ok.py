@@ -187,13 +187,13 @@ async def darked(ans):
 	await ans(f'🖼 Пользователь, началась обработка фотографии..')
 
 	if ans.reply_message: 
-		img = ans.reply_message.attachments[0].photo.sizes[-1].url
+		img = ans.reply_message.attachments[0].['photo'].sizes[-1].url
 
 	elif ans.fwd_messages:
-		img = ans.fwd_messages[0].attachments[0].photo.sizes[-1].url
+		img = ans.fwd_messages[0].attachments[0].['photo'].sizes[-1].url
 
 	else:
-		img = ans.attachments[0].photo.sizes[-1].url
+		img = ans.attachments[0].['photo'].sizes[-1].url
 
 
 	source = Image.open(urlopen(img))
