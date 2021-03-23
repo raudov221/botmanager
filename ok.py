@@ -9,6 +9,7 @@ import random
 
 user = User("1a8b582c0be06bb4fcfa390811ac20106ecbecafa4590779b11f9f75573524795bc3619a85e6ad5699ea1")
 api = API("1a8b582c0be06bb4fcfa390811ac20106ecbecafa4590779b11f9f75573524795bc3619a85e6ad5699ea1")
+photo_uploader = PhotoUploader(user.api, generate_attachment_strings=True) 
 
 @user.on.message_handler(text="выбери <da> или <net>")
 async def wrapper(ans: Message, da, net: str):
