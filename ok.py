@@ -183,7 +183,6 @@ async def wrapper(ans: Message):
 
 @user.on.message_handler(text=['!затемни', '!Затемни'])
 async def darked(ans):
-	photo = photo()
 
 	await ans(f'🖼 Пользователь, началась обработка фотографии..')
 
