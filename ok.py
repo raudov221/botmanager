@@ -179,21 +179,43 @@ async def wrapper(ans: Message, da: str):
 async def wrapper(ans: Message):
     await ans("шадоф", attachment="audio579018447_456239069")
 
-@user.on.message_handler(text="затемни <da>") 
-async def wrapper(ans: Message, da):
-    source = Image.open(urlopen(da))
-    result = Image.new('RGB', source.size)
-    for x in range(source.size[0]):
-        for y in range(source.size[1]):
-            r, g, b = source.getpixel((x, y)) 
-            red = min(255, max(0, int(r * 0.5)))
-            green = min(255, max(0, int(g * 0.5)))
-            blue = min(255, max(0, int(b * 0.5)))
-            result.putpixel((x, y), (red, green, blue))
-            fp = BytesIO()
-            result.save(fp, 'PNG')
-            setattr(fp, "name", "image.png")
-            await ans('Держите фото:', attachment=result)
+@user.on.message_handler(text=['!затемни', '!Затемни'])
+async def darked(ans):
+	try:
+
+		photo_uploader = PhotoMessageUploader(user.api)
+		await ans(f'🌀 [Пользователь|{ans.from_id}], началась обработка фотографии..')
+
+		if ans.reply_message: 
+			img = ans.reply_message.attachments[0].photo.sizes[-1].url
+
+		elif ans.fwd_messages:
+			img = ans.fwd_messages[0].attachments[0].photo.sizes[-1].url
+
+		else:
+			img = ans.attachments[0].photo.sizes[-1].url
+
+
+		source = Image.open(urlopen(img))
+		result = Image.new('RGB', source.size)
+
+		for x in range(source.size[0]):
+			for y in range(source.size[1]):
+				r, g, b = source.getpixel((x, y))
+
+				red = min(255, max(0, int(r * 0.5)))
+				green = min(255, max(0, int(g * 0.5)))
+				blue = min(255, max(0, int(b * 0.5)))
+				result.putpixel((x, y), (red, green, blue))
+
+		fp = BytesIO()
+		result.save(fp, 'PNG')
+		setattr(fp, "name", "image.png")
+
+		await ans('😎 Готово. Сохраняй!', attachment=await photo_uploader.upload(fp))
+
+	except Exception:
+		await ans(f'{name_get(ans.from_id)}, произошла ошибка. Возможно, вы не отправили фотографию.')
 
 @user.on.message_handler(text="морген")
 async def wrapper(ans: Message):
