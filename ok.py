@@ -1,4 +1,4 @@
-from vkbottle.user import User, Message, PhotoUploader
+from vkbottle.user import User, Message
 from vkbottle.api import API
 from vkbottle import PhotoUploader
 from rextester_py import rexec_aio
