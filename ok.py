@@ -182,18 +182,18 @@ async def wrapper(ans: Message):
     await ans("шадоф", attachment="audio579018447_456239069")
 
 @user.on.message_handler(text=['!затемни', '!Затемни'])
-async def darked(ans):
+async def darked(ans: Message):
 
 	await ans(f'🖼 Пользователь, началась обработка фотографии..')
 
 	if ans.reply_message: 
-		img = ans.reply_message.attachments[0].['photo'].sizes[-1].url
+		img = ans.reply_message.attachments[0].photo.sizes[-1].url
 
 	elif ans.fwd_messages:
-		img = ans.fwd_messages[0].attachments[0].['photo'].sizes[-1].url
+		img = ans.fwd_messages[0].attachments[0].photo.sizes[-1].url
 
 	else:
-		img = ans.attachments[0].['photo'].sizes[-1].url
+		img = ans.attachments[0].photo.sizes[-1].url
 
 
 	source = Image.open(urlopen(img))
@@ -213,8 +213,6 @@ async def darked(ans):
 		setattr(fp, "name", "image.png")
 
 		await ans('😇 Готово. Сохраняй!', attachment=await photo_uploader.upload(fp))
-
-	await ans(f'Пользователь, произошла ошибка. Возможно, вы не отправили фотографию.')
 
 @user.on.message_handler(text="морген")
 async def wrapper(ans: Message):
