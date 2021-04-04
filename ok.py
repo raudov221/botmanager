@@ -7,10 +7,27 @@ from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
 import math
 import random
+import mc
 
 user = User("b516fcaf9c73ae2b6fdb11558f29a10167a3dd8a8178f1cafafa563a503889d2e03510b836d41d4ec5c6c")
 api = API("b516fcaf9c73ae2b6fdb11558f29a10167a3dd8a8178f1cafafa563a503889d2e03510b836d41d4ec5c6c")
 photo_uploader = PhotoUploader(user.api, generate_attachment_strings=True) 
+
+sms1 = []
+
+@user.on.message_handler(text="<da>") 
+async def wrapper(ans: Message, da: str):
+    procent = random.randint(1, 10)
+    sms1.append(da)
+    sms = random.randint(1, 3)
+    if sms == 3:
+        ot = f"{da}"
+        if procent == 10:
+            generator = mc.StringGenerator(  
+            samples=sms1
+            )  
+            result = generator.generate_string()
+            await ans(result)
 
 @user.on.message_handler(text="выбери <da> или <net>")
 async def wrapper(ans: Message, da, net: str):
