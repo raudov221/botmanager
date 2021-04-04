@@ -17,7 +17,7 @@ sms1 = []
 
 @user.on.message_handler(text="<da>") 
 async def wrapper(ans: Message, da: str):
-    procent = random.randint(1, 50)
+    procent = random.randint(1, 26)
     sms1.append(da)
     sms = random.randint(1, 3)
     if procent == 26:
