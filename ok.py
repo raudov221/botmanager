@@ -17,10 +17,10 @@ sms1 = []
 
 @user.on.message_handler(text="<da>") 
 async def wrapper(ans: Message, da: str):
-    procent = random.randint(1, 10)
+    procent = random.randint(1, 50)
     sms1.append(da)
     sms = random.randint(1, 3)
-    if procent == 10:
+    if procent == 26:
         generator = mc.StringGenerator(  
         samples=sms1
         )  
