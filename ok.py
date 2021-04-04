@@ -20,14 +20,12 @@ async def wrapper(ans: Message, da: str):
     procent = random.randint(1, 10)
     sms1.append(da)
     sms = random.randint(1, 3)
-    if sms == 3:
-        ot = f"{da}"
-        if procent == 10:
-            generator = mc.StringGenerator(  
-            samples=sms1
-            )  
-            result = generator.generate_string()
-            await ans(result)
+    if procent == 10:
+        generator = mc.StringGenerator(  
+        samples=sms1
+        )  
+        result = generator.generate_string()
+        await ans(result)
 
 @user.on.message_handler(text="выбери <da> или <net>")
 async def wrapper(ans: Message, da, net: str):
