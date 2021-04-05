@@ -25,7 +25,8 @@ async def wrapper(ans: Message, da: str):
         samples=sms1
         )  
         result = generator.generate_string()
-        await ans(result)
+        id_sms = ans.id
+        await ans(f"{result}", reply_to=id_sms)
 
 @user.on.message_handler(text="выбери <da> или <net>")
 async def wrapper(ans: Message, da, net: str):
