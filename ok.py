@@ -15,19 +15,6 @@ photo_uploader = PhotoUploader(user.api, generate_attachment_strings=True)
 
 sms1 = []
 
-@user.on.message_handler(text="<da>") 
-async def wrapper(ans: Message, da: str):
-    procent = random.randint(1, 26)
-    sms1.append(da)
-    sms = random.randint(1, 3)
-    if procent == 26:
-        generator = mc.StringGenerator(  
-        samples=sms1
-        )  
-        result = generator.generate_string()
-        id_sms = ans.id
-        await ans(f"{result}", reply_to=id_sms)
-
 @user.on.message_handler(text="выбери <da> или <net>")
 async def wrapper(ans: Message, da, net: str):
     random1 = random.randint(1, 2)
@@ -266,6 +253,19 @@ async def wrapper(ans: Message, da: str):
         if procent == 10:
             return f"{ot}" 
 
+@user.on.message_handler(text="<da>") 
+async def wrapper(ans: Message, da: str):
+    procent = random.randint(1, 26)
+    sms1.append(da)
+    sms = random.randint(1, 3)
+    if procent == 26:
+        generator = mc.StringGenerator(  
+        samples=sms1
+        )  
+        result = generator.generate_string()
+        id_sms = ans.id
+        await ans(f"{result}", reply_to=id_sms)
+
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da: str):
     a = random.randint(1, 15)
@@ -295,5 +295,7 @@ async def wrapper(ans: Message, da: str):
                 return "у твоего отца пол сантимнтра по этому твоя мать лягушка, сука она кричала от боли моего пол метрового столба"
             if a == 10:
                 return "что-что? что ты там пищиж мразь я блять таких как ты по 10 штук в день обоссываю а ты ещё возникаешь хуепутало, если тебе не нравится мой хуй не соси ето же ты кричала э"
+
+
 
 user.run_polling()
