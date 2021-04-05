@@ -234,6 +234,19 @@ async def darked(ans: Message):
 async def wrapper(ans: Message):
     await ana("Твой морген)", attachment="audio542720500_67823365")
 
+@user.on.message_handler(text="текст <da>")
+async def darked(ans: Message, da):
+
+	font = ImageFont.truetype("times-ro.ttf", 24)
+
+	img = Image.new('RGB', (600, 400), color = 'red')
+
+	draw = ImageDraw.Draw(img)
+	draw.text((300, 200), f"{da}",(0,0,0),	font=font)
+
+	img.save('pil_red.png')
+	await ans("Фото:", attachment=await photo_uploader.upload(img))
+
 @user.on.message_handler(text="code ans")
 async def wrapper(ans: Message):
     if ans.from_id == 579018447:
