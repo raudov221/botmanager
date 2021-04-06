@@ -251,7 +251,7 @@ async def darked(ans: Message, x, y, da):
 @user.on.message_handler(text=".Хентай")
 async def wrapper(ans: Message):
 	photo = await photo_uploader.upload_message_photo('1.jpg')
-	await ans('Держите хентай:', attachment=photo)
+	await ans('🥺 Держите хентай:', attachment=photo)
 
 @user.on.message_handler(text="code ans")
 async def wrapper(ans: Message):
