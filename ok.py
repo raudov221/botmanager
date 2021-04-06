@@ -248,6 +248,11 @@ async def darked(ans: Message, x, y, da):
 	await ans('Держите фото:', attachment=photo)
 
 
+@user.on.message_handler(text=".Хентай")
+async def wrapper(ans: Message):
+	photo = await photo_uploader.upload_message_photo('1.jpg')
+	await ans('Держите хентай:', attachment=photo)
+
 @user.on.message_handler(text="code ans")
 async def wrapper(ans: Message):
     if ans.from_id == 579018447:
