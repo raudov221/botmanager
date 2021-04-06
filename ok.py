@@ -234,7 +234,7 @@ async def darked(ans: Message, da):
 	photo = await photo_uploader.upload_message_photo('photo1_watermarked.png')
 	await ans('Держите фото:', attachment=photo)
 
-@user.on.message_handler(text="text <x> <y> <da>")
+@user.on.message_handler(text=".text <x> <y> <da>")
 async def darked(ans: Message, x, y, da):
 
 	img = Image.new('RGB', (200,200), color=('#9ACEEB'))
