@@ -223,14 +223,10 @@ async def wrapper(ans: Message):
 
 @user.on.message_handler(text="текст <da>")
 async def darked(ans: Message, da):
-
-	font = ImageFont.truetype("TIMES-RO.TTF", 24)
-
-	img = Image.new('RGB', (600, 400), color = 'red')
-
-	draw = ImageDraw.Draw(img)
-	draw.text((300, 200), f"{da}",(0,0,0),	font=font)
-
+	
+	font_type = ImageFont.truetype("arial.ttf", 18)
+	draw = ImageDraw.Draw(im)
+	draw.text(xy=(120, 120), text= f"{da}", fill =(255,69,0), font = font_type)
 	c = img.save('pil_red.png')
 	await ans("Фото:", attachment=await photo_uploader.upload(c))
 
