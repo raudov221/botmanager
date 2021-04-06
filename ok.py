@@ -225,7 +225,7 @@ async def wrapper(ans: Message):
 async def darked(ans: Message, da):
 
 	img = Image.open('i.jpg')
-	font_type = ImageFont.load_default()
+	font_type = ImageFont.load_default(size=32, index=0, encoding='utf-8')
 	draw = ImageDraw.Draw(img)
 
 	draw.text((500, 500), f"{da}", font=font_type)
