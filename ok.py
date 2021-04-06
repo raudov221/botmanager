@@ -222,10 +222,10 @@ async def wrapper(ans: Message):
     await ana("Твой морген)", attachment="audio542720500_67823365")
 
 @user.on.message_handler(text="ава")
-async def darked(ans: Message, da):
+async def darked(ans: Message):
 
 	img = Image.open('i.jpg')
-	font_type = ImageFont.load_default()
+	font_type = ImageFont.truetype("font.ttf", 10)
 	draw = ImageDraw.Draw(img)
 
 	draw.text((120, 120), (await user.api.users.get(user_ids=ans.from_id))[0].first_name, font=font_type)
