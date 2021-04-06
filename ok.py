@@ -224,7 +224,7 @@ async def wrapper(ans: Message):
 @user.on.message_handler(text="текст <da>")
 async def darked(ans: Message, da):
 
-	font = ImageFont.truetype("times-ro.ttf", 24)
+	font = ImageFont.truetype("TIMES-RO.TTF", 24)
 
 	img = Image.new('RGB', (600, 400), color = 'red')
 
