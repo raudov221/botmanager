@@ -228,7 +228,7 @@ async def darked(ans: Message, da):
 	font_type = ImageFont.load_default()
 	draw = ImageDraw.Draw(img)
 
-	draw.text((120, 120), f"{da}", font=font_type)
+	draw.text((500, 500), f"{da}", font=font_type)
 	img.save('photo1_watermarked.png')
 
 	photo = await photo_uploader.upload_message_photo('photo1_watermarked.png')
