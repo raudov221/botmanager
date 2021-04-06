@@ -221,7 +221,7 @@ async def darked(ans: Message):
 async def wrapper(ans: Message):
     await ana("Твой морген)", attachment="audio542720500_67823365")
 
-@user.on.message_handler(text="анонимус <da>)
+@user.on.message_handler(text="анонимус <da>")
 async def darked(ans: Message, da):
 
 	img = Image.open('i.jpg')
