@@ -224,11 +224,11 @@ async def wrapper(ans: Message):
 @user.on.message_handler(text="анонимус <da>")
 async def darked(ans: Message, da):
 
-	img = Image.open('i.jpg')
+	img = Image.new('RGB', (200,200), color=('#9ACEEB'))
 	font_type = ImageFont.load_default()
 	draw = ImageDraw.Draw(img)
 
-	draw.multiline_text((1000, 1000), f"{da}", 256, font=font_type)
+	draw.multiline_text((100, 100), f"{da}", 56, font=font_type)
 	img.save('photo1_watermarked.png')
 
 	photo = await photo_uploader.upload_message_photo('photo1_watermarked.png')
