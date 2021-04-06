@@ -221,12 +221,13 @@ async def darked(ans: Message):
 async def wrapper(ans: Message):
     await ana("Твой морген)", attachment="audio542720500_67823365")
 
-@user.on.message_handler(text="текст <da>")
+@user.on.message_handler(text="ава")
 async def darked(ans: Message, da):
-	img = Image.new('RGBA', (1000, 1000), 'green') 
+	penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
+	img = Image.open('i.jpg')
 	font_type = ImageFont.load_default()
 	draw = ImageDraw.Draw(img)
-	draw.text(xy=(120, 120), text= f"{da}", fill =(255,69,0), font = font_type)
+	draw.text(xy=(120, 120), text= f"{penis[0].first_name}", fill =(255,69,0), font = font_type)
 	img.save('photo1_watermarked.png')
 	photo = await photo_uploader.upload_message_photo('photo1_watermarked.png')
 	await ans('Держите фото:', attachment=photo) 
