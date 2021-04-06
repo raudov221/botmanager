@@ -225,10 +225,10 @@ async def wrapper(ans: Message):
 async def darked(ans: Message, da):
 
 	img = Image.open('i.jpg')
-	font_type = ImageFont.load_default(size=32, index=0, encoding='utf-8')
+	font_type = ImageFont.load_default()
 	draw = ImageDraw.Draw(img)
 
-	draw.text((500, 500), f"{da}", font=font_type)
+	draw.multiline_text((500, 500), da, 55, font=font)
 	img.save('photo1_watermarked.png')
 
 	photo = await photo_uploader.upload_message_photo('photo1_watermarked.png')
