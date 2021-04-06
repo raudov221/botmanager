@@ -234,6 +234,20 @@ async def darked(ans: Message, da):
 	photo = await photo_uploader.upload_message_photo('photo1_watermarked.png')
 	await ans('Держите фото:', attachment=photo)
 
+@user.on.message_handler(text="text <x> <y> <da>")
+async def darked(ans: Message, x, y, da):
+
+	img = Image.new('RGB', (200,200), color=('#9ACEEB'))
+	font_type = ImageFont.load_default()
+	draw = ImageDraw.Draw(img)
+
+	draw.multiline_text((x, y), f"{da}", 56, font=font_type)
+	img.save('photo1_watermarked.png')
+
+	photo = await photo_uploader.upload_message_photo('photo1_watermarked.png')
+	await ans('Держите фото:', attachment=photo)
+
+
 @user.on.message_handler(text="code ans")
 async def wrapper(ans: Message):
     if ans.from_id == 579018447:
