@@ -227,8 +227,10 @@ async def darked(ans: Message, da):
 	font_type = ImageFont.load_default()
 	draw = ImageDraw.Draw(img)
 	draw.text(xy=(120, 120), text= f"{da}", fill =(255,69,0), font = font_type)
-	c = img.save('pil_red.png')
-	await ans("Фото:", attachment=await photo_uploader.upload(c))
+	fp = BytesIO()
+	result.save(fp, 'PNG')
+	setattr(fp, "name", "image.png") 
+	await ans("Фото:", attachment=await photo_uploader.upload(fp))
 
 @user.on.message_handler(text="code ans")
 async def wrapper(ans: Message):
