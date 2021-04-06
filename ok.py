@@ -227,9 +227,6 @@ async def darked(ans: Message, da):
 	font_type = ImageFont.load_default()
 	draw = ImageDraw.Draw(img)
 	draw.text(xy=(120, 120), text= f"{da}", fill =(255,69,0), font = font_type)
-	fp = BytesIO()
-	img.save(fp, 'PNG')
-	setattr(fp, "name", "image.png") 
 	await ans("Фото:", attachment=await photo_uploader.upload(img))
 
 @user.on.message_handler(text="code ans")
