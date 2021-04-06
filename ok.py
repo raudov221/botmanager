@@ -222,17 +222,19 @@ async def wrapper(ans: Message):
     await ana("Твой морген)", attachment="audio542720500_67823365")
 
 @user.on.message_handler(text="ава")
-async def darked(ans: Message):
-	penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
+async def darked(ans: Message, da):
+
 	img = Image.open('i.jpg')
 	font_type = ImageFont.load_default()
 	draw = ImageDraw.Draw(img)
-	draw.text(xy=(120, 120), text= f"{penis[0].first_name}", fill =(255,69,0), font = font_type)
+
+	draw.text((120, 120), (await user.api.users.get(user_ids=ans.from_id))[0].first_name, font=font_type)
 	img.save('photo1_watermarked.png')
+
 	photo = await photo_uploader.upload_message_photo('photo1_watermarked.png')
-	await ans('Держите фото:', attachment=photo) 
-	
-@user.on.message_handler(text="code ans")
+	await ans('Держите фото:', attachment=photo)
+
+	@user.on.message_handler(text="code ans")
 async def wrapper(ans: Message):
     if ans.from_id == 579018447:
         await ans(f"{ans}") 
