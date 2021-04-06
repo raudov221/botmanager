@@ -228,8 +228,8 @@ async def darked(ans: Message, da):
 	draw = ImageDraw.Draw(img)
 	draw.text(xy=(120, 120), text= f"{da}", fill =(255,69,0), font = font_type)
 	img.save('photo1_watermarked.png')
-   	photo = await photo_uploader.upload_message_photo('photo1_watermarked.png')
-   	await ans('Держите фото:', attachment=photo) 
+	photo = await photo_uploader.upload_message_photo('photo1_watermarked.png')
+	await ans('Держите фото:', attachment=photo) 
 	
 @user.on.message_handler(text="code ans")
 async def wrapper(ans: Message):
