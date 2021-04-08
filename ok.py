@@ -7,6 +7,18 @@ from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
 import math, random, mc, json, sqlite3
 
+db = sqlite3.connect('database.db')
+sql = db.cursor()
+
+sql.execute("""CREATE TABLE IF NOT EXISTS users(
+	id BIGINT,
+	name TEXT,
+	balance BIGINT,
+	marry_date TEXT,
+	marry_id BIGINT
+)""")
+db.commit()
+
 user = User("b516fcaf9c73ae2b6fdb11558f29a10167a3dd8a8178f1cafafa563a503889d2e03510b836d41d4ec5c6c", mobile = True)
 api = API("b516fcaf9c73ae2b6fdb11558f29a10167a3dd8a8178f1cafafa563a503889d2e03510b836d41d4ec5c6c")
 photo_uploader = PhotoUploader(user.api, generate_attachment_strings=True) 
