@@ -12,8 +12,9 @@ api = API("b516fcaf9c73ae2b6fdb11558f29a10167a3dd8a8178f1cafafa563a503889d2e0351
 photo_uploader = PhotoUploader(user.api, generate_attachment_strings=True) 
 
 def banned_words(text: str):
-	return text.replace("vto.ре","").replace("https://vto.ре","").replace(".com","").replace(".ru","").replace(".lol","").replace("sex","").replace("porno","")
-	
+	text = text.replace("vto.ре","").replace("https://vto.ре","").replace(".com","").replace(".ru","").replace(".lol","").replace("sex","").replace("porno","")
+	return text
+
 @user.on.message_handler(text = "выбери <da> или <net>", lower = True)
 async def wrapper(ans: Message, da, net: str):
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
