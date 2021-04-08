@@ -1,3 +1,4 @@
+from vkbottle.ext import Middleware
 from vkbottle.user import User, Message
 from vkbottle.api import API
 from vkbottle import PhotoUploader
@@ -26,6 +27,12 @@ photo_uploader = PhotoUploader(user.api, generate_attachment_strings=True)
 def banned_words(text: str):
 	text = text.replace("vto.ре","").replace("https://vto.ре","").replace(".com","").replace(".ru","").replace(".lol","").replace("sex","").replace("porno","")
 	return text
+
+@user.middleware.middleware_handler()
+class Registration(Middleware):
+	async def pre(self, ans: Message):
+		if ans.from_user and len(q.execute(f"SELECT * FROM players WHERE id = {ans.from_id}").fetchall()) == 0:
+			await ans(f"ты зарегался уебок")
 
 @user.on.message_handler(text = "выбери <da> или <net>", lower = True)
 async def wrapper(ans: Message, da, net: str):
