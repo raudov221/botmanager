@@ -1,6 +1,5 @@
 loguru
 pillow
-unicorn
-https://github.com/timoniq/vkbottle-types/archive/master.zip
+https://github.com/timoniq/vkbottle/archive/v2.0.zip 
 rextester_py
 mc.py
