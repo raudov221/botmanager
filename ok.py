@@ -195,4 +195,5 @@ async def wrapper(ans: Message):
 		if result:
 			await ans(f"{result}")
 
-user.run_polling(
+user.run_polling() 
+
