@@ -31,7 +31,7 @@ def banned_words(text: str):
 @user.middleware.middleware_handler()
 class Registration(Middleware):
 	async def pre(self, ans: Message):
-		if ans.from_user and len(q.execute(f"SELECT * FROM players WHERE id = {ans.from_id}").fetchall()) == 0:
+		if ans.from_user and len(q.execute(f"SELECT * FROM users WHERE id = {ans.from_id}").fetchall()) == 0:
 			await ans(f"ты зарегался уебок")
 
 @user.on.message_handler(text = "выбери <da> или <net>", lower = True)
