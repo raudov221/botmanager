@@ -16,7 +16,6 @@ def banned_words(text: str):
 	
 @user.on.message_handler(text = "выбери <da> или <net>", lower = True)
 async def wrapper(ans: Message, da, net: str):
-    random1 = random.randint(1, 2)
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
     return f"🌿 [id{ans.from_id}|{penis[0].first_name}], Я выбрал: {random.choice(banned_words(str(da)),banned_words(str(net)))}"
     
@@ -184,16 +183,12 @@ async def wrapper(ans: Message):
 	data = json.load(open("words.json","r",encoding="utf-8"))
 	procent = random.randint(1,25)
 	if procent > 20:
-		if ans.text.lower() not in data["words"]:
-			data["words"].append(ans.text)
-			json.dump(data, open("words.json","w"),ensure_ascii=False)
+		data["words"].append(ans.text)
+		json.dump(data, open("words.json","w"),ensure_ascii=False)
 		r1 = random.choice(data["words"])
 		r2 = random.choice(data["words"])
 		generator = mc.StringGenerator(samples = [r1,r2])
 		result = generator.generate_string()
-		print(result)
-		if result:
-			await ans(f"{result}")
+		await ans(f"{result}")
 
 user.run_polling() 
-
