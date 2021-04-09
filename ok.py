@@ -27,17 +27,31 @@ photo_uploader = PhotoUploader(user.api, generate_attachment_strings=True)
 def banned_words(text: str):
 	text = text.replace("vto.ре","").replace("https://vto.ре","").replace(".com","").replace(".ru","").replace(".lol","").replace("sex","").replace("porno","")
 	return text
+	
+def get_name(id: int):
+	name = sql.execute(f"SELECT name FROM users WHERE id = {id}").fetchall()[0][0]
+	return f"[id{id}|{name}]"
 
 @user.middleware.middleware_handler()
 class Registration(Middleware):
 	async def pre(self, ans: Message):
-		if ans.from_id and len(q.execute(f"SELECT * FROM users WHERE id = {ans.from_id}").fetchall()) == 0:
-			await ans(f"ты зарегался уебок")
+		if ans.from_id and len(sql.execute(f"SELECT * FROM users WHERE id = {ans.from_id}").fetchall()) == 0:
+			if ans.from_id > 0:
+				name = f"[id{ans.from_id}|{(await user.api.users.get(user_ids = ans.from_id))[0].first_name}]"
+				sql.execute(f"INSERT INTO users (id, name, balance, marry_date, marry_id ) VALUES ({ans.from_id}, '{user}', 0, 0, '')")
+				db.commit()
+				await ans(f"🥂 {name}, вы зарегистрировались!")
+			
+@user.on.message_handler(text = ["!ник <name>","ник <name>"], lower = True)
+async def wrapper( ans: Message, name: str):
+	if len(name) <= 20:
+		sql.execute("UPDATE users SET name = ? WHERE id = ?", (name, ans.from_id))
+		db.commit()
+		await ans(f"🔫  {get_name(ans.from_id)}, теперь вы <<{name}>>")
 
 @user.on.message_handler(text = "выбери <da> или <net>", lower = True)
 async def wrapper(ans: Message, da, net: str):
-    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-    return f"🌿 [id{ans.from_id}|{penis[0].first_name}], Я выбрал: {random.choice(banned_words(str(da)),banned_words(str(net)))}"
+    return f"🌿{get_name(ans.from_id)} Я выбрал: {random.choice(banned_words(str(da)),banned_words(str(net)))}"
     
 @user.on.message_handler(text="наградить медалью <da>", lower = True)
 async def wrapper(ans: Message, da: str):
@@ -46,9 +60,12 @@ async def wrapper(ans: Message, da: str):
     else:
         return f"🌿 Недостаточно прав!"
 
-@user.on.message_handler(text="?брак",lower = True)
-async def wrapper(ans: Message):
-    return f"🤗 [id{ans.from_id}|Пользователь], появились молодо жёны [id{ans.reply_message.from_id}|вам] =)"
+@user.on.chat_message(text="?брак запрос",lower = True)
+async def wrapper(ans: Message ):
+	chat = await user.api.messages.get_conversation_members(peer_id = ans.peer_id)
+	users = [member.member_id for member in chat.items]
+	await ans(users)
+    #await ans(f"💍 ")
 
 @user.on.message_handler(text="?браки",lower = True)
 async def wrapper(ans: Message):
@@ -58,7 +75,6 @@ async def wrapper(ans: Message):
 
 @user.on.message_handler(text="Обнять",lower = True)
 async def wrapper(ans: Message):
-    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
     return f"🤗 [id{ans.from_id}|{penis[0].first_name}] обнял кого то =)"
 
 @user.on.message_handler(text="/me <da>", lower = True)
@@ -67,56 +83,51 @@ async def wrapper(ans: Message, da: str):
 
 @user.on.message_handler(text = "кто <da>", lower = True)
 async def wrapper(ans: Message, da: str):
-	penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
 	da = banned_words(da)
 	users = await user.api.messages.get_conversation_members(peer_id=ans.peer_id)
-	return f'🌀 [id{ans.from_id}|{penis[0].first_name}], я думаю что {da} @id{random.choice([member.id for member in users.profiles if member.id])} (он)!'
+	return f'🌀{get_name(ans.from_id)} я думаю что {da} @id{random.choice([member.id for member in users.profiles if member.id])} (он)!'
 
 @user.on.message_handler(text="стикеры", lower = True)
 async def wrapper(ans: Message):
-	penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
 	if ans.reply_message:
 		all_stickers = await api.request('gifts.getCatalog', {'user_id': ans.reply_message.from_id})
 		stickers = [f"{i['sticker_pack']['title']}" for i in all_stickers[1]['items'] if 'disabled' in i]
 		if len(stickers) > 0:
-			return f"🤑 [id{ans.from_id}|{penis[0].first_name}], у него есть {len(stickers)} стикерпака: \n\n{', '.join(stickers)}"
+			return f"🤑{get_name(ans.from_id)}, у него есть {len(stickers)} стикерпака: \n\n{', '.join(stickers)}"
 		else:
-			return f"🤑 [id{ans.from_id}|{penis[0].first_name}], у него нету стикеров!"
+			return f"🤑{get_name(ans.from_id)}, у него нету стикеров!"
 	else:
 		all_stickers = await api.request('gifts.getCatalog', {'user_id': ans.from_id})
 		stickers = [f"{i['sticker_pack']['title']}" for i in all_stickers[1]['items'] if 'disabled' in i]
 		if len(stickers) > 0:
-			return f"🤑 [id{ans.from_id}|{penis[0].first_name}], у вас есть {len(stickers)} стикерпака: \n\n{', '.join(stickers)}"
+			return f"🤑{get_name(ans.from_id)}, у Вас есть {len(stickers)} стикерпака: \n\n{', '.join(stickers)}"
 		else:
-			return f"🤑 [id{ans.from_id}|{penis[0].first_name}], у вас нету стикеров!"
+			return f"🤑{get_name(ans.from_id)}, у Вас нету стикеров!"
 		
 
 @user.on.message_handler(text=["корень <da>","√<da>"],lower = True)
 async def wrapper(ans: Message, da: str):
-    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-    return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {math.sqrt(int(da))}"
+    return f"🌿{get_name(ans.from_id)} ответ: {math.sqrt(int(da))}"
 
 @user.on.message_handler(text="send <da>", lower = True)
 async def wrapper(ans: Message, da: str):
-    brawl = ans.from_id
-    await user.api.messages.send(user_id=brawl, random_id=0, message=f'{da}')
+    await user.api.messages.send(user_id=da, random_id=0, message=f'{da}')
     return f"Message from {ans.from_id} send"
 
 @user.on.message_handler(text = "пример <da>", lower = True)
 async def wrapper(ans: Message, da):
-	penis = await user.api.users.get(user_ids = ans.from_id, fields='is_closed')
 	list = [i for i in da if str(i) in ["1","2","3","4","5","6","7","8","9","0","+","-","/","*"]]
 	if len(list) == len(da):
-		return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {'{0:,}'.format(eval(da))}"""
+		return f"🌿{get_name(ans.from_id)} ответ: {'{0:,}'.format(eval(da))}"""
 	else:
-		return f"🌿 [id{ans.from_id}|{penis[0].first_name}], Я могу решить пример только из цифр."
+		return f"🌿{get_name(ans.from_id)} Я могу решить пример только из цифр."
 
 @user.on.message_handler(text="py <da>", lower = True) 
 async def wrapper(ans: Message, da: str):
     c = da.replace("~", "    ")
     rex = await rexec_aio(f"python 3", "{c}", None) 
     penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-    return f"🌿 [id{ans.from_id}|{penis[0].first_name}], вывод: {banned_words(rex.results)}"
+    return f"🌿{get_name(ans.from_id)} вывод: {banned_words(rex.results)}"
 
 @user.on.message_handler(text="shadow")
 async def wrapper(ans: Message):
@@ -211,4 +222,4 @@ async def wrapper(ans: Message):
 		result = generator.generate_string()
 		await ans(f"{result}")
 
-user.run_polling() 
+user.run_polling()
