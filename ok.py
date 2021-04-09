@@ -73,9 +73,12 @@ async def wrapper(ans: Message):
     b = open("text2.txt", "r")
     return f"💞 Браки беседы\n\n1.[id{f.read()}|Любовь] 💚 [id{b.read()}|Морковь]"
 
-@user.on.message_handler(text="Обнять",lower = True)
+@user.on.message_handler(text=".Обнять",lower = True)
 async def wrapper(ans: Message):
-    return f"🤗 [id{ans.from_id}|{penis[0].first_name}] обнял кого то =)"
+	if ans.reply_message:
+		await ans(f"🤗 {get_name(ans.from_id)} обнял {get_name(ans.reply_message.from_id)}")
+	else:
+		await ans(f"🤗 {get_name(ans.from_id)}, чтобы обнять пользователя, перешлите его сообщение"
 
 @user.on.message_handler(text="/me <da>", lower = True)
 async def wrapper(ans: Message, da: str):
