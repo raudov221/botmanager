@@ -29,7 +29,7 @@ def banned_words(text: str):
 	return text
 	
 def get_name(id: int):
-	if id and len(sql.execute(f"SELECT * FROM users WHERE id = {id}").fetchall()) != 0:
+	if len(sql.execute(f"SELECT * FROM users WHERE id = {id}").fetchall()) != 0:
 		name = sql.execute(f"SELECT name FROM users WHERE id = {id}").fetchall()[0][0]
 		return f"[id{id}|{name}]"
 	else:
