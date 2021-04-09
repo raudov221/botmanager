@@ -76,7 +76,7 @@ async def wrapper(ans: Message):
     b = open("text2.txt", "r")
     return f"💞 Браки беседы\n\n1.[id{f.read()}|Любовь] 💚 [id{b.read()}|Морковь]"
 
-@user.on.message_handler(text=".Обнять",lower = True)
+@user.on.message_handler(text="?обнять",lower = True)
 async def wrapper(ans: Message):
 	if ans.reply_message:
 		await ans(f"🤗 {get_name(ans.from_id)} обнял {get_name(ans.reply_message.from_id)}")
