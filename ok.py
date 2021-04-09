@@ -41,7 +41,7 @@ class Registration(Middleware):
 		if ans.from_id and len(sql.execute(f"SELECT * FROM users WHERE id = {ans.from_id}").fetchall()) == 0:
 			if ans.from_id > 0:
 				name = f"[id{ans.from_id}|{(await user.api.users.get(user_ids = ans.from_id))[0].first_name}]"
-				sql.execute(f"INSERT INTO users (id, name, balance, marry_date, marry_id ) VALUES ({ans.from_id}, '{user}', 0, 0, '')")
+				sql.execute(f"INSERT INTO users (id, name, balance, marry_date, marry_id ) VALUES ({ans.from_id}, '{name}', 0, 0, '')")
 				db.commit()
 				await ans(f"🥂 {name}, вы зарегистрировались!")
 			
