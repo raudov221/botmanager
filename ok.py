@@ -81,7 +81,7 @@ async def wrapper(ans: Message):
 	if ans.reply_message:
 		await ans(f"🤗 {get_name(ans.from_id)} обнял {get_name(ans.reply_message.from_id)}")
 	else:
-		await ans(f"🤗 {get_name(ans.from_id)}, чтобы обнять пользователя, перешлите его сообщение"
+		await ans(f"🤗 {get_name(ans.from_id)}, чтобы обнять пользователя, перешлите его сообщение")
 
 @user.on.message_handler(text="/me <da>", lower = True)
 async def wrapper(ans: Message, da: str):
