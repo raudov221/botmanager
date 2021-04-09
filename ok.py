@@ -29,8 +29,11 @@ def banned_words(text: str):
 	return text
 	
 def get_name(id: int):
-	name = sql.execute(f"SELECT name FROM users WHERE id = {id}").fetchall()[0][0]
-	return f"[id{id}|{name}]"
+	if id and len(sql.execute(f"SELECT * FROM users WHERE id = {id}").fetchall()) != 0:
+		name = sql.execute(f"SELECT name FROM users WHERE id = {id}").fetchall()[0][0]
+		return f"[id{id}|{name}]"
+	else:
+		return f"[id{id}|пользователь]"
 
 @user.middleware.middleware_handler()
 class Registration(Middleware):
