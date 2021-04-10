@@ -64,29 +64,17 @@ async def wrapper(ans: Message, da: str):
     else:
         return f"🌿 Недостаточно прав!"
 
-@user.on.chat_message(text="?брак запрос",lower = True)
-async def wrapper(ans: Message ):
-	chat = await user.api.messages.get_conversation_members(peer_id = ans.peer_id)
-	users = [member.member_id for member in chat.items]
-	await ans(users)
-    #await ans(f"💍 ")
-
-@user.on.message_handler(text="?браки",lower = True)
-async def wrapper(ans: Message):
-    f = open("text.txt", "r")
-    b = open("text2.txt", "r")
-    return f"💞 Браки беседы\n\n1.[id{f.read()}|Любовь] 💚 [id{b.read()}|Морковь]"
-
 @user.on.message_handler(text="?обнять",lower = True)
 async def wrapper(ans: Message):
 	if ans.reply_message:
-		await ans(f"🤗 {get_name(ans.from_id)} обнял {get_name(ans.reply_message.from_id)}")
+		photo = await photo_uploader.upload_message_photo([random.choice(['neck_1.jpg','neck_2.jpg','neck_3.jpg']))
+		await ans(f"🤗 {get_name(ans.from_id)} обнял {get_name(ans.reply_message.from_id)}", attachment = photo)
 	else:
 		await ans(f"🤗 {get_name(ans.from_id)}, чтобы обнять пользователя, перешлите его сообщение")
 
 @user.on.message_handler(text="/me <da>", lower = True)
 async def wrapper(ans: Message, da: str):
-    return f"[id{ans.from_id}|Пользователь], {da}"
+    return f"👤 {get_name(ans.from_id)}, {da}"
 
 @user.on.message_handler(text = "кто <da>", lower = True)
 async def wrapper(ans: Message, da: str):
