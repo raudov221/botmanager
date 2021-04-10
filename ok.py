@@ -219,7 +219,7 @@ async def wrapper(ans: Message, da, count):
 async def wrapper(ans: Message):
 	data = json.load(open("words.json","r",encoding="utf-8"))
 	procent = random.randint(1,25)
-	if procent > 20:
+	if procent > 20 and ans.from_id > 0:
 		data["words"].append(ans.text)
 		json.dump(data, open("words.json","w"),ensure_ascii=False)
 		r1 = random.choice(data["words"])
