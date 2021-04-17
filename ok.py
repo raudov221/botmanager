@@ -114,7 +114,7 @@ async def wrapper(ans: Message, da):
 	if data[ "reg" ][ str( ans.from_id ) ] == "0":
 		name = await user.api.users.get(user_ids=c)
 		data[ "name" ][ str( ans.from_id ) ] = f"[id{c}|{name[0].first_name}]"
-		await ans(f"🦊 {data['name'][str(ans.from_id)]}, ты успешно зарегистрировался!", reply_to = id)
+		await user.api.messages.send(user_id=c, random_id=0, message=f'🦊 {data['name'][str(ans.from_id)]}, ты успешно зарегистрировался!')
 		data[ "reg" ][ str( ans.from_id ) ] = "1"
 		json.dump( data, open( "data.json", "w" ) )
 		print("reg")
