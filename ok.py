@@ -97,15 +97,24 @@ async def wrapper(ans: Message):
 	data = json.load( open( "data.json", "r" ) )
 	await ans(f"🦊 {data['name'][str(ans.from_id)]}, ваш профиль:\n\n💵 Баланс: {data['balance'][str(ans.from_id)]}\n🚗 Машина: {data['carname'][str(ans.from_id)]}\n🪐 Id: {ans.from_id}")
 
+@user.on.message_handler(text="дроби <num1>/<num2> - <num3>/<num4>", lower = True)
+async def wrapper(ans: Message, num1, num2, num3, num4):
+	c = num2 * num4
+	x = num1 - num3
+	id = ans.id
+	data = json.load( open( "data.json", "r" ) )
+	await ans(f"{data['name'][str(ans.from_id)]}, решение: \n{num1}/{num2}-{num3}/{num4} = {num1}-{num3}/{c} = {x}/{c}", reply_to = id) 
+
 @user.on.message_handler(text="<da>")
 async def wrapper(ans: Message, da):
 	reg(ans)
 	c = ans.from_id
+	id = ans.id
 	data = json.load( open( "data.json", "r" ) )
 	if data[ "reg" ][ str( ans.from_id ) ] == "0":
 		name = await user.api.users.get(user_ids=c)
 		data[ "name" ][ str( ans.from_id ) ] = f"[id{c}|{name[0].first_name}]"
-		await ans(f"🦊 {data['name'][str(ans.from_id)]}, ты успешно зарегистрировался!")
+		await ans(f"🦊 {data['name'][str(ans.from_id)]}, ты успешно зарегистрировался!", reply_to)
 		data[ "reg" ][ str( ans.from_id ) ] = "1"
 		json.dump( data, open( "data.json", "w" ) )
 		print("reg")
