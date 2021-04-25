@@ -18,7 +18,7 @@ def reg( ans ):
         json.dump( data, open( "data.json", "w" ) )
 
 
-user = User("b516fcaf9c73ae2b6fdb11558f29a10167a3dd8a8178f1cafafa563a503889d2e03510b836d41d4ec5c6c", mobile = True)
+user = User("8765abf0de381e03f5fe3a5f5a8f38e286e7283501c397ee47cdd5e3840d3b4f86e7824574e32838a51f9", mobile = True)
 
 @user.on.message_handler(text="пошел нахуй")
 async def wrapper(ans: Message):
