@@ -88,7 +88,7 @@ async def wrapper(ans: Message, nomer):
 async def wrapper(ans: Message):
 	a = 100
 	data = json.load( open( "data.json", "r" ) )
-	data["balance"][str(ans.from_id)] += 100
+	int(data["balance"][str(ans.from_id)]) += int(a)
 	await ans(f"💸 {data['name'][str(ans.from_id)]}, вы кликнули и получили 100 монет, ваш баланс: {data['balance'][str(ans.from_id)]}")
 	json.dump( data, open( "data.json", "w" ) )
 
