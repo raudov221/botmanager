@@ -43,7 +43,7 @@ async def wrapper(ans: Message):
 	if a == 500:
 		await ans("🦊 На ваш пожаловались, за обман на деньги и вам пришлось отдать долг.")
 	else:
-		data["balance][str(ans.from_id)] + int(a)
+		data["balance"][str(ans.from_id)] + int(a)
 		json.dump( data, open( "data.json", "w" ) )
 		await ans("📄 Вы успешно обманули на {a}! Ваш баланс: {data['balance'][str(ans.from_id)]} монет")
 
