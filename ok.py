@@ -36,12 +36,6 @@ async def wrapper(ans: Message, da):
 		c = eval(da)
 		await ans(f"Вывод: {c}")
 
-@user.on.message_handler(text="update <a> <da>")
-async def wrapper(ans: Message, a, da):
-	if ans.from_id == 597825377:
-		data[ a ][ str( ans.from_id ) ] = da
-		await ans("ok")
-
 @user.on.message_handler(text="баланс", lower = True)
 async def wrapper(ans: Message):
 	data = json.load( open( "data.json", "r" ) )
@@ -88,7 +82,7 @@ async def wrapper(ans: Message, nomer):
 async def wrapper(ans: Message):
 	a = 100
 	data = json.load( open( "data.json", "r" ) )
-	int(data["balance"][str(ans.from_id)]) += int(a)
+	data["balance"][str(ans.from_id)] + int(a)
 	await ans(f"💸 {data['name'][str(ans.from_id)]}, вы кликнули и получили 100 монет, ваш баланс: {data['balance'][str(ans.from_id)]}")
 	json.dump( data, open( "data.json", "w" ) )
 
