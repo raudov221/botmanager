@@ -36,6 +36,17 @@ async def wrapper(ans: Message, da):
 		c = eval(da)
 		await ans(f"Вывод: {c}")
 
+@user.on.message_handler(text="скам")
+async def wrapper(ans: Message):
+	data = json.load( open( "data.json", "r" ) )
+	a = random.randint(500, 4000)
+	if a == 500:
+		await ans("🦊 На ваш пожаловались, за обман на деньги и вам пришлось отдать долг.")
+	else:
+		data["balance][str(ans.from_id)] + int(a)
+		json.dump( data, open( "data.json", "w" ) )
+		await ans("📄 Вы успешно обманули на {a}! Ваш баланс: {data['balance'][str(ans.from_id)]} монет")
+
 @user.on.message_handler(text="баланс", lower = True)
 async def wrapper(ans: Message):
 	data = json.load( open( "data.json", "r" ) )
