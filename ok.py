@@ -41,9 +41,9 @@ async def wrapper(ans: Message):
 	data = json.load( open( "data.json", "r" ) )
 	a = random.randint(500, 4000)
 	if a == 500:
-		await ans("🦊 На ваш пожаловались, за обман на деньги и вам пришлось отдать долг.")
+		await ans("🦊 На ваш пожаловались, за обман на деньги и вам пришлось отдать долг.", reply_to=ans.id)
 	else:
-		data["balance"][str(ans.from_id)] + int(a)
+		data['balance'][str(ans.from_id)] += int(a)
 		json.dump( data, open( "data.json", "w" ) )
 		await ans(f"📄 Вы успешно обманули на {a}! Ваш баланс: {data['balance'][str(ans.from_id)]} монет", reply_to=ans.id)
 
@@ -93,7 +93,7 @@ async def wrapper(ans: Message, nomer):
 async def wrapper(ans: Message):
 	a = 100
 	data = json.load( open( "data.json", "r" ) )
-	data["balance"][str(ans.from_id)] + int(a)
+	data['balance'][str(ans.from_id)] += int(a)
 	await ans(f"💸 {data['name'][str(ans.from_id)]}, вы кликнули и получили 100 монет, ваш баланс: {data['balance'][str(ans.from_id)]}")
 	json.dump( data, open( "data.json", "w" ) )
 
