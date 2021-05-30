@@ -5,11 +5,11 @@ import random
 blocked = ["porno365", "porno", "xnxx", "vto", "vto.pe", "ru", "com", "pe"]
 
 
-user = User("1d461298f071fc440160706f4d6beb66ee1052a87090b001ee0c99aae13f0191f6a78d48c2c9f0509b426", mobile = True)
+user = User("f316473ce9ae540331f5fe8cbdc1bd1c7901324b1ca0b42648be820b589b00f17f7ccb94646b7d32cd9c2", mobile = True)
 
-@user.on.message_handler(text=".брак принять", lower = True)
-async def wrapper(ans: Message):
-	await ans(".брак пошалить")
+@user.on.message_handler(text="привет <da>", lower = True)
+async def wrapper(ans: Message, da):
+	await ans("[id{ans.from_id}|пошел нахуй]")
 
 
 user.run_polling()
