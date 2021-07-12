@@ -2,7 +2,7 @@ from vkbottle import User, Message
 import time
 import random
 
-user = User("b027b5b1190e3d38c39860d70246b1c3edae84ac2f0c883f2160c542f42af6c589c3b2b6dbe457c4d4c95")
+user = User("b09f8966729f76a376bce69785dce013da0596e9a5b122b76162a7edf169da00da1f1f817a515bfc38e5a")
 
 @user.on.message_handler(text="создать запись <dad>", lower=True)
 async def wall(ans, dad):
