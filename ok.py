@@ -1,7 +1,9 @@
 from vkbottle.bot import Bot, Message
 from vkbottle.keyboard import Keyboard, Text
+from vkbottle.api import API
 from datetime import datetime as dt
 from time import time
+import time, math
 import random
 import config
 import json
