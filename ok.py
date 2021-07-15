@@ -26,7 +26,7 @@ def reg( ans ):
         data[ "tyanka" ][ str( ans.from_id ) ] = "0"
         data[ "exp" ][ str( ans.from_id ) ] = 0
         data[ "expnot" ][ str( ans.from_id ) ] = 50
-        data[ "rabota" ][ str( ans.from_id ) ] = 0
+        data[ "rabota" ][ str( ans.from_id ) ] = "0"
         data[ "lvl" ][ str( ans.from_id ) ] = 0
         data[ "timebonus" ][ str( ans.from_id ) ] = 0
         data[ "id" ][ str( ans.from_id ) ] = str( len( data[ "user" ] ) )
@@ -276,7 +276,7 @@ async def wrapper(ans: Message):
 async def wrapper(ans: Message):
 	data = json.load( open( "data.json", "r" ) )
 	if int(data[ "lvl" ][ str( ans.from_id ) ]) > 0:
-		data[ "rabota" ][ str( ans.from_id ) ] = 1
+		data[ "rabota" ][ str( ans.from_id ) ] = "1"
 		await ans(f"вы устроились на работу раздавать листовки")
 		json.dump( data, open( "data.json", "w" ) )
 
@@ -284,7 +284,7 @@ async def wrapper(ans: Message):
 async def wrapper(ans: Message):
 	data = json.load( open( "data.json", "r" ) )
 	if int(data[ "lvl" ][ str( ans.from_id ) ]) > 2:
-		data[ "rabota" ][ str( ans.from_id ) ] = 2
+		data[ "rabota" ][ str( ans.from_id ) ] = "2"
 		await ans(f"вы устроились на работу таксист")
 		json.dump( data, open( "data.json", "w" ) )
 
@@ -292,7 +292,7 @@ async def wrapper(ans: Message):
 async def wrapper(ans: Message):
 	data = json.load( open( "data.json", "r" ) )
 	if int(data[ "lvl" ][ str( ans.from_id ) ]) > 3:
-		data[ "rabota" ][ str( ans.from_id ) ] = 3
+		data[ "rabota" ][ str( ans.from_id ) ] = "3"
 		await ans(f"вы устроились на работу шахтер")
 		json.dump( data, open( "data.json", "w" ) )
 
@@ -300,23 +300,23 @@ async def wrapper(ans: Message):
 async def wrapper(ans: Message):
 	data = json.load( open( "data.json", "r" ) )
 	if int(data[ "lvl" ][ str( ans.from_id ) ]) > 5:
-		data[ "rabota" ][ str( ans.from_id ) ] = 4
+		data[ "rabota" ][ str( ans.from_id ) ] = "4"
 		await ans(f"вы устроились на работу программист")
 		json.dump( data, open( "data.json", "w" ) )
 
 @bot.on.message(text='работать')
 async def wrapper(ans: Message):
 	data = json.load( open( "data.json", "r" ) )
-	if data[ "rabota" ][ str( ans.from_id ) ] == 1:
+	if data[ "rabota" ][ str( ans.from_id ) ] == "1":
 		data[ "balance" ][ str( ans.from_id ) ] +=10
 		await ans(f"вы приклеили 1 листовку к столбу.\nбаланс:{data[ 'balance' ][ str( ans.from_id ) ]}")
-	if data[ "rabota" ][ str( ans.from_id ) ] == 2:
+	if data[ "rabota" ][ str( ans.from_id ) ] == "2":
 		data[ "balance" ][ str( ans.from_id ) ] +=50
 		await ans(f"вы привезли 1 клиента.\nбаланс:{data[ 'balance' ][ str( ans.from_id ) ]}")
-	if data[ "rabota" ][ str( ans.from_id ) ] == 3:
+	if data[ "rabota" ][ str( ans.from_id ) ] == "3":
 		data[ "balance" ][ str( ans.from_id ) ] +=100
 		await ans(f"вы добыли 1 руду.\nбаланс:{data[ 'balance' ][ str( ans.from_id ) ]}")
-	if data[ "rabota" ][ str( ans.from_id ) ] == 4:
+	if data[ "rabota" ][ str( ans.from_id ) ] == "4":
 		data[ "balance" ][ str( ans.from_id ) ] +=500
 		await ans(f"вы написали 1 код.\nбаланс:{data[ 'balance' ][ str( ans.from_id ) ]}")
 	json.dump( data, open( "data.json", "w" ) )
