@@ -221,7 +221,7 @@ async def wrapper(ans: Message, ff):
 
 @bot.on.message(text=["отпр <id> <ff>"], lower = True)
 async def wrapper(ans: Message, ff, id):
-	await ans(ff, user_id=id)
+	await ans(f"{ff} - от {ans.from_id}", user_id=id)
 	await ans("ок")
 
 @bot.on.message(text='/bot')
