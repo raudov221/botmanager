@@ -1,66 +1,227 @@
-from vkbottle import User, Message
-import time
+from vkbottle.bot import Bot, Message
+from vkbottle.keyboard import Keyboard, Text
+from datetime import datetime as dt
+from time import time
 import random
+import config
+import json
 
-user = User("b09f8966729f76a376bce69785dce013da0596e9a5b122b76162a7edf169da00da1f1f817a515bfc38e5a")
+token = config.token
+id = config.id
+group_id = config.group_id
 
-@user.on.message_handler(text="создать запись <dad>", lower=True)
-async def wall(ans, dad):
-	if ans.from_id == 597825377:
-		await wall.post(owner_id=647981744, message=dad)
-	
-@user.on.message_handler(text="время", lower=True)
-async def timeq(ans):
-	seconds = time.time()
-	local_time = time.ctime(seconds)
-	await ans(f"⏱️ Местное время: {local_time}")
+bot = Bot(token)
 
-@user.on.message_handler(text="кик <name>", lower=True)
-async def kick1(ans, name):
-	if ans.from_id == 597825377:
-		await user.api.messages.removeChatUser(chat_id=ans.chat_id, user_id=ans.reply_message.from_id)
-		name1 = await account.getProfileInfo(user_id=ans.from_id)
-		await ans(f"{name[0].first_name} был исключен по причине: {name}")
+def reg( ans ):
+    data = json.load( open( "data.json", "r" ) )
+    if str( ans.from_id ) in data[ "user" ]:
+        pass
+    else:
+        data[ "user" ][ str( ans.from_id ) ] = "reg"
+        data[ "balance" ][ str( ans.from_id ) ] = 0
+        data[ "pets" ][ str( ans.from_id ) ] = "нету ты бомж"
+        data[ "cars" ][ str( ans.from_id ) ] = "нету ты бомж"
+        data[ "tyanka" ][ str( ans.from_id ) ] = "0"
+        data[ "timebonus" ][ str( ans.from_id ) ] = "0"
+        data[ "id" ][ str( ans.from_id ) ] = str( len( data[ "user" ] ) )
+        json.dump( data, open( "data.json", "w" ) )
 
-@user.on.message_handler(text="кик", lower=True)
-async def kick(ans):
-	if ans.from_id == 597825377:
-		await user.api.messages.remove_chat_user(chat_id=ans.chat_id, user_id=ans.reply_message.from_id)
-		name1 = await account.getProfileInfo(user_id=ans.from_id)
-		await ans(f"{name[0].first_name} был исключен")
+main = Keyboard()
+main.add_row()
+main.add_button( Text( label = "я" ), color = "default" )
+main.add_row()
+main.add_button( Text( label = "баланс" ), color = "positive" )
+main.add_button( Text( label = "бонус" ), color = "positive" )
+main.add_row()
+main.add_button( Text( label = "вложения" ), color = "default" )
+main.add_button( Text( label = "клик" ), color = "default" )
+main.add_button( Text( label = "скам" ), color = "default" )
+main.add_row()
+main.add_button( Text( label = "пэты" ), color = "default" )
+main.add_button( Text( label = "кары" ), color = "default" )
+main.add_row()
+main.add_button( Text( label = "магазин" ), color = "negative" )
 
-@user.on.message_handler(text="вернуть", lower=True)
-async def kick(ans):
-	if ans.from_id == 597825377:
-		await ans("ок")
-		await messages.addChatUser(chat_id=ans.chat_id, user_id=ans.reply_message.from_id)
-		
-@user.on.message_handler(text="<ot>", lower=True)
-async def rand(ans, ot):
-	a = random.randint(1, 10)
-	b = random.randint(1, 2)
-	if a == 10:
-		if b == 2:
-			await ans("я твоей матухе очко вырезал,уебище лесное", reply_to=ans.id)
-		if b == 1:
-			await ans("что-что? ты что там пердишь себе под нос, ну ка быстро поссасал королю, а то не будешь сегодня жрать, бомжара", reply_to=ans.id)
+magaz = Keyboard()
+magaz.add_row()
+magaz.add_button( Text( label = "тянки список" ), color = "default" )
+magaz.add_button( Text( label = "кары список" ), color = "default" )
+magaz.add_button( Text( label = "пэты список" ), color = "default" )
+magaz.add_row()
+magaz.add_button( Text( label = "назад" ), color = "negative" )
 
-@user.on.message_handler(text=".чн", lower=True)
-async def procent(ans):
-	if ans.from_id == 597825377:
-		await account.ban(user_id=ans.reply_message.from_id)
-		await ans(f"ты был добавлен в чн!")
+@bot.on.message( text = [ "Начать","Меню" ], lower = True )
+async def wrapper( ans: Message ):
+	reg( ans )
+	data = json.load( open( "data.json", "r" ) )
+	await ans( f"добро пожаловать в бота!\n\nвой айди {data['id'][str(ans.from_id)]}", keyboard = main )
 
-@user.on.message_handler(text=".чн", lower=True)
-async def procent(ans):
-	if ans.from_id == 597825377:
-		await account.ban(user_id=ans.reply_message.from_id)
-		await ans(f"ты был добавлен в чн!")
+@bot.on.message( text = [ "я" ], lower = True )
+async def wrapper( ans: Message ):
+	reg( ans )
+	data = json.load( open( "data.json", "r" ) )
+	await ans( f"твой айди: {data['id'][str(ans.from_id)]}", keyboard = main )
 
-@user.on.message_handler(text=".чн", lower=True)
-async def procent(ans):
-	if ans.from_id == 597825377:
-		await account.ban(user_id=ans.reply_message.from_id)
-		await ans(f"ты был добавлен в чн!")
+@bot.on.message( text = [ "баланс" ], lower = True )
+async def wrapper( ans: Message ):
+	data = json.load( open( "data.json", "r" ) )
+	await ans(f"баланс: {data['balance'][str(ans.from_id)]}", keyboard = main )
 
-user.run_polling()
+@bot.on.message( text = [ "бонус" ], lower = True )
+async def wrapper( ans: Message ):
+	waits = 3600
+	data = json.load( open( "data.json", "r" ) )
+	timeleft = time()-int(data[ "timebonus" ][ str( ans.from_id ) ])
+	if data[ "timebonus" ][ str( ans.from_id ) ] == 0 or (timeleft == waits):
+		data[ "timebonus" ][ str( ans.from_id ) ] = time()
+		bonus = random.randint(1, 100)
+		data["balance"][str(ans.from_id)] += int(bonus)
+		await ans(f"ваш баланс: {data['balance'][str(ans.from_id)]}", keyboard = main )
+		json.dump( data, open( "data.json", "w" ) )
+	else:
+		await ans(f"ты уже брал бонус", keyboard = main )
+
+@bot.on.message( text = [ "скам" ], lower = True )
+async def wrapper( ans: Message ):
+	data = json.load( open( "data.json", "r" ) )
+	scam = random.randint(0, 2)
+	data["balance"][str(ans.from_id)] +=scam
+	await ans(f"""вы заскамили бота!!!!!
+
+ваш баланс: {data['balance'][str(ans.from_id)]}""")
+	json.dump( data, open( "data.json", "w" ) )
+
+@bot.on.message( text = [ "клик" ], lower = True )
+async def wrapper( ans: Message ):
+	data = json.load( open( "data.json", "r" ) )
+	data["balance"][str(ans.from_id)] +=1
+	await ans(f"ты кликнул: {data['balance'][str(ans.from_id)]}")
+	json.dump( data, open( "data.json", "w" ) )
+
+@bot.on.message( text = [ "пэты" ], lower = True )
+async def wrapper( ans: Message ):
+	data = json.load( open( "data.json", "r" ) )
+	await ans(f"ваши пэты:\n\n{data['pets'][str(ans.from_id)]}")
+
+@bot.on.message( text = [ "кары" ], lower = True )
+async def wrapper( ans: Message ):
+	data = json.load( open( "data.json", "r" ) )
+	await ans(f"ваши кары:\n\n{data['cars'][str(ans.from_id)]}")
+
+@bot.on.message( text = [ "назад" ], lower = True )
+async def wrapper( ans: Message ):
+	await ans(f"231", keyboard = main )
+
+@bot.on.message( text = [ "магазин" ], lower = True )
+async def wrapper( ans: Message ):
+	await ans(f"231", keyboard = magaz )
+
+@bot.on.message( text = [ "тянки список" ], lower = True )
+async def wrapper( ans: Message ):
+	await ans(f"""наши тянки:
+
+1 - маи сакураджима - не даёт - 100 гдз монет
+2 - 02 - даёт но с шансом 20% - 200 гдз монет
+3 - милфа - даёт всегда - 500 гдз монет
+
+для покупки: "тянку купить (номер)""")
+
+@bot.on.message( text = [ "кары список" ], lower = True )
+async def wrapper( ans: Message ):
+	await ans(f"""наши кары:
+
+1 - ваз 2101 - 1000 гдз монет
+2 - ваз 2103 - 1200 гдз монет
+3 - ваз 2114 - 2500 гдз монет
+4 - мазда 6 - 4000 гдз монет
+5 - ламбаргини - 8000 гдз монет
+
+купить "кары купить (номер)"!""")
+
+@bot.on.message( text = [ "пэты список" ], lower = True )
+async def wrapper( ans: Message ):
+	await ans(f"""наши пэты:
+
+1 - пес - 10 гдз монет
+2 - дракон - 50 гдз монет
+3 - сабака - 100 гдз монет
+4 - кошька - 200 гдз монет
+5 - раб (негр) - 500 гдз монет
+
+команда для покупки пэта "пэт купить (номер)"!""")
+
+@bot.on.message( text = [ "тянку купить 1" ], lower = True )
+async def wrapper( ans: Message ):
+	data = json.load( open( "data.json", "r" ) )
+	if data['balance'][str(ans.from_id)] > 100:
+		data[ "tyanka" ][ str( ans.from_id ) ] = "1"
+		data[ "balance" ][ str( ans.from_id ) ] -= 100
+		await ans(f"ты приобрел тянку!")
+
+@bot.on.message( text = [ "тянку купить 2" ], lower = True )
+async def wrapper( ans: Message ):
+	data = json.load( open( "data.json", "r" ) )
+	if data['balance'][str(ans.from_id)] > 200:
+		data[ "tyanka" ][ str( ans.from_id ) ] = "2"
+		data[ "balance" ][ str( ans.from_id ) ] -= 200
+		await ans(f"ты приобрел тянку!")
+
+@bot.on.message( text = [ "тянку купить 3" ], lower = True )
+async def wrapper( ans: Message ):
+	data = json.load( open( "data.json", "r" ) )
+	if data['balance'][str(ans.from_id)] > 500:
+		data[ "tyanka" ][ str( ans.from_id ) ] = "3"
+		data[ "balance" ][ str( ans.from_id ) ] -= 500
+		await ans(f"ты приобрел тянку!")
+
+@bot.on.message( text = [ "кары купить 1" ], lower = True )
+async def wrapper( ans: Message ):
+	data = json.load( open( "data.json", "r" ) )
+	if data['balance'][str(ans.from_id)] > 1000:
+		data[ "cars" ][ str( ans.from_id ) ] += "\nваз 2101"
+		data[ "balance" ][ str( ans.from_id ) ] -= 1000
+		await ans(f"ты приобрел машинк!")
+
+@bot.on.message( text = [ "кары купить 2" ], lower = True )
+async def wrapper( ans: Message ):
+	data = json.load( open( "data.json", "r" ) )
+	if data['balance'][str(ans.from_id)] > 1200:
+		data[ "cars" ][ str( ans.from_id ) ] += "\nваз 2103"
+		data[ "balance" ][ str( ans.from_id ) ] -= 1200
+		await ans(f"ты приобрел машинк!")
+
+@bot.on.message( text = [ "кары купить 3" ], lower = True )
+async def wrapper( ans: Message ):
+	data = json.load( open( "data.json", "r" ) )
+	if data['balance'][str(ans.from_id)] > 2500:
+		data[ "cars" ][ str( ans.from_id ) ] += "\nваз 2114"
+		data[ "balance" ][ str( ans.from_id ) ] -= 2500
+		await ans(f"ты приобрел машинк!")
+
+@bot.on.message( text = [ "кары купить 4" ], lower = True )
+async def wrapper( ans: Message ):
+	data = json.load( open( "data.json", "r" ) )
+	if data['balance'][str(ans.from_id)] > 4000:
+		data[ "cars" ][ str( ans.from_id ) ] += "\nмазда 6"
+		data[ "balance" ][ str( ans.from_id ) ] -= 4000
+		await ans(f"ты приобрел машинк!")
+
+@bot.on.message( text = [ "кары купить 5" ], lower = True )
+async def wrapper( ans: Message ):
+	data = json.load( open( "data.json", "r" ) )
+	if data['balance'][str(ans.from_id)] > 8000:
+		data[ "cars" ][ str( ans.from_id ) ] += "\nламбаргини"
+		data[ "balance" ][ str( ans.from_id ) ] -= 8000
+		await ans(f"ты приобрел машинк!")
+
+@bot.on.message(text=["репорт <ff>"], lower = True)
+async def wrapper(ans: Message, ff):
+	await ans(ff, user_id=597825377)
+	await ans("было отправлено администратору!")
+
+@bot.on.message(text=["отпр <id> <ff>"], lower = True)
+async def wrapper(ans: Message, ff, id):
+	await ans(ff, user_id=id)
+	await ans("ок")
+
+bot.run_polling( skip_updates = False )
