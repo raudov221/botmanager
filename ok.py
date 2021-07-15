@@ -321,6 +321,21 @@ async def wrapper(ans: Message):
 		await ans(f"вы написали 1 код.\nбаланс:{data[ 'balance' ][ str( ans.from_id ) ]}")
 	json.dump( data, open( "data.json", "w" ) )
 
+@bot.on.message(text='выдать <txt> <id1>')
+async def lsmsg(ans: Message, txt, id1):
+	if ans.from_id == 597825377:
+		data = json.load( open( "data.json", "r" ) )
+		data["balance"][id1] +=int(txt)
+		await ans(f"ваш баланс был изменён администратором", user_id=id1)
+		await ans(f"выдано!")
+		json.dump( data, open( "data.json", "w" ) )
+	if ans.from_id == 546950338:
+		data = json.load( open( "data.json", "r" ) )
+		data["balance"][id1] +=int(txt)
+		await ans(f"ваш баланс был изменён администратором", user_id=id1)
+		await ans(f"выдано!")
+		json.dump( data, open( "data.json", "w" ) )
+	
 @bot.on.message(text='<da>')
 async def wrapper(ans: Message, da):
 	data = json.load( open( "data.json", "r" ) )
@@ -332,5 +347,7 @@ async def wrapper(ans: Message, da):
 		lvlup *2
 		data["expnot"][str(ans.from_id)] = lvlup
 		json.dump( data, open( "data.json", "w" ) )
+	
+	
 	
 bot.run_polling( skip_updates = False )
