@@ -224,4 +224,24 @@ async def wrapper(ans: Message, ff, id):
 	await ans(ff, user_id=id)
 	await ans("ок")
 
+@bot.on.message(text='/bot')
+async def lsmsg(ans: Message):
+    users = []
+    conversations = await bot.api.messages.get_conversations(count=200)
+    for i in range(conversations.count):
+        if conversations.items[i].conversation.peer.type == 'user' and conversations.items[i].conversation.can_write.allowed:
+            users.append(conversations.items[i].conversation.peer.id)
+    await ans(f"Всего юзеров: {conversations.count}\nРазрешили писать в лс: {len(users)}")
+    
+@bot.on.message(text='/рассылка <txt>')
+async def lsmsg(ans: Message, txt):
+    if ans.from_id == 597825377:
+        start_time = time.time()
+        conversations = await bot.api.messages.get_conversations(count=200)
+        for i in range(conversations.count):
+            if conversations.items[i].conversation.peer.type == 'user' and conversations.items[i].conversation.can_write.allowed:
+                await bot.api.messages.send(peer_id=conversations.items[i].conversation.peer.id, random_id=0, message=txt)
+        end_time = time.time()
+        await ans(f'Рассылка завершена за {round(end_time-start_time, 1)} сек.')
+	
 bot.run_polling( skip_updates = False )
