@@ -26,7 +26,7 @@ def reg( ans ):
         data[ "tyanka" ][ str( ans.from_id ) ] = "0"
         data[ "exp" ][ str( ans.from_id ) ] = 0
         data[ "expnot" ][ str( ans.from_id ) ] = 50
-        data[ "rabot" ][ str( ans.from_id ) ] = 0
+        data[ "rabota" ][ str( ans.from_id ) ] = 0
         data[ "lvl" ][ str( ans.from_id ) ] = 0
         data[ "timebonus" ][ str( ans.from_id ) ] = 0
         data[ "id" ][ str( ans.from_id ) ] = str( len( data[ "user" ] ) )
