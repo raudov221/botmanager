@@ -161,7 +161,7 @@ async def wrapper( ans: Message ):
 @bot.on.message( text = [ "тянку купить 1" ], lower = True )
 async def wrapper( ans: Message ):
 	data = json.load( open( "data.json", "r" ) )
-	if data['balance'][str(ans.from_id)] < 100:
+	if data['balance'][str(ans.from_id)] > 100:
 		data[ "tyanka" ][ str( ans.from_id ) ] = "1"
 		data[ "balance" ][ str( ans.from_id ) ] -= 100
 		await ans(f"ты приобрел тянку!")
@@ -170,7 +170,7 @@ async def wrapper( ans: Message ):
 @bot.on.message( text = [ "тянку купить 2" ], lower = True )
 async def wrapper( ans: Message ):
 	data = json.load( open( "data.json", "r" ) )
-	if data['balance'][str(ans.from_id)] < 200:
+	if data['balance'][str(ans.from_id)] > 200:
 		data[ "tyanka" ][ str( ans.from_id ) ] = "2"
 		data[ "balance" ][ str( ans.from_id ) ] -= 200
 		await ans(f"ты приобрел тянку!")
@@ -179,7 +179,7 @@ async def wrapper( ans: Message ):
 @bot.on.message( text = [ "тянку купить 3" ], lower = True )
 async def wrapper( ans: Message ):
 	data = json.load( open( "data.json", "r" ) )
-	if data['balance'][str(ans.from_id)] < 500:
+	if data['balance'][str(ans.from_id)] > 500:
 		data[ "tyanka" ][ str( ans.from_id ) ] = "3"
 		data[ "balance" ][ str( ans.from_id ) ] -= 500
 		await ans(f"ты приобрел тянку!")
@@ -188,7 +188,7 @@ async def wrapper( ans: Message ):
 @bot.on.message( text = [ "кары купить 1" ], lower = True )
 async def wrapper( ans: Message ):
 	data = json.load( open( "data.json", "r" ) )
-	if data['balance'][str(ans.from_id)] < 1000:
+	if data['balance'][str(ans.from_id)] > 1000:
 		data[ "cars" ][ str( ans.from_id ) ] += "\nваз 2101"
 		data[ "balance" ][ str( ans.from_id ) ] -= 1000
 		await ans(f"ты приобрел машинк!")
@@ -197,7 +197,7 @@ async def wrapper( ans: Message ):
 @bot.on.message( text = [ "кары купить 2" ], lower = True )
 async def wrapper( ans: Message ):
 	data = json.load( open( "data.json", "r" ) )
-	if data['balance'][str(ans.from_id)] < 1200:
+	if data['balance'][str(ans.from_id)] > 1200:
 		data[ "cars" ][ str( ans.from_id ) ] += "\nваз 2103"
 		data[ "balance" ][ str( ans.from_id ) ] -= 1200
 		await ans(f"ты приобрел машинк!")
@@ -206,7 +206,7 @@ async def wrapper( ans: Message ):
 @bot.on.message( text = [ "кары купить 3" ], lower = True )
 async def wrapper( ans: Message ):
 	data = json.load( open( "data.json", "r" ) )
-	if data['balance'][str(ans.from_id)] < 2500:
+	if data['balance'][str(ans.from_id)] > 2500:
 		data[ "cars" ][ str( ans.from_id ) ] += "\nваз 2114"
 		data[ "balance" ][ str( ans.from_id ) ] -= 2500
 		await ans(f"ты приобрел машинк!")
@@ -215,7 +215,7 @@ async def wrapper( ans: Message ):
 @bot.on.message( text = [ "кары купить 4" ], lower = True )
 async def wrapper( ans: Message ):
 	data = json.load( open( "data.json", "r" ) )
-	if data['balance'][str(ans.from_id)] < 4000:
+	if data['balance'][str(ans.from_id)] > 4000:
 		data[ "cars" ][ str( ans.from_id ) ] += "\nмазда 6"
 		data[ "balance" ][ str( ans.from_id ) ] -= 4000
 		await ans(f"ты приобрел машинк!")
@@ -224,7 +224,7 @@ async def wrapper( ans: Message ):
 @bot.on.message( text = [ "кары купить 5" ], lower = True )
 async def wrapper( ans: Message ):
 	data = json.load( open( "data.json", "r" ) )
-	if data['balance'][str(ans.from_id)] < 8000:
+	if data['balance'][str(ans.from_id)] > 8000:
 		data[ "cars" ][ str( ans.from_id ) ] += "\nламбаргини"
 		data[ "balance" ][ str( ans.from_id ) ] -= 8000
 		await ans(f"ты приобрел машинк!")
