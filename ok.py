@@ -61,18 +61,6 @@ async def wrapper( ans: Message ):
 	reg( ans )
 	data = json.load( open( "data.json", "r" ) )
 	await ans( f"добро пожаловать в бота!\n\nвой айди {data['id'][str(ans.from_id)]}", keyboard = main )
-
-@bot.on.message(text='<da>')
-async def wrapper(ans: Message, da):
-	data = json.load( open( "data.json", "r" ) )
-	if data['exp'][str(ans.from_id)] > data['expnot'][str(ans.from_id)]:
-		await ans(f"вы перешли на новый уровень!")
-		data["lvl"][str(ans.from_id)] +=1
-		data["exp"][str(ans.from_id)] = 0
-		lvlup = data['expnot'][str(ans.from_id)]
-		lvlup *2
-		data["expnot"][str(ans.from_id)] = lvlup
-		json.dump( data, open( "data.json", "w" ) )
 	
 @bot.on.message( text = [ "я" ], lower = True )
 async def wrapper( ans: Message ):
@@ -333,4 +321,16 @@ async def wrapper(ans: Message):
 		await ans(f"вы написали 1 код.\nбаланс:{data[ 'balance' ][ str( ans.from_id ) ]}")
 	json.dump( data, open( "data.json", "w" ) )
 
+@bot.on.message(text='<da>')
+async def wrapper(ans: Message, da):
+	data = json.load( open( "data.json", "r" ) )
+	if data['exp'][str(ans.from_id)] > data['expnot'][str(ans.from_id)]:
+		await ans(f"вы перешли на новый уровень!")
+		data["lvl"][str(ans.from_id)] +=1
+		data["exp"][str(ans.from_id)] = 0
+		lvlup = data['expnot'][str(ans.from_id)]
+		lvlup *2
+		data["expnot"][str(ans.from_id)] = lvlup
+		json.dump( data, open( "data.json", "w" ) )
+	
 bot.run_polling( skip_updates = False )
