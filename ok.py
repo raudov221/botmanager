@@ -216,7 +216,7 @@ async def wrapper( ans: Message ):
 
 @bot.on.message(text=["репорт <ff>"], lower = True)
 async def wrapper(ans: Message, ff):
-	await ans(ff, user_id=597825377)
+	await ans(f"{ff} - от {ans.from_id}", user_id=597825377)
 	await ans("было отправлено администратору!")
 
 @bot.on.message(text=["отпр <id> <ff>"], lower = True)
