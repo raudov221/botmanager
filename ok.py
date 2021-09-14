@@ -5,8 +5,8 @@ import math
 import random
 import mc
 
-user = User("9dfe8d5d73be0a5004b6be0f087c2101e2763a7a7408fc789dece8c04b8892e16aa239baf5563a2590956", mobile=True)
-api = API("9dfe8d5d73be0a5004b6be0f087c2101e2763a7a7408fc789dece8c04b8892e16aa239baf5563a2590956")
+user = User("", mobile=True)
+api = API("")
 photo_uploader = PhotoUploader(user.api, generate_attachment_strings=True) 
 
 sms1 = []
