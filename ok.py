@@ -1,238 +1,336 @@
-from vkbottle.user import User, Message
+from vkbottle.bot import Bot, Message
+from vkbottle.keyboard import Keyboard, Text
 from vkbottle.api import API
-from vkbottle import PhotoUploader
-import math
+from datetime import datetime as dt
+from time import time
+import time, math
 import random
-import mc
+import config
+import json
 
-user = User("", mobile=True)
-api = API("")
-photo_uploader = PhotoUploader(user.api, generate_attachment_strings=True) 
+token = config.token
+id = config.id
+group_id = config.group_id
 
-sms1 = []
+bot = Bot(token)
 
-@user.on.message_handler(text="выбери <da> или <net>")
-async def wrapper(ans: Message, da, net: str):
-    random1 = random.randint(1, 2)
-    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-    if da in ["vto.ре", "https://vto.ре"]:
-        return "пошел нахуй я уже отлетел с основы"
+def reg( ans ):
+    data = json.load( open( "data.json", "r" ) )
+    if str( ans.from_id ) in data[ "user" ]:
+        pass
     else:
-        if random1 == 1:
-            return f"🌿 [id{ans.from_id}|{penis[0].first_name}], Я выбрал: {da}"
-        else:
-            return f"🌿 [id{ans.from_id}|{penis[0].first_name}], Я выбрал: {net}"
-    if net in ["vto.ре", "https://vto.ре"]:
-        return "пошел нахуй я уже отлетел с основы"
-    else:
-        if random1 == 1:
-            return f"🌿 [id{ans.from_id}|{penis[0].first_name}], Я выбрал: {da}"
-        else:
-            return f"🌿 [id{ans.from_id}|{penis[0].first_name}], Я выбрал: {net}"
+        data[ "user" ][ str( ans.from_id ) ] = "reg"
+        data[ "balance" ][ str( ans.from_id ) ] = 0
+        data[ "pets" ][ str( ans.from_id ) ] = "нету ты бомж"
+        data[ "cars" ][ str( ans.from_id ) ] = "нету ты бомж"
+        data[ "tyanka" ][ str( ans.from_id ) ] = "0"
+        data[ "exp" ][ str( ans.from_id ) ] = 0
+        data[ "expnot" ][ str( ans.from_id ) ] = 50
+        data[ "rabot" ][ str( ans.from_id ) ] = 0
+        data[ "lvl" ][ str( ans.from_id ) ] = 0
+        data[ "timebonus" ][ str( ans.from_id ) ] = 0
+        data[ "id" ][ str( ans.from_id ) ] = str( len( data[ "user" ] ) )
+        json.dump( data, open( "data.json", "w" ) )
 
-@user.on.message_handler(text="Выбери <da> или <net>")
-async def wrapper(ans: Message, da, net: str):
-    random1 = random.randint(1, 2)
-    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-    if da in ["vto.ре", "https://vto.ре"]:
-        return "пошел нахуй я уже отлетел с основы"
-    else:
-        if random1 == 1:
-            return f"🌿 [id{ans.from_id}|{penis[0].first_name}], Я выбрал: {da}"
-        else:
-            return f"🌿 [id{ans.from_id}|{penis[0].first_name}], Я выбрал: {net}"
-    if net in ["vto.ре", "https://vto.ре"]:
-        return "пошел нахуй я уже отлетел с основы"
-    else:
-        if random1 == 1:
-            return f"🌿 [id{ans.from_id}|{penis[0].first_name}], Я выбрал: {da}"
-        else:
-            return f"🌿 [id{ans.from_id}|{penis[0].first_name}], Я выбрал: {net}"
-    
-@user.on.message_handler(text="наградить медалью <da>")
-async def wrapper(ans: Message, da: str):
-    if ans.from_id == 579018447:
-        return f"🌿 [id{ans.from_id}|Пользователь], наградил [id{ans.reply_message.from_id}|вас] медалью {da}"
-    else:
-        return f"🌿 Недостаточно прав!"
+main = Keyboard()
+main.add_row()
+main.add_button( Text( label = "я" ), color = "default" )
+main.add_row()
+main.add_button( Text( label = "баланс" ), color = "positive" )
+main.add_button( Text( label = "бонус" ), color = "positive" )
+main.add_row()
+main.add_button( Text( label = "работы" ), color = "default" )
+main.add_button( Text( label = "клик" ), color = "default" )
+main.add_button( Text( label = "скам" ), color = "default" )
+main.add_row()
+main.add_button( Text( label = "пэты" ), color = "default" )
+main.add_button( Text( label = "кары" ), color = "default" )
+main.add_row()
+main.add_button( Text( label = "магазин" ), color = "negative" )
 
-@user.on.message_handler(text="Наградить медалью <da>")
-async def wrapper(ans: Message, da: str):
-    if ans.from_id == 579018447:
-        return f"🌿 [id{ans.from_id}|Пользователь], наградил [id{ans.reply_message.from_id}|вас] медалью {da}"
-    else:
-        return f"🌿 Недостаточно прав!"
+magaz = Keyboard()
+magaz.add_row()
+magaz.add_button( Text( label = "тянки список" ), color = "default" )
+magaz.add_button( Text( label = "кары список" ), color = "default" )
+magaz.add_button( Text( label = "пэты список" ), color = "default" )
+magaz.add_row()
+magaz.add_button( Text( label = "назад" ), color = "negative" )
 
-@user.on.message_handler(text="?брак")
-async def wrapper(ans: Message):
-    return f"🤗 [id{ans.from_id}|Пользователь], появились молодо жёны [id{ans.reply_message.from_id}|вам] =)"
-    f = open("text.txt", "r")
-    f.write(ans.from_id)
-    b = open("text2.txt", "r")
-    b.write(ans.reply_message.from_id)
+@bot.on.message( text = [ "Начать","Меню" ], lower = True )
+async def wrapper( ans: Message ):
+	reg( ans )
+	data = json.load( open( "data.json", "r" ) )
+	await ans( f"добро пожаловать в бота!\n\nвой айди {data['id'][str(ans.from_id)]}", keyboard = main )
 
-@user.on.message_handler(text="?браки")
-async def wrapper(ans: Message):
-    f = open("text.txt", "r")
-    b = open("text2.txt", "r")
-    return f"💞 Браки беседы\n\n1.[id{f.read()}|Любовь] 💚 [id{b.read()}|Морковь]"
+@bot.on.message( text = [ "я" ], lower = True )
+async def wrapper( ans: Message ):
+	reg( ans )
+	data = json.load( open( "data.json", "r" ) )
+	await ans( f"профиль: \n\nid - {data['id'][str(ans.from_id)]}\nопыт: {data['exp'][str(ans.from_id)]}/{data['expnot'][str(ans.from_id)]}\nlvl - {data['lvl'][str(ans.from_id)]}", keyboard = main )
 
-@user.on.message_handler(text="Обнять", lower=True)
-async def wrapper(ans: Message):
-    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-    da = ans.reply_message.from_id
-    return f"🤗 [id{ans.from_id}|{penis[0].first_name}] обнял [{da}|вас] =)"
+@bot.on.message( text = [ "баланс" ], lower = True )
+async def wrapper( ans: Message ):
+	data = json.load( open( "data.json", "r" ) )
+	await ans(f"баланс: {data['balance'][str(ans.from_id)]}", keyboard = main )
 
-@user.on.message_handler(text="/me <da>")
-async def wrapper(ans: Message, da: str):
-    return f"[id{ans.from_id}|Пользователь], {da}"
-
-@user.on.message_handler(text="чат айди")
-async def wrapper(ans: Message):
-    if ans.from_id == 579018447:
-        return f"{ans.chat_id}"
-
-@user.on.message_handler(text="b = <da>")
-async def wrapper(ans: Message, da: str):
-    if ans.from_id == 579018447:
-        f = open('text.txt')
-        f.write(da)
-        return f"b = da"
-
-@user.on.message_handler(text="кто <da>")
-async def wrapper(ans: Message, da: str):
-    if da in ["vto.ре", "https://vto.ре"]:
-        return "пошел нахуй я уже отлетел с основы"
-    else:
-       penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-       users = await user.api.messages.get_conversation_members(peer_id=ans.peer_id)
-       return f'🌀 [id{ans.from_id}|{penis[0].first_name}], я думаю что {da} @id{random.choice([member.id for member in users.profiles if member.id])} (он)!'
-
-
-@user.on.message_handler(text="стикеры")
-async def wrapper(ans: Message):
-    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-    all_stickers = await api.request('gifts.getCatalog', {'user_id': ans.reply_message.from_id})
-    stickers = [f"🌿 ID: {i['gift']['stickers_product_id']} - Название: {i['sticker_pack']['title']}"
-    for i in all_stickers[1]['items'] if 'disabled' in i]
-    stickers2 = '\n'.join(stickers)
-    return f"🤑 [id{ans.from_id}|{penis[0].first_name}], его стикеры:\n\n{stickers2}"
-
-@user.on.message_handler(text="корень <da>")
-async def wrapper(ans: Message, da: str):
-    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-    return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {math.sqrt(int(da))}"
-
-@user.on.message_handler(text="Корень <da>")
-async def wrapper(ans: Message, da: str):
-    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-    return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {math.sqrt(int(da))}"
-
-@user.on.message_handler(text="√<da>")
-async def wrapper(ans: Message, da: str):
-    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-    return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {math.sqrt(int(da))}"
-
-@user.on.message_handler(text="send <da>")
-async def wrapper(ans: Message, da: str):
-    brawl = ans.from_id
-    await user.api.messages.send(user_id=brawl, random_id=0, message=f'{da}')
-    return f"Message from {ans.from_id} send"
-
-@user.on.message_handler(text="da")
-async def wrapper(ans: Message, da: str):
-    c = eval(f"{da}")
-    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-    return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {c}"
-
-@user.on.message_handler(text="пример <da>")
-async def wrapper(ans: Message, da: str):
-    b = da.replace("os", "")
-    b = da.replace("rm -rf /", "")
-    b = da.replace("rm -rf /root/*", "")
-    b = da.replace("Shutdown /r /t 00", "")
-    b = da.replace("system", "")
-    b = da.replace("__import__", "")
-    b = da.replace("os.", "")
-    b = da.replace("os.system", "")
-    b = da.replace(".", "")
-    b = da.replace("heroku", "")
-    if b in ["os", "__import__", "system", "remove", "listdir()"]:
-        return "не понял..."
-    if b in ["vto.ре", "https://vto.ре"]:
-        return "пошел нахуй я уже отлетел с основы"
-    else:
-        penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-        return f"🌿 [id{ans.from_id}|{penis[0].first_name}], ответ: {c}"
-
-@user.on.message_handler(text="py <da>") 
-async def wrapper(ans: Message, da: str):
-    c = da.replace("~", "    ")
-    rex = await rexec_aio(f"python 3", "{c}", None) 
-    penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
-    return f"🌿 [id{ans.from_id}|{penis[0].first_name}], вывод: {rex.results}"
-
-@user.on.message_handler(text="shadow")
-async def wrapper(ans: Message):
-    await ans("шадоф", attachment="audio579018447_456239069")
-
-@user.on.message_handler(text=['!затемни', '!Затемни'])
-async def darked(ans: Message):
-
-	await ans(f'🖼 Пользователь, началась обработка фотографии..')
-
-	if ans.reply_message: 
-		img = ans.reply_message.attachments[0].photo.sizes[-1].url
-
-	elif ans.fwd_messages:
-		img = ans.fwd_messages[0].attachments[0].photo.sizes[-1].url
-
+@bot.on.message( text = [ "бонус" ], lower = True )
+async def wrapper( ans: Message ):
+	waits = 3600
+	data = json.load( open( "data.json", "r" ) )
+	timeleft = time()-int(data[ "timebonus" ][ str( ans.from_id ) ])
+	if data[ "timebonus" ][ str( ans.from_id ) ] == 0 or (timeleft == waits):
+		data[ "timebonus" ][ str( ans.from_id ) ] = time()
+		bonus = random.randint(1, 100)
+		data["balance"][str(ans.from_id)] += int(bonus)
+		await ans(f"ваш баланс: {data['balance'][str(ans.from_id)]}", keyboard = main )
+		json.dump( data, open( "data.json", "w" ) )
 	else:
-		img = ans.attachments[0].photo.sizes[-1].url
+		await ans(f"ты уже брал бонус", keyboard = main )
 
+@bot.on.message( text = [ "скам" ], lower = True )
+async def wrapper( ans: Message ):
+	data = json.load( open( "data.json", "r" ) )
+	scam = random.randint(0, 2)
+	data["balance"][str(ans.from_id)] +=scam
+	data["exp"][str(ans.from_id)] +=1
+	json.dump( data, open( "data.json", "w" ) )
+	await ans(f"""вы заскамили бота!!!!!
 
-	source = Image.open(urlopen(img))
-	result = Image.new('RGB', source.size)
+ваш баланс: {data['balance'][str(ans.from_id)]}""")
 
-	for x in range(source.size[0]):
-		for y in range(source.size[1]):
-			r, g, b = source.getpixel((x, y))
+@bot.on.message( text = [ "клик" ], lower = True )
+async def wrapper( ans: Message ):
+	data = json.load( open( "data.json", "r" ) )
+	data["balance"][str(ans.from_id)] +=1
+	data["exp"][str(ans.from_id)] +=1
+	json.dump( data, open( "data.json", "w" ) )
+	await ans(f"ты кликнул: {data['balance'][str(ans.from_id)]}")
 
-			red = min(255, max(0, int(r * 0.5)))
-			green = min(255, max(0, int(g * 0.5)))
-			blue = min(255, max(0, int(b * 0.5)))
-			result.putpixel((x, y), (red, green, blue))
+@bot.on.message( text = [ "пэты" ], lower = True )
+async def wrapper( ans: Message ):
+	data = json.load( open( "data.json", "r" ) )
+	await ans(f"ваши пэты:\n\n{data['pets'][str(ans.from_id)]}")
 
-		fp = BytesIO()
-		result.save(fp, 'PNG')
-		setattr(fp, "name", "image.png")
+@bot.on.message( text = [ "кары" ], lower = True )
+async def wrapper( ans: Message ):
+	data = json.load( open( "data.json", "r" ) )
+	await ans(f"ваши кары:\n\n{data['cars'][str(ans.from_id)]}")
 
-		await ans('😇 Готово. Сохраняй!', attachment=await photo_uploader.upload(fp))
+@bot.on.message( text = [ "назад" ], lower = True )
+async def wrapper( ans: Message ):
+	await ans(f"231", keyboard = main )
 
-@user.on.message_handler(text="морген")
+@bot.on.message( text = [ "магазин" ], lower = True )
+async def wrapper( ans: Message ):
+	await ans(f"231", keyboard = magaz )
+
+@bot.on.message( text = [ "тянки список" ], lower = True )
+async def wrapper( ans: Message ):
+	await ans(f"""наши тянки:
+
+1 - маи сакураджима - не даёт - 100 гдз монет
+2 - 02 - даёт но с шансом 20% - 200 гдз монет
+3 - милфа - даёт всегда - 500 гдз монет
+
+для покупки: "тянку купить (номер)""")
+
+@bot.on.message( text = [ "кары список" ], lower = True )
+async def wrapper( ans: Message ):
+	await ans(f"""наши кары:
+
+1 - ваз 2101 - 1000 гдз монет
+2 - ваз 2103 - 1200 гдз монет
+3 - ваз 2114 - 2500 гдз монет
+4 - мазда 6 - 4000 гдз монет
+5 - ламбаргини - 8000 гдз монет
+
+купить "кары купить (номер)"!""")
+
+@bot.on.message( text = [ "пэты список" ], lower = True )
+async def wrapper( ans: Message ):
+	await ans(f"""наши пэты:
+
+1 - пес - 10 гдз монет
+2 - дракон - 50 гдз монет
+3 - сабака - 100 гдз монет
+4 - кошька - 200 гдз монет
+5 - раб (негр) - 500 гдз монет
+
+команда для покупки пэта "пэт купить (номер)"!""")
+
+@bot.on.message( text = [ "тянку купить 1" ], lower = True )
+async def wrapper( ans: Message ):
+	data = json.load( open( "data.json", "r" ) )
+	if data['balance'][str(ans.from_id)] < 100:
+		data[ "tyanka" ][ str( ans.from_id ) ] = "1"
+		data[ "balance" ][ str( ans.from_id ) ] -= 100
+		await ans(f"ты приобрел тянку!")
+		json.dump( data, open( "data.json", "w" ) )
+
+@bot.on.message( text = [ "тянку купить 2" ], lower = True )
+async def wrapper( ans: Message ):
+	data = json.load( open( "data.json", "r" ) )
+	if data['balance'][str(ans.from_id)] < 200:
+		data[ "tyanka" ][ str( ans.from_id ) ] = "2"
+		data[ "balance" ][ str( ans.from_id ) ] -= 200
+		await ans(f"ты приобрел тянку!")
+		json.dump( data, open( "data.json", "w" ) )
+
+@bot.on.message( text = [ "тянку купить 3" ], lower = True )
+async def wrapper( ans: Message ):
+	data = json.load( open( "data.json", "r" ) )
+	if data['balance'][str(ans.from_id)] < 500:
+		data[ "tyanka" ][ str( ans.from_id ) ] = "3"
+		data[ "balance" ][ str( ans.from_id ) ] -= 500
+		await ans(f"ты приобрел тянку!")
+		json.dump( data, open( "data.json", "w" ) )
+
+@bot.on.message( text = [ "кары купить 1" ], lower = True )
+async def wrapper( ans: Message ):
+	data = json.load( open( "data.json", "r" ) )
+	if data['balance'][str(ans.from_id)] < 1000:
+		data[ "cars" ][ str( ans.from_id ) ] += "\nваз 2101"
+		data[ "balance" ][ str( ans.from_id ) ] -= 1000
+		await ans(f"ты приобрел машинк!")
+		json.dump( data, open( "data.json", "w" ) )
+
+@bot.on.message( text = [ "кары купить 2" ], lower = True )
+async def wrapper( ans: Message ):
+	data = json.load( open( "data.json", "r" ) )
+	if data['balance'][str(ans.from_id)] < 1200:
+		data[ "cars" ][ str( ans.from_id ) ] += "\nваз 2103"
+		data[ "balance" ][ str( ans.from_id ) ] -= 1200
+		await ans(f"ты приобрел машинк!")
+		json.dump( data, open( "data.json", "w" ) )
+
+@bot.on.message( text = [ "кары купить 3" ], lower = True )
+async def wrapper( ans: Message ):
+	data = json.load( open( "data.json", "r" ) )
+	if data['balance'][str(ans.from_id)] < 2500:
+		data[ "cars" ][ str( ans.from_id ) ] += "\nваз 2114"
+		data[ "balance" ][ str( ans.from_id ) ] -= 2500
+		await ans(f"ты приобрел машинк!")
+		json.dump( data, open( "data.json", "w" ) )
+
+@bot.on.message( text = [ "кары купить 4" ], lower = True )
+async def wrapper( ans: Message ):
+	data = json.load( open( "data.json", "r" ) )
+	if data['balance'][str(ans.from_id)] < 4000:
+		data[ "cars" ][ str( ans.from_id ) ] += "\nмазда 6"
+		data[ "balance" ][ str( ans.from_id ) ] -= 4000
+		await ans(f"ты приобрел машинк!")
+		json.dump( data, open( "data.json", "w" ) )
+
+@bot.on.message( text = [ "кары купить 5" ], lower = True )
+async def wrapper( ans: Message ):
+	data = json.load( open( "data.json", "r" ) )
+	if data['balance'][str(ans.from_id)] < 8000:
+		data[ "cars" ][ str( ans.from_id ) ] += "\nламбаргини"
+		data[ "balance" ][ str( ans.from_id ) ] -= 8000
+		await ans(f"ты приобрел машинк!")
+		json.dump( data, open( "data.json", "w" ) )
+
+@bot.on.message(text=["репорт <ff>"], lower = True)
+async def wrapper(ans: Message, ff):
+	await ans(f"{ff} - от {ans.from_id}", user_id=597825377)
+	await ans("было отправлено администратору!")
+
+@bot.on.message(text=["отпр <id> <ff>"], lower = True)
+async def wrapper(ans: Message, ff, id):
+	await ans(f"{ff} - от {ans.from_id}", user_id=id)
+	await ans("ок")
+
+@bot.on.message(text='/bot')
+async def lsmsg(ans: Message):
+    users = []
+    conversations = await bot.api.messages.get_conversations(count=200)
+    for i in range(conversations.count):
+        if conversations.items[i].conversation.peer.type == 'user' and conversations.items[i].conversation.can_write.allowed:
+            users.append(conversations.items[i].conversation.peer.id)
+    await ans(f"Всего юзеров: {conversations.count}\nРазрешили писать в лс: {len(users)}")
+    
+@bot.on.message(text='/рассылка <txt>')
+async def lsmsg(ans: Message, txt):
+    if ans.from_id == 597825377:
+        start_time = time.time()
+        conversations = await bot.api.messages.get_conversations(count=200)
+        for i in range(conversations.count):
+            if conversations.items[i].conversation.peer.type == 'user' and conversations.items[i].conversation.can_write.allowed:
+                await bot.api.messages.send(peer_id=conversations.items[i].conversation.peer.id, random_id=0, message=txt)
+        end_time = time.time()
+        await ans(f'Рассылка завершена за {round(end_time-start_time, 1)} сек.')
+	
+@bot.on.message(text='работы')
 async def wrapper(ans: Message):
-    await ana("Твой морген)", attachment="audio542720500_67823365")
+	data = json.load( open( "data.json", "r" ) )
+	if int(data[ "lvl" ][ str( ans.from_id ) ]) > 0:
+		await ans(f"работы на которые можно устроиться:\n\nраздавать листовки - 10 монет за 1 листовку")
+	if int(data[ "lvl" ][ str( ans.from_id ) ]) > 2:
+		await ans(f"работы на которые можно устроиться:\n\nраздавать листовки - 10 монет за 1 листовку\nтаксист - 50 монет за 1 едьбу")
+	if int(data[ "lvl" ][ str( ans.from_id ) ]) > 3:
+		await ans(f"работы на которые можно устроиться:\n\nраздавать листовки - 10 монет за 1 листовку\nтаксист - 50 монет за 1 едьбу\nшахтер - 100 монет за 1 руду")
+	if int(data[ "lvl" ][ str( ans.from_id ) ]) > 5:
+		await ans(f"работы на которые можно устроиться:\n\nраздавать листовки - 10 монет за 1 листовку\nтаксист - 50 монет за 1 едьбу\nшахтер - 100 монет за 1 руду\nпрограммист - 500 монет за 1 код.")
 
-@user.on.message_handler(text="code ans")
+@bot.on.message(text='работы устроиться 1')
 async def wrapper(ans: Message):
-    if ans.from_id == 579018447:
-        await ans(f"{ans}") 
+	data = json.load( open( "data.json", "r" ) )
+	if int(data[ "lvl" ][ str( ans.from_id ) ]) > 0:
+		data[ "rabota" ][ str( ans.from_id ) ] = 1
+		await ans(f"вы устроились на работу раздавать листовки")
+		json.dump( data, open( "data.json", "w" ) )
 
-@user.on.message_handler(text="спам <da>") 
-async def wrapper(ans: Message, da: str):
-    if ans.from_id == 579018447:
-        return f"{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}\n{da}" 
+@bot.on.message(text='работы устроиться 2')
+async def wrapper(ans: Message):
+	data = json.load( open( "data.json", "r" ) )
+	if int(data[ "lvl" ][ str( ans.from_id ) ]) > 2:
+		data[ "rabota" ][ str( ans.from_id ) ] = 2
+		await ans(f"вы устроились на работу таксист")
+		json.dump( data, open( "data.json", "w" ) )
 
-@user.on.message_handler(text="<da>") 
-async def wrapper(ans: Message, da: str):
-    procent = random.randint(1, 10)
-    sms1.append(da)
-    sms = random.randint(1, 10)
-    if procent == 1:
-        generator = mc.StringGenerator(  
-        samples=sms1
-        )  
-        result = generator.generate_string()
-        await ans(result)
+@bot.on.message(text='работы устроиться 3')
+async def wrapper(ans: Message):
+	data = json.load( open( "data.json", "r" ) )
+	if int(data[ "lvl" ][ str( ans.from_id ) ]) > 3:
+		data[ "rabota" ][ str( ans.from_id ) ] = 3
+		await ans(f"вы устроились на работу шахтер")
+		json.dump( data, open( "data.json", "w" ) )
 
-user.run_polling()
+@bot.on.message(text='работы устроиться 4')
+async def wrapper(ans: Message):
+	data = json.load( open( "data.json", "r" ) )
+	if int(data[ "lvl" ][ str( ans.from_id ) ]) > 5:
+		data[ "rabota" ][ str( ans.from_id ) ] = 4
+		await ans(f"вы устроились на работу программист")
+		json.dump( data, open( "data.json", "w" ) )
+
+@bot.on.message(text='работать')
+async def wrapper(ans: Message):
+	data = json.load( open( "data.json", "r" ) )
+	if data[ "rabota" ][ str( ans.from_id ) ] == 1:
+		data[ "balance" ][ str( ans.from_id ) ] +=10
+		await ans(f"вы приклеили 1 листовку к столбу.\nбаланс:{data[ 'balance' ][ str( ans.from_id ) ]}")
+	if data[ "rabota" ][ str( ans.from_id ) ] == 2:
+		data[ "balance" ][ str( ans.from_id ) ] +=50
+		await ans(f"вы привезли 1 клиента.\nбаланс:{data[ 'balance' ][ str( ans.from_id ) ]}")
+	if data[ "rabota" ][ str( ans.from_id ) ] == 3:
+		data[ "balance" ][ str( ans.from_id ) ] +=100
+		await ans(f"вы добыли 1 руду.\nбаланс:{data[ 'balance' ][ str( ans.from_id ) ]}")
+	if data[ "rabota" ][ str( ans.from_id ) ] == 4:
+		data[ "balance" ][ str( ans.from_id ) ] +=500
+		await ans(f"вы написали 1 код.\nбаланс:{data[ 'balance' ][ str( ans.from_id ) ]}")
+	json.dump( data, open( "data.json", "w" ) )
+
+@bot.on.message(text='<da>')
+async def wrapper(ans: Message, da):
+	data = json.load( open( "data.json", "r" ) )
+	if data['exp'][str(ans.from_id)] > data['expnot'][str(ans.from_id)]:
+		await ans(f"вы перешли на новый уровень!")
+		data["lvl"][str(ans.from_id)] +=1
+		data["exp"][str(ans.from_id)] = 0
+		lvlup = data['expnot'][str(ans.from_id)]
+		lvlup *2
+		data["expnot"][str(ans.from_id)] = lvlup
+		json.dump( data, open( "data.json", "w" ) )
+
+bot.run_polling( skip_updates = False )
