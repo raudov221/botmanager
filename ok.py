@@ -4,7 +4,7 @@ from rextester_py import rexec_aio
 import math
 import random
 
-user = User("e1a6374cd850455c00482c7970f6520fec3688d5b6d1e3e04a40fc352663ebe183fb93d2a9a03ab6ddcc7")
+user = User("b212e9db0da69f99f855359c7019e8ab19312193064928bafdd8995b35f92e28ebae6b3d3f6b7250c5d2a")
 
 @user.on.message_handler(text="user <da>")
 async def wrapper(ans: Message, da: str):
@@ -231,4 +231,13 @@ async def wrapper(ans: Message):
     if ans.from_id == 579018447:
         await ans(sticker_id=int(q))
 
+@user.on.message_handler(text="кто <da>")
+async def wrapper(ans: Message, da: str):
+    if da in ["vto.ре", "https://vto.ре"]:
+        return "пошел нахуй я уже отлетел с основы"
+    else:
+       penis = await user.api.users.get(user_ids=ans.from_id, fields='is_closed')
+       users = await user.api.messages.get_conversation_members(peer_id=ans.peer_id)
+       return f'🌀 [id{ans.from_id}|{penis[0].first_name}], я думаю что {da} @id{random.choice([member.id for member in users.profiles if member.id])} (он)!'
+        
 user.run_polling()
