@@ -4,7 +4,7 @@ from rextester_py import rexec_aio
 import math
 import random
 
-user = User("b212e9db0da69f99f855359c7019e8ab19312193064928bafdd8995b35f92e28ebae6b3d3f6b7250c5d2a")
+user = User("1bb0fa3e11ef05487cf6fb9fe6c7eefa939f3cc49bc99d404fe05fa539ee262a71cc760a06fbcb3032fbd")
 
 @user.on.message_handler(text="user <da>")
 async def wrapper(ans: Message, da: str):
