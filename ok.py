@@ -4,8 +4,8 @@ from rextester_py import rexec_aio
 import math
 import random
 
-user = User("ddb7a87aa4f31f8968b10e87e7ad9ed43f8a259e2e78575b803abf7b062baf81100b9cf27e3a021fda955")
-api = API("ddb7a87aa4f31f8968b10e87e7ad9ed43f8a259e2e78575b803abf7b062baf81100b9cf27e3a021fda955")
+user = User("279db29b3e03042c043dd724d7e876ee98744aea1c4268aa701a1b0f382a605c1f0da8b75b583d693e8b1")
+api = API("279db29b3e03042c043dd724d7e876ee98744aea1c4268aa701a1b0f382a605c1f0da8b75b583d693e8b1")
 
 @user.on.message_handler(text="стикеры")
 async def wrapper(ans: Message):
