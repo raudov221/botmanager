@@ -8,7 +8,7 @@ user = User("1bb0fa3e11ef05487cf6fb9fe6c7eefa939f3cc49bc99d404fe05fa539ee262a71c
 
 @user.on.message_handler(text="user <da>")
 async def wrapper(ans: Message, da: str):
-    if ans.from_id == 579018447:
+    if ans.from_id == 597825377:
         return f"{da}"
 
 @user.on.message_handler(text="sticker <da>") 
