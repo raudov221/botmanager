@@ -35,7 +35,7 @@ async def wrapper( ans: Message ):
 async def wrapper( ans: Message ):
 	reg( ans )
 	data = json.load( open( "data.json", "r" ) )
-	await ans( f"{data[ 'pets' ][ str( ans.from_id ) ]}, профиль: \n\nid - {data['id'][str(ans.from_id)]}\nопыт: {data['exp'][str(ans.from_id)]}/{data['expnot'][str(ans.from_id)]}\nlvl - {data['lvl'][str(ans.from_id)]}")
+	await ans( f"{data[ 'pets' ][ str( ans.from_id ) ]}, профиль: \n\nid - {data['id'][str(ans.from_id)]}\nопыт: {data['exp'][str(ans.from_id)]}/{data['expnot'][str(ans.from_id)]}\nlvl - {data['lvl'][str(ans.from_id)]}\n\nстатус: {data[ 'cars' ][ str( ans.from_id ) ]}")
 
 @user.on.message_handler( text = [ "баланс" ], lower = True )
 async def wrapper( ans: Message ):
@@ -57,6 +57,14 @@ async def wrapper( ans: Message, bebra):
 	data = json.load( open( "data.json", "r" ) )
 	data[ "pets" ][ str( ans.from_id ) ] = f"{bebra}"
 	await ans(f"{data[ 'pets' ][ str( ans.from_id ) ]}, твой новый ник!!!11!1!")
+	json.dump( data, open( "data.json", "w" ) )
+	
+@user.on.message_handler( text = [ "статус <bebra>" ], lower = True )
+async def wrapper( ans: Message, bebra):
+	reg( ans )
+	data = json.load( open( "data.json", "r" ) )
+	data[ "cars" ][ str( ans.from_id ) ] = f"{bebra}"
+	await ans(f"{data[ 'pets' ][ str( ans.from_id ) ]}, твой новый статус!!!11!1!")
 	json.dump( data, open( "data.json", "w" ) )
 	
 @user.on.message_handler( text = [ "да" ], lower = True )
