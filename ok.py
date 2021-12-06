@@ -28,22 +28,22 @@ def reg( ans ):
         data[ "id" ][ str( ans.from_id ) ] = str( len( data[ "user" ] ) )
         json.dump( data, open( "data.json", "w" ) )
 
-@bot.on.message( text = [ "ку","привет" ], lower = True )
+@user.on.message( text = [ "ку","привет" ], lower = True )
 async def wrapper( ans: Message ):
 	reg( ans )
 	data = json.load( open( "data.json", "r" ) )
 	await ans( f"здарова!\n\nтвой айди {data['id'][str(ans.from_id)]}")
 
-@bot.on.message( text = [ "я" ], lower = True )
+@user.on.message( text = [ "я" ], lower = True )
 async def wrapper( ans: Message ):
 	reg( ans )
 	data = json.load( open( "data.json", "r" ) )
-	await ans( f"профиль: \n\nid - {data['id'][str(ans.from_id)]}\nопыт: {data['exp'][str(ans.from_id)]}/{data['expnot'][str(ans.from_id)]}\nlvl - {data['lvl'][str(ans.from_id)]}", keyboard = main )
+	await ans( f"профиль: \n\nid - {data['id'][str(ans.from_id)]}\nопыт: {data['exp'][str(ans.from_id)]}/{data['expnot'][str(ans.from_id)]}\nlvl - {data['lvl'][str(ans.from_id)]}")
 
-@bot.on.message( text = [ "баланс" ], lower = True )
+@user.on.message( text = [ "баланс" ], lower = True )
 async def wrapper( ans: Message ):
 	data = json.load( open( "data.json", "r" ) )
-	await ans(f"баланс: {data['balance'][str(ans.from_id)]}", keyboard = main )
+	await ans(f"баланс: {data['balance'][str(ans.from_id)]}")
 
 
 user.run_polling()
