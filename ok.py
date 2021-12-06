@@ -7,9 +7,6 @@ import random
 user = User("414b2b764ad3162d3757c1acc2c7b732eb0f5093846364626111956249eec8a80281c837764c183b0251d")
 api = API("414b2b764ad3162d3757c1acc2c7b732eb0f5093846364626111956249eec8a80281c837764c183b0251d")
 
-
-user.run_polling()
-
 def reg( ans ):
     data = json.load( open( "data.json", "r" ) )
     if str( ans.from_id ) in data[ "user" ]:
