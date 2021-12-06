@@ -29,18 +29,18 @@ def reg( ans ):
 async def wrapper( ans: Message ):
 	reg( ans )
 	data = json.load( open( "data.json", "r" ) )
-	await ans( f"здарова!\n\nтвой айди {data['id'][str(ans.from_id)]}")
+	await ans( f"здарова!, {data[ 'pets' ][ str( ans.from_id ) ]},\n\nтвой айди {data['id'][str(ans.from_id)]}")
 
 @user.on.message( text = [ "я" ], lower = True )
 async def wrapper( ans: Message ):
 	reg( ans )
 	data = json.load( open( "data.json", "r" ) )
-	await ans( f"профиль: \n\nid - {data['id'][str(ans.from_id)]}\nопыт: {data['exp'][str(ans.from_id)]}/{data['expnot'][str(ans.from_id)]}\nlvl - {data['lvl'][str(ans.from_id)]}")
+	await ans( f"{data[ 'pets' ][ str( ans.from_id ) ]}, профиль: \n\nid - {data['id'][str(ans.from_id)]}\nопыт: {data['exp'][str(ans.from_id)]}/{data['expnot'][str(ans.from_id)]}\nlvl - {data['lvl'][str(ans.from_id)]}")
 
 @user.on.message( text = [ "баланс" ], lower = True )
 async def wrapper( ans: Message ):
 	data = json.load( open( "data.json", "r" ) )
-	await ans(f"баланс: {data['balance'][str(ans.from_id)]}")
+	await ans(f"{data[ 'pets' ][ str( ans.from_id ) ]}, баланс: {data['balance'][str(ans.from_id)]}")
 
 @user.on.message( text = [ "скам" ], lower = True )
 async def wrapper( ans: Message):
@@ -48,7 +48,7 @@ async def wrapper( ans: Message):
 	data = json.load( open( "data.json", "r" ) )
 	a = random.randint(0, 5)
 	data[ "balance" ][ str( ans.from_id ) ] += int(a)
-	await ans(f"ты получить {a} монет. иди нахуй.")
+	await ans(f"{data[ 'pets' ][ str( ans.from_id ) ]}, ты получить {a} монет. иди нахуй.")
 	json.dump( data, open( "data.json", "w" ) )
 
 @user.on.message( text = [ "ник <bebra>" ], lower = True )
