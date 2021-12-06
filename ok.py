@@ -42,5 +42,22 @@ async def wrapper( ans: Message ):
 	data = json.load( open( "data.json", "r" ) )
 	await ans(f"баланс: {data['balance'][str(ans.from_id)]}")
 
+@user.on.message( text = [ "скам" ], lower = True )
+async def wrapper( ans: Message):
+	reg( ans )
+	data = json.load( open( "data.json", "r" ) )
+	a = random.randint(0, 5)
+	data[ "balance" ][ str( ans.from_id ) ] += int(a)
+	await ans(f"ты получить {a} монет. иди нахуй.")
+	json.dump( data, open( "data.json", "w" ) )
 
+@user.on.message( text = [ "ник <bebra>" ], lower = True )
+async def wrapper( ans: Message, bebra):
+	reg( ans )
+	data = json.load( open( "data.json", "r" ) )
+	data[ "pets" ][ str( ans.from_id ) ] = f"{bebra}"
+	await ans(f"{data[ 'pets' ][ str( ans.from_id ) ]}, твой новый ник!!!11!1!")
+	json.dump( data, open( "data.json", "w" ) )
+	
+	
 user.run_polling()
