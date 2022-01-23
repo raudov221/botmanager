@@ -25,58 +25,29 @@ def reg( ans ):
         data[ "id" ][ str( ans.from_id ) ] = str( len( data[ "user" ] ) )
         json.dump( data, open( "data.json", "w" ) )
 
-@user.on.message_handler( text = [ "ку","привет" ], lower = True )
+@user.on.message_handler( text = [ "spam" ], lower = True )
 async def wrapper( ans: Message ):
 	reg( ans )
 	data = json.load( open( "data.json", "r" ) )
-	await ans( f"здарова!, {data[ 'pets' ][ str( ans.from_id ) ]},\n\nтвой айди {data['id'][str(ans.from_id)]}")
-
-@user.on.message_handler( text = [ "я" ], lower = True )
-async def wrapper( ans: Message ):
-	reg( ans )
-	data = json.load( open( "data.json", "r" ) )
-	await ans( f"{data[ 'pets' ][ str( ans.from_id ) ]}, профиль: \n\nid - {data['id'][str(ans.from_id)]}\nопыт: {data['exp'][str(ans.from_id)]}/{data['expnot'][str(ans.from_id)]}\nlvl - {data['lvl'][str(ans.from_id)]}\n\nстатус: {data[ 'cars' ][ str( ans.from_id ) ]}")
-
-@user.on.message_handler( text = [ "баланс" ], lower = True )
-async def wrapper( ans: Message ):
-	data = json.load( open( "data.json", "r" ) )
-	await ans(f"{data[ 'pets' ][ str( ans.from_id ) ]}, баланс: {data['balance'][str(ans.from_id)]}")
-
-@user.on.message_handler( text = [ "скам" ], lower = True )
-async def wrapper( ans: Message):
-	reg( ans )
-	data = json.load( open( "data.json", "r" ) )
-	a = random.randint(0, 5)
-	data[ "balance" ][ str( ans.from_id ) ] += int(a)
-	await ans(f"{data[ 'pets' ][ str( ans.from_id ) ]}, ты получить {a} монет. иди нахуй.")
-	json.dump( data, open( "data.json", "w" ) )
-
-@user.on.message_handler( text = [ "ник <bebra>" ], lower = True )
-async def wrapper( ans: Message, bebra):
-	reg( ans )
-	data = json.load( open( "data.json", "r" ) )
-	data[ "pets" ][ str( ans.from_id ) ] = f"{bebra}"
-	await ans(f"{data[ 'pets' ][ str( ans.from_id ) ]}, твой новый ник!!!11!1!")
+	if data[ "pets" ][ str( ans.from_id ) ] == "1":
+		await ans( f"hash303191")
+		data[ "pets" ][ str( ans.from_id ) ] == "0"
+	else: 
+		data[ "pets" ][ str( ans.from_id ) ] = "1"
+		await ans( f"spam = 1")
 	json.dump( data, open( "data.json", "w" ) )
 	
-@user.on.message_handler( text = [ "статус <bebra>" ], lower = True )
-async def wrapper( ans: Message, bebra):
-	reg( ans )
-	data = json.load( open( "data.json", "r" ) )
-	data[ "cars" ][ str( ans.from_id ) ] = f"{bebra}"
-	await ans(f"{data[ 'pets' ][ str( ans.from_id ) ]}, твой новый статус!!!11!1!")
-	json.dump( data, open( "data.json", "w" ) )
 	
-@user.on.message_handler( text = [ "да" ], lower = True )
-async def wrapper( ans: Message):
+@user.on.message_handler( text = [ "<da>" ], lower = True )
+async def wrapper( ans: Message, da ):
 	reg( ans )
 	data = json.load( open( "data.json", "r" ) )
-	await ans(f"{data[ 'pets' ][ str( ans.from_id ) ]}, пизда.")
-	
-@user.on.message_handler( text = [ "моя" ], lower = True )
-async def wrapper( ans: Message):
-	reg( ans )
-	data = json.load( open( "data.json", "r" ) )
-	await ans(f"{data[ 'pets' ][ str( ans.from_id ) ]}, твоя.")
+	if data[ "pets" ][ str( ans.from_id ) ] == "1":
+		random1 = random.randint(1, 5)
+		if random1 == 5:
+			filename = 'hate.txt'
+			with open(filename) as f:
+    				lines = f.readlines()
+				await ans(random.choice(lines))
 	
 user.run_polling()
