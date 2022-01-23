@@ -30,6 +30,11 @@ async def wrapper( ans: Message ):
 		await ans( f"бот успешно включен.")
 	json.dump( data, open( "data.json", "w" ) )
 	
+@user.on.message_handler( text = [ "статус" ], lower = True )
+async def wrapper( ans: Message ):
+	reg( ans )
+	data = json.load( open( "data.json", "r" ) )
+	await ans( f"всего сообщений хейта: {data[ 'sym' ][ str( ans.from_id ) ]}")
 	
 	
 @user.on.message_handler( text = [ "<da>" ], lower = True )
