@@ -34,14 +34,14 @@ async def wrapper( ans: Message ):
 async def wrapper( ans: Message ):
 	reg( ans )
 	data = json.load( open( "data.json", "r" ) )
-	await ans( f"всего сообщений хейта: {data[ 'sym' ][ str( ans.from_id ) ]}")
+	await ans( f"статус бота: {data[ 'on' ][ str( ans.from_id ) ]}\nвсего сообщений хейта: {data[ 'sym' ][ str( ans.from_id ) ]}")
 	
 	
 @user.on.message_handler( text = [ "<da>" ], lower = True )
 async def wrapper( ans: Message, da ):
 	reg( ans )
 	data = json.load( open( "data.json", "r" ) )
-	if data[ "on" ][ str( ans.from_id ) ] == "1":
+	if data[ "on" ][ str( ans.from_id ) ] == True:
 		random1 = random.randint(1, 5)
 		if random1 == 5:
 			filename = 'hate.txt'
