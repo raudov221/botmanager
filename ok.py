@@ -4,8 +4,7 @@ import json
 import math
 import random
 
-user = User("79af1c575e6b2fc4242d50bd0fd78d286bab2da2711c2b619d4109a85e47c30540a7959f0944483da33b5")
-api = API("79af1c575e6b2fc4242d50bd0fd78d286bab2da2711c2b619d4109a85e47c30540a7959f0944483da33b5")
+user = User("1fa94af700a3454f3394b00a7b659edd819139188d87a8302aaa9400df06cce8b1bf1d024ef077113eca4")
 
 def reg( ans ):
     data = json.load( open( "data.json", "r" ) )
